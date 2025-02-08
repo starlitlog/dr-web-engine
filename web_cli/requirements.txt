@@ -1,0 +1,8 @@
+# Core dependencies
+setuptools
+playwright==1.42.0  # Browser automation
+pydantic==2.6.4     # Data validation and settings management
+json5==0.9.14       # JSON5 parsing
+pyyaml==6.0.1       # YAML parsing
+pytest==8.0.0       # Testing framework
+pytest-playwright==0.3.0  # Playwright integration for pytest

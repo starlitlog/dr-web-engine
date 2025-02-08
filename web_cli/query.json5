@@ -1,0 +1,14 @@
+{
+  "url": "https://www.childcare.co.uk/search/Babysitters/BR6+9AA",
+  "steps": [
+    {
+      "xpath": "//div[contains(@class, 'search-result')]",  // Target each sitter listing
+      "fields": {
+        "full_name": ".//div[contains(@class, 'items-baseline')]/div[1]/span[1]/text()",
+        "rating": ".//div[contains(@class, 'rating')]/span[1]/text()",
+        "distance": ".//div[contains(@class, 'distance')]/span[2]/normalize-space()",
+        "image_url": ".//div[contains(@class, 'profile-image')]//img[1]/@src"
+      }
+    }
+  ]
+}
