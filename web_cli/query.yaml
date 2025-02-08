@@ -1,0 +1,15 @@
+url: https://www.google.com/search?q=Hello+World
+steps:
+  - xpath: //div[@class='g']  # Target search results (ignoring ads)
+    fields:
+      link: .//a[@href]/@href
+      title: .//h3/text()
+    follow:
+      xpath: .//a[@href]/@href  # Follow the link in the search result
+      steps:
+        - xpath: //title
+          fields:
+            page_title: /text()
+pagination:
+  xpath: //a[@id='pnnext']/@href  # Next page link
+  limit: 3  # Limit to the first 3 pages
