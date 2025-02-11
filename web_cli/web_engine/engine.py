@@ -3,23 +3,26 @@ from playwright.sync_api import sync_playwright
 from .extractor import XPathExtractor
 from .models import ExtractionQuery, ExtractStep, FollowStep, PaginationSpec
 
-
 logger = logging.getLogger(__name__)
 
 
 def extract_fields(element, fields):
     result = {}
+
     for field, xpath in fields.items():
         # Locate the element using XPath
         target_element = element.query_selector(f"xpath={xpath}")
+
         if target_element:
-            # Extract text or attribute based on the field
-            if field == "image_url":  # Special handling for image URLs
-                result[field] = target_element.get_attribute("src")
-            else:  # Default to text content
+            # Automatically detect attribute extraction (`@src`, `@href`)
+            if xpath.endswith("/@src") or xpath.endswith("/@href"):
+                attribute = xpath.split("/@")[-1]  # Extract attribute name
+                result[field] = target_element.get_attribute(attribute)
+            else:
                 result[field] = target_element.text_content().strip()
         else:
             logger.warning(f"Field '{field}' not found with XPath: {xpath}")
+
     return result
 
 
@@ -37,32 +40,56 @@ def check_for_captcha(page):
     return False
 
 
-def execute_step(page, step):
+def execute_step(context, page, step: ExtractStep):  # Ensure step is an ExtractStep object
     results = []
+
     elements = page.query_selector_all(f"xpath={step.xpath}")
     logger.debug(f"Found {len(elements)} elements with XPath: {step.xpath}")
 
     extractor = XPathExtractor()
+
     for element in elements:
         item = extractor.extract_fields(element, step.fields)
+
         if step.follow:
-            link = extractor.extract_value(element, step.follow.xpath, "href")
+            follow_xpath, extraction_method = extractor.parse_xpath(step.follow.xpath)
+            link = extractor.extract_value(element, follow_xpath, extraction_method, base_url=page.url)
+
             if link:
-                with page.context.new_page() as new_page:
-                    logger.info(f"Following link: {link}")
+                logger.info(f"Following link: {link}")
+
+                with context.new_page() as new_page:
                     new_page.goto(link)
-                    for follow_step in step.follow.steps:
-                        item.update(execute_step(new_page, follow_step))
+                    new_page.wait_for_load_state("domcontentloaded")
+
+                    for follow_step in step.follow.steps:  # ✅ Use model attribute instead of dict
+                        follow_results = execute_step(context, new_page, follow_step)
+
+                        if isinstance(follow_results, dict) and follow_results:
+                            item.update(follow_results)
+
+                        elif isinstance(follow_results, list) and follow_results:
+                            structured_list = [result for result in follow_results if isinstance(result, dict)]
+
+                            if structured_list:
+                                key = follow_step.name or follow_step.xpath  # ✅ Correct access
+                                item.setdefault(key, []).extend(structured_list)
+
         results.append(item)
-    return results
+
+    return results if results else {}
 
 
 def execute_query(query: ExtractionQuery):
+    """Executes the web extraction query using Playwright."""
     try:
         with sync_playwright() as p:
             logger.info("Launching browser...")
+
             browser = p.chromium.launch(headless=False)
-            page = browser.new_page()
+            context = browser.new_context()
+            page = context.new_page()
+
             logger.info(f"Navigating to URL: {query.url}")
             page.goto(query.url)
 
@@ -76,15 +103,17 @@ def execute_query(query: ExtractionQuery):
 
             while True:
                 for step in query.steps:
-                    logger.info(f"Executing step with XPath: {step.xpath}")
-                    results.extend(execute_step(page, step))
+                    logger.info(f"Executing step with XPath: {step.xpath}")  # ✅ Fix field access
+                    results.extend(execute_step(context, page, step))
 
-                # Handle pagination
-                if not query.pagination or page_count >= query.pagination.limit - 1:
-                    logger.info("Pagination limit reached or no pagination specified.")
+                # Use `.pagination` method/property instead of dict access
+                pagination = query.pagination
+                if not pagination or page_count >= pagination.limit - 1:
+                    logger.info("Pagination limit reached or not specified.")
                     break
 
-                next_link = page.query_selector(f"xpath={query.pagination.xpath}")
+                next_page_xpath = pagination.xpath
+                next_link = page.query_selector(f"xpath={next_page_xpath}")
                 if not next_link:
                     logger.warning("Next page link not found.")
                     break
@@ -98,7 +127,7 @@ def execute_query(query: ExtractionQuery):
                 page.goto(next_url)
                 page_count += 1
 
-                # Check for CAPTCHA after each page navigation
+                # Check for CAPTCHA after navigation
                 if check_for_captcha(page):
                     logger.warning("CAPTCHA detected. Please solve it manually.")
                     input("Press Enter to continue after solving CAPTCHA...")
@@ -106,7 +135,7 @@ def execute_query(query: ExtractionQuery):
             logger.info("Closing browser...")
             browser.close()
             return results
+
     except Exception as e:
         logger.error(f"An error occurred during query execution: {e}", exc_info=True)
         raise
-
