@@ -5,38 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ccd92a8-4083-4beb-9894-a8d9bce2a15e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/engine/tests/integration/test_engine_integration.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/tests/unit/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/tests/unit/test_extractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/tests/unit/test_parsers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/tests/unit/test_parsers/test_json5_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/tests/unit/test_parsers/test_yaml_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/web_engine/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/web_engine/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/web_engine/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/web_engine/utils/file_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/web_engine/utils/logger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/cli/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/engine/data/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/query.json5" beforeDir="false" afterPath="$PROJECT_DIR$/engine/data/query.json5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/query.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/engine/data/query.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/engine/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/sitters.json" beforeDir="false" afterPath="$PROJECT_DIR$/engine/data/sitters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/conftest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/tests/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/unit/test_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/web_engine/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/web_engine/extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/web_engine/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/parsers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/web_engine/parsers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/parsers/json5_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/web_engine/parsers/json5_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/parsers/yaml_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/web_engine/parsers/yaml_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_cli/web_engine/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/integration/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/tests/unit/test_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/tests/unit/test_engine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +182,7 @@
       <workItem from="1738377142235" duration="5429000" />
       <workItem from="1738384051862" duration="134000" />
       <workItem from="1738384271103" duration="18000" />
-      <workItem from="1738384393095" duration="21481000" />
+      <workItem from="1738384393095" duration="22467000" />
     </task>
     <servers />
   </component>
