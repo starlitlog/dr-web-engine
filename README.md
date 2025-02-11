@@ -1,4 +1,3 @@
----
 # DR Web Engine
 
 **DR Web Engine** is an open-source data retrieval engine designed to extract structured data from web pages using Playwright. It allows users to define queries in JSON5 or YAML format and execute them to retrieve data from websites. The project is highly extensible and can be used for web scraping, data extraction, and automation tasks.
@@ -155,5 +154,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 If you encounter any issues or have questions, please open an issue on [GitHub](https://github.com/starlitlog/dr-web-engine/issues).
 
 ---
-
-This `README.md` provides a clear overview of your project, how to use it, and how to extend it. It also links to your blog for further reading and encourages contributions. Let me know if you need further adjustments!
