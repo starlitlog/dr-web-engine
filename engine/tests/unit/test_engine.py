@@ -25,7 +25,9 @@ def test_execute_query(mock_page):
     """Test query execution with a mock Playwright browser."""
     query = ExtractionQuery(
         url="https://example.com",
-        steps=[ExtractStep(xpath="//div", fields={"field": ".//span"})]
+        steps=[ExtractStep(
+            **{"@xpath": "//div", "@fields": {"field": ".//span"}})
+        ]
     )
     with pytest.MonkeyPatch.context() as mp:
         mp.setattr("playwright.sync_api.sync_playwright", lambda: MagicMock())
@@ -37,8 +39,12 @@ def test_pagination(mock_page):
     """Test pagination handling."""
     query = ExtractionQuery(
         url="https://example.com",
-        steps=[ExtractStep(xpath="//div", fields={"field": ".//span"})],
-        pagination=PaginationSpec(xpath="//a[@id='next']", limit=2)
+        steps=[
+            ExtractStep(
+                **{"@xpath": "//div", "@fields": {"field": ".//span"}}  # Use aliases
+            )
+        ],
+        pagination=PaginationSpec(**{"@xpath": "//a[@id='next']", "@limit": 2})  # Use aliases
     )
     with pytest.MonkeyPatch.context() as mp:
         mp.setattr("playwright.sync_api.sync_playwright", lambda: MagicMock())
