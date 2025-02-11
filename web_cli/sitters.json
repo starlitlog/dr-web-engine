@@ -1,122 +1,596 @@
 [
   {
-    "full_name": "Mayekel Tiney Home",
-    "rating": "6",
-    "distance": "- 5 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/6/3e254/4417b735.thumbnail.png"
+    "full_name": "Nancy",
+    "ratings": "4",
+    "image_url": "https://pf1.childcare.co.uk/6/3fe69/918bc958.thumbnail.png",
+    "profile": [
+      {
+        "bio": "Am passionate registered Childminder with over 6 years' experience caring for children from age 0 up to 16years, with an extensive knowledge of early childhood development and the skill needed to look after group of children to the highest possible standard. Am flexible in terms of opening hours, dedicated to create a stimulating and encouraging atmosphere to meet each child's individual needs.",
+        "experience": "I provide a safe and welcoming environment where children can learn through play, have fun, and develop relationship. Also, work with parents and others professionals in order to support children and meet their milestones."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Chan",
+        "reviewer_profile": "/profile/3733111",
+        "rating": "5 stars",
+        "comment": "Nancy provided childcare services for my 2 children. She adapted to adjustments of times whenever I needed. My children enjoyed their time with Nancy and her family. Nancy did days at the park and local events. I would highly recommend Nancy a lovely lady"
+      },
+      {
+        "reviewer": "Sarah",
+        "reviewer_profile": "/profile/3744700",
+        "rating": "5 stars",
+        "comment": "It was our first time leaving our 1 year old in childcare, and naturally we were extremely nervous. From meeting Nancy for the first time, she made us feel at ease and was clearly very organised and prepared. Our daughter took to her very quickly and would become visibly excited every time she greeted her in the mornings. When we came to pick our daughter up, she was the happiest girl. We regilarly got updates throughout the day, and Nancy went out of her way to ensure our daughter was eating well. Nancy frequently kept her engaged by taking her out and planning different activities. We are extremely grateful for her and would not hesitate to recommend her to anyone looking for a great childminder!"
+      },
+      {
+        "reviewer": "Chido",
+        "reviewer_profile": "/profile/3653523",
+        "rating": "5 stars",
+        "comment": "For the last 7 months, Nancy has been an absolute blessing for our family as our daughter\u2019s childminder. From the moment we met her, her sweet and kind demeanour instantly resonated with us, and we knew our daughter would feel the same. Our intuition proved correct, as our daughter has flourished under Nancy's care. Nancy cultivates a warm and welcoming atmosphere that truly feels like a second home for our daughter. The familial environment she provides has been invaluable, and our daughter looks forward to spending time with her. Beyond her nurturing nature, Nancy is incredibly understanding and communicative. She keeps us informed every step of the way and ensures that our daughter's needs are always met with care and attention. Nancy has seamlessly become what feels like an extension of our family, and we couldn't be more grateful for the love and care she shows our daughter. We wholeheartedly recommend Nancy to any family in need of a dedicated and compassionate childminder. She is amazing!"
+      },
+      {
+        "reviewer": "Louise",
+        "reviewer_profile": "/profile/3572522",
+        "rating": "5 stars",
+        "comment": "Nancy has been our childcare provider for the last 7 months. I cannot express what a wonderful person she is. Our child loves being with her, she has a lovely family whom our child is extremely fond of and nothing is ever to much trouble. Nancy takes the time to understand our child and also help them, she will go out of her way to accommodate extra hours and days which gives us the flexibility for our working hours. Nancy collects our child from school and feeds her the days in her care which is of great value with long working days. We have never had a negative response regarding Nancys care from our child, in fact quite the opposite, she is always disappointed if we say she doesn\u2019t need to go on any given day. I cannot speak more highly of Nancys services and if you are looking for a childcare provider, you need look no further."
+      }
+    ]
   },
   {
-    "full_name": "Casey",
-    "rating": "14",
-    "distance": "- 4.8 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/6/550f5/5846442e.thumbnail.png"
+    "full_name": "Samantha",
+    "ratings": "6",
+    "image_url": "https://pf1.childcare.co.uk/5/bb22f/f208ab3a.thumbnail.png",
+    "profile": [
+      {
+        "bio": "I am a friendly, caring and confident person. I have 24 years childcare experience. Since having my own 3 children, I have become a registered childminder. I enjoy working with children and creating activities to encourage all areas of learning.",
+        "experience": "I have worked within the childcare profession for 20 years, the first 4 of those years I worked as a senior supervisor within a day nursery, caring for children 3 months to 5 years. I have been a nanny for the last 14 years, working with 5 families in this time, ranging from ages birth to 13 years. I also have night nannying experience with a new born. I have been an ofsted registered childminder since October 2018"
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Yolie",
+        "reviewer_profile": "/profile/1532936",
+        "rating": "5 stars",
+        "comment": "words can\u2019t explain how great Sam is towards looking after children. I\u2019ve known Sam for a good few years now through play groups in the local area but didn\u2019t know she was a childminder at the time until I got the childminder app. She has made my children feel like they were her own involving them in so many outdoor/indoor activities. She is kind,loving and always enthusiastic when my kids have something to tell her and when she has them over. I would highly recommend her to anyone who is looking for a childminder/babysit she is a true gem. XX"
+      },
+      {
+        "reviewer": "HannahLo",
+        "reviewer_profile": "/profile/1408730",
+        "rating": "5 stars",
+        "comment": "Sam has been caring for my children for the past 18 months. Doing school drop offs and picks up for my daughter and looking after my son through the day. From the very beginning I felt Sam listened to what our needs were as a family and understood exactly what we wanted from our childminder. Sam is professional and friendly to deal with as well as being wonderfully caring, fun and fair with our kids. Her home is always clean and tidy, with plenty of toys and games to play with. Sam always has plenty of ideas and themes of things to do, there\u2019s never a dull day and we\u2019ve never had any grumbles from our children about going! Sam also has a huge back garden for everyone to enjoy which is brilliant during the spring and summer. Her two boys are delightful and my son is now best buddies with her eldest boy. We came across Sam by total chance, at a time when we really needed a trustworthy childminder. She\u2019s never let us down and I\u2019m so thankful and grateful for all she does."
+      },
+      {
+        "reviewer": "Rebecca",
+        "reviewer_profile": "/profile/3042095",
+        "rating": "5 stars",
+        "comment": "I always felt so confident leaving my son with Samantha. She\u2019s amazing with children and has such a calm caring nature that makes children feel instantly settled. Would 100% recommend!"
+      },
+      {
+        "reviewer": "Sally",
+        "reviewer_profile": "/profile/2955537",
+        "rating": "5 stars",
+        "comment": "As a first time mum, I was feeling very nervous about heading back to work at the beginning of the year. I had \u201cmum guilt\u201d and was very worried about leaving my little boy. After meeting and chatting to Sam, I was completely put at ease. I no longer have any mum guilt and now fully enjoy working while knowing my son is having the best time with Sam and her gorgeous loving boys. I have had more mum guilt during the CoVID situation that he hasn\u2019t been with Sam enjoying all the amazing activities she does with her children! I could never imagine that I would have felt so amazing about my childcare. Sam communicates so well with parents during the day and also at the end of the day in a journal for your child. She has an amazing childcare setting with a enormous garden with lots of activities and an amazing playroom with a great variety of toys for all areas of development. Sam also does a daily activity with all the children in the morning which is at an external children play group and then does an activity at home with the children in the afternoon. I am always so excited to hear what Miles has done. My son was a clingy exclusively breastfed child who for me only really napped on the breast. Sam can get him asleep instantly in a travel cot! I highly recommend Sam and look forward to my son and hopefully future children continuing their early years journey with Sam."
+      },
+      {
+        "reviewer": "Ang_R",
+        "reviewer_profile": "/profile/3041375",
+        "rating": "5 stars",
+        "comment": "Sam has looked after my child since October 2018, & we as a family could not be happier with the level of service. She is an excellent childminder & provides great activities, outings and fun for all ages. Sam offers a brilliant service of home from home care with lots of love & security. Our child is always excited to go to Sams & beaming with stories on collection! We feel so lucky to have found her, & would 100% recommend Sam as a childminder, we couldn\u2019t ask for more! Thank you! Xx"
+      },
+      {
+        "reviewer": "Sid",
+        "reviewer_profile": "/profile/2170535",
+        "rating": "5 stars",
+        "comment": "I had a really good experience with Samantha. We spent sometime finding for a good childcare which is also closer to his school and we are not easily satisfied, to be honest. But meeting Samantha and seeing how she was with her kids, we instantly knew this was a place for him. Adding to that, she has a dedicated play area and a big backyard where kids can enjoy sunshine. She is very enthusiastic and arranges for lot of fun activities for kids. My son loves it there. Thanks Sam for all your help."
+      }
+    ]
   },
   {
-    "full_name": "Barbora",
-    "rating": "6",
-    "distance": "- Less than one mile away",
-    "image_url": "https://pf1.childcare.co.uk/6/54105/5fa2c69a.thumbnail.png"
+    "full_name": "Laura",
+    "ratings": "4",
+    "image_url": "https://pf1.childcare.co.uk/v2/S/PoGH/3n6Wp.3718162.thumb.jpg",
+    "reviews": [
+      {
+        "reviewer": "Jonathan",
+        "reviewer_profile": "/profile/3709752",
+        "rating": "5 stars",
+        "comment": "Laura has been looking after our one-year-old daughter for the past 3 months, and we\u2019ve been really happy with the care she provides. Our daughter enjoys spending time with her, and it's clear they've built a good relationship. We also appreciate that Laura incorporates learning through play, which has helped our daughter pick up new skills in a fun way. Additionally, she often takes our daughter out for walks and to the playground, which is great for her. We\u2019re pleased with the care our daughter receives and feel confident she\u2019s in good hands. Thank you Laura!"
+      },
+      {
+        "reviewer": "Emma",
+        "reviewer_profile": "/profile/3855130",
+        "rating": "5 stars",
+        "comment": "Laura has looked after my 2 young boys who are aged 3 and under 1. Laura is kind, proffessional and patient. My boys enjoy spending time with her and Laura makes me feel comfortable and confident leaving my children in her care."
+      },
+      {
+        "reviewer": "Gabby",
+        "reviewer_profile": "/profile/3278516",
+        "rating": "5 stars",
+        "comment": "Laura looked after my little boy on a number of occasions and all I can say is she is such a pleasure! My little boy took to her so quickly. She was friendly and patient. She even did activities like phonics and reading during the time she was babysitting. Laura is absolutely amazing."
+      },
+      {
+        "reviewer": "Ruta",
+        "reviewer_profile": "/profile/3755594",
+        "rating": "5 stars",
+        "comment": "Laura is an excellent babysitter! She is reliable, attentive, and truly great with kids. My children always feel safe and entertained when Laure is around. She is patient, creative with activities, and communicate well. Highly recommend"
+      }
+    ]
   },
   {
-    "full_name": "Helenlc",
-    "rating": "6",
-    "distance": "- 1.9 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/eb931/1f00c367.thumbnail.png"
+    "full_name": "Shannon",
+    "ratings": "7",
+    "image_url": "https://pf1.childcare.co.uk/6/4a9c3/3a34b30c.thumbnail.png",
+    "reviews": [
+      {
+        "reviewer": "Ola",
+        "reviewer_profile": "/profile/2106949",
+        "rating": "5 stars",
+        "comment": "Shannon is one of best thing that has happen to me\u2026 my kids love Shannon so much it makes me happy\u2026 Shannon is so sweet, very welcoming and caring.. every time she opens her door it feels like home.. my kids always begging me to take them to Shannon even when I don\u2019t need to.. I have recommended Shannon to few of my friends and they always give good feed back\u2026 I recommend Shannon she is so lovely and trustworthy"
+      },
+      {
+        "reviewer": "Kelly",
+        "reviewer_profile": "/profile/2860043",
+        "rating": "5 stars",
+        "comment": "Shannon is an amazing childminder my boys love going to her house after school she makes it fun for them , couldn\u2019t recommend her anymore , all 4 of my boys never want to leave xx"
+      },
+      {
+        "reviewer": "Chil",
+        "reviewer_profile": "/profile/2452145",
+        "rating": "5 stars",
+        "comment": "My little boy started with Shannon when he was very tiny, I needed only a little bit of care for the baby initially and was naturally worried about finding the right person. After a few interviews it was obvious that Shannon was not only the best but perfect. Leo felt at home immediately, Shannon\u2019s boys treated him like their very tiny brother and as he grew they became closer. Now he is almost 20 months he is happy going to Shannon or to nursery. I highly recommend Shannon, she is caring, kind, responsive and professional. Her home is always happy and warm, full of giggles and yummy food."
+      },
+      {
+        "reviewer": "TLavelle",
+        "reviewer_profile": "/profile/2313937",
+        "rating": "5 stars",
+        "comment": "Shannon has offered nothing but warmth, fun and love to my 3 children. Lovely clean home, adorable children and a friendly attitude and atmosphere. I've always felt they're in safe hands. Shannon is extremely flexible and has helped me out no end and hopefully will continue to do so. Very pleased with her services."
+      },
+      {
+        "reviewer": "Parent",
+        "reviewer_profile": "/profile/1510688",
+        "rating": "5 stars",
+        "comment": "Shannon has been looking after my little girl on a regular basis, since she was 10 months old. If I ever needed someone there at short notice Shannon can be there for her, and I have never had any problems on the days that she has her."
+      },
+      {
+        "reviewer": "beczlee",
+        "reviewer_profile": "/profile/1644316",
+        "rating": "5 stars",
+        "comment": "I have used Shannon for 2 years. My daughter always looks forward to seeing her and her family and always comes back with a smile on her face, telling me what they have been up to. highly recommended ! Xx"
+      }
+    ]
   },
   {
-    "full_name": "Tiffany",
-    "rating": "8",
-    "distance": "- Less than one mile away",
-    "image_url": "https://pf1.childcare.co.uk/6/53a3e/eb377aa0.thumbnail.png"
+    "full_name": "Rav",
+    "ratings": "3",
+    "image_url": "https://pf1.childcare.co.uk/v2/W/DkrL/uyJDk.3413035.thumb.jpg",
+    "reviews": [
+      {
+        "reviewer": "JTO",
+        "reviewer_profile": "/profile/3794242",
+        "rating": "5 stars",
+        "comment": "Having Rav care for my daughters was one of the highlights of the summer. The team of mom and daughter is absolutely amazing. They genuinely love the children, understand how to keep them happy, cared for and safe. The girls felt comfortable with them immediately. A great personality, amazing attitude to work, gets things done on time, going the extra mile and above all, building an amazing relationship with the family. We\u2019ve been in touch since and wouldn\u2019t consider anyone else for childcare. Great with communication, willing to go the extra mile, just amazing. Super respectful of the routine, our preferences, instructions and eager to learn our ways of caring for the children to make them comfortable. 20/10 Absolutely amazing experience!"
+      },
+      {
+        "reviewer": "Hannah",
+        "reviewer_profile": "/profile/3676116",
+        "rating": "5 stars",
+        "comment": "The care I have received for my son has been very good, very caring and understanding of my son needs at all time, Rav mum has taken great care of my son for the last 2 to 3 months and my son is really keen to be with her she is very gentle and he loves to be looked after by her and I feel safe leaving him with her , I would definitely recommend both mum and daughter to any parents who wants someone who is sensitive for their child"
+      },
+      {
+        "reviewer": "vanita",
+        "reviewer_profile": "/profile/2854283",
+        "rating": "5 stars",
+        "comment": "Rav has been looking after my children 1.5 years and 4.5 years for just over 6 months now and what an amazing find. She is trustworthy, polite, punctual and such a joy to work with, she quickly and easily became part of our family. I can go to work and genuinely have no worries at all knowing Rav has things under control. From the job description I advertised she has truly surpassed my expectations. I can rely on her with emergencies and honestly am thankful to have found her."
+      }
+    ]
   },
   {
-    "full_name": "Ravi35",
-    "rating": "8",
-    "distance": "- 1.1 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/dd52a/a47ebca6.thumbnail.png"
+    "full_name": "Janet",
+    "ratings": "2",
+    "image_url": "https://pf1.childcare.co.uk/6/2e042/2a04ba34.thumbnail.png",
+    "reviews": [
+      {
+        "reviewer": "Jojo",
+        "reviewer_profile": "/profile/3477394",
+        "rating": "5 stars",
+        "comment": "Our time with Janet has been coming up for a year but doesnt end here, Janet has become a friend. She will bring a warmth to your home and bundles of energy for games and learning time for the little ones. Our girls are now 2 and 3 but we're only 1 and 2 when Janet joined us, and as a nervous mum I felt completely at ease knowing my children were in loving capable hands. Janets approch is gentle whilst ALWAYS mantaining control of the room even with 2 under 2 (it was like magic) Janet is also very reliable, was not late nor sick in the year that she was with us. Janet, you went above and beyond to help us, especially at the beggining, we are very grateful. Thankyou for creating so many kind, loving and playful memories with the girls and for all you have done for us \ud83d\udc96"
+      },
+      {
+        "reviewer": "Smaranda",
+        "reviewer_profile": "/profile/3355677",
+        "rating": "5 stars",
+        "comment": "We hired Janet on a very short notice because our previous baby sitter was not available anymore. She stepped in and proved to be a very warm, gentle person that our son loved spending time with. I felt comfortable leaving my son in her care. I appreciated her punctuality and flexibility towards our needs. Highly recommend to all parents."
+      }
+    ]
   },
   {
-    "full_name": "Lisa F",
-    "rating": "5",
-    "distance": "- Less than one mile away",
-    "image_url": "https://pf1.childcare.co.uk/5/a8041/1a2440c0.thumbnail.png"
+    "full_name": "Adriana",
+    "ratings": "7",
+    "image_url": "https://pf1.childcare.co.uk/5/ff33e/e99e2218.thumbnail.png",
+    "reviews": [
+      {
+        "reviewer": "Iulia",
+        "reviewer_profile": "/profile/3619714",
+        "rating": "5 stars",
+        "comment": "I highly recommend Adriana. She doesn\u2019t only care for the children she looks after, she also shows them love and attention which are very important for a child\u2019s development. She is flexible, trying her best to accommodate your requirements. She is open, friendly and reliable. I would not have another childminder for my child."
+      },
+      {
+        "reviewer": "MariaIon",
+        "reviewer_profile": "/profile/3729058",
+        "rating": "5 stars",
+        "comment": "Adriana is a great childminder and she is so attentive to my daughter when she needs. She provides a clean and warm environment and has welcomed us into her home . My daughter loves Adriana I don\u2019t have to worry once I leave her which is every parent dream I have always felt content .Adriana regular takes my daughter to groups,parks etc My daughter has learnt so much from vocabulary to sharing and making friends .My daughter always comes home full of life and happy . I cannot recommend her highly enough"
+      },
+      {
+        "reviewer": "Maria",
+        "reviewer_profile": "/profile/2834385",
+        "rating": "5 stars",
+        "comment": "My daughter has been with Adriana in the last 2 years , we love her and we are really happy and blessed to have her! My husband and I are full time working parents and Adriana has been a wonderful support for us too!"
+      },
+      {
+        "reviewer": "Andreea",
+        "reviewer_profile": "/profile/3594198",
+        "rating": "5 stars",
+        "comment": "I am so glad that I found her for my daughter and cannot recommend her highly enough. Adriana is very helpful, friendly and totally professional. Ami loves every activities and walks/outings with Adriana and always keep me up to date throughout with what she has doing. She really provides a large variety of activities and always keep them entertained,educated and happy!"
+      },
+      {
+        "reviewer": "iulia",
+        "reviewer_profile": "/profile/3398842",
+        "rating": "5 stars",
+        "comment": "A woman I have rarely met, she loves children very much and is involved in everything she does. every day children go and visit places and I saw how happy they are. thank you for what you do for my child."
+      },
+      {
+        "reviewer": "Ramona",
+        "reviewer_profile": "/profile/3590567",
+        "rating": "5 stars",
+        "comment": "Adriana is the perfect lady to take care of my child. It has been nearly 2 years since my son enjoyed it. We love the activities, the way she treats the kids , I always see happy kids there, different programs for them, they never get bored, playgroups, playground, farms, outside activities. She always keeps me updated, sending pictures with my son, messages. I will always recommend her\u2764"
+      },
+      {
+        "reviewer": "Inderjit",
+        "reviewer_profile": "/profile/3145722",
+        "rating": "5 stars",
+        "comment": "Adriana is nice ,caring and friendly. She has a lovely , neat and clean house .she given proper care, massaging to my baby and feeding .I am really happy to stay my baby in her home. She play with my baby, supporting early language development. She has excellent communication skills and understand mother'sfeelings. My husband also liked her services. She do lots of fun with my baby. I am heartly blessed to Adriana. Really she is very amazing."
+      }
+    ]
   },
   {
-    "full_name": "Nicoleta",
-    "rating": "4",
-    "distance": "- 4.8 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/v2/D/BbsQ/1ZWSl.3815630.thumb.jpg"
+    "full_name": "Alwaystherechildcare",
+    "ratings": "11",
+    "image_url": "https://pf1.childcare.co.uk/v2/R/RcB8/0H5gC.2640537.thumb.jpg",
+    "profile": [
+      {
+        "bio": "I am kind, caring and passionate about childcare, I always want to ensure that babies and children in my care are not only reaching their expected developmental milestones but also having so much fun, learning through a variety of activities and play experiences. I understand parents going to work and leaving their child with someone else to care for them is very hard, which is why I try to give as much reassurance as possible, and I create WhatsApp groups that have the parents in of the child I\u2019m caring for and share photos of their child throughout the time I\u2019m caring for them, I believe this gives great reassurance to parents to know their little one is in safe hands and are happy. I believe working in partnership with parents is also as important as creating a special bond with the babies and children. I\u2019m a self employed Nanny/babysitter, but also I am a Co-childminder, which means I childmind from another childminders home, I am registered with Ofsted. I\u2019m level 2 and 3 qualified in childcare which I gained through an apprenticeship. I\u2019ve also completed level 4 nursery management. I have a up to date DBS check, renewed in August 2023, I\u2019m also on the update service. I refreshed my Paediatric first aid course in April 2023 which is now valid for another 3 years. I have also recently become a mother , I gave birth to my beautiful baby boy in June 2024 and I am loving every minute. I am happy to answer any questions any parents have and I can provide references if parents would like as well.",
+        "experience": "3 years experience working in a day nursery, which included looking after children from 3 months old to 5 years old and supporting them with their own individual needs. Gained experience being a childminding assistant for over 2 years. Then became a ofsted registered Co-childminder in November 2023. I\u2019ve got newborn experience from caring for my own baby boy and I have also looked after twins alongside their mother from 3 weeks old, till they were over a year old and I have grown up with family members who have SEN and also supported children who have SEN. I have done babysitting for a variety of ages from 3 months old to 11 years old."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Frances",
+        "reviewer_profile": "/profile/3530991",
+        "rating": "5 stars",
+        "comment": "Jess has been looking after our kids for over a year now. She has never been late nor has she let us down. She is really good with kids: she knows how to entertain them, she is very kind, and teaches them good manners. We are very lucky to have found Jess."
+      },
+      {
+        "reviewer": "ellis127",
+        "reviewer_profile": "/profile/1120750",
+        "rating": "5 stars",
+        "comment": "Jess is a fantastic childminder. My son has never been left with anyone before and I was a little nervous about leaving him for the first time. As soon as I met jess I knew my son would be in safe hands. My son had the best time with her and hasn't stopped talking about her since. He cannot wait for her to look after him again. I can't recommend her enough, she's fantastic, a great find."
+      },
+      {
+        "reviewer": "pear19",
+        "reviewer_profile": "/profile/3295495",
+        "rating": "5 stars",
+        "comment": "I used Jess for the first time this weekend and will definitely be booking her again! It was the first time we left our son with someone other than family but Jess made us feel really comfortable and kept me updated with messages and pictures throughout the evening! Would absolutely recommend, Jess is lovely."
+      },
+      {
+        "reviewer": "Polina",
+        "reviewer_profile": "/profile/2994630",
+        "rating": "5 stars",
+        "comment": "Jessica is a great nanny, my son absolutely loves her, I am sure she can find a way to each baby. She has a calm manner and always listens to parents concerns, but also knows how to suggest activities or point some observations. I am glad we found her."
+      },
+      {
+        "reviewer": "Laura",
+        "reviewer_profile": "/profile/2953453",
+        "rating": "5 stars",
+        "comment": "Both our boys love Jess. They get so excited when they know she is coming to look after them. We finds it is so easy just to leave Jess to it, to organise feeding them and putting them to bed etc. Really pleased we found her."
+      },
+      {
+        "reviewer": "wipper",
+        "reviewer_profile": "/profile/108985",
+        "rating": "5 stars",
+        "comment": "Jessica is amazing, my daughter absolutely love her. She is very professional and has spend time actively with my little one."
+      },
+      {
+        "reviewer": "Ryn",
+        "reviewer_profile": "/profile/2960334",
+        "rating": "5 stars",
+        "comment": "My daughter loves Jess! Jess is a great childminder, she engages well with my daughter who loves having her babysit and gets so excited to see Jess. Jess is a very caring, friendly, engaging and experienced child minder who I would definitely recommend to others."
+      },
+      {
+        "reviewer": "GabyF",
+        "reviewer_profile": "/profile/2954793",
+        "rating": "5 stars",
+        "comment": "Jessica is amazing and she is such a life saver. Over the Christmas period my original babysitter could no longer look after my son last minute. Jessica helped me out, even her mum had my son on one day. My son really enjoys his time with Jessica. Couldn\u2019t be happier with such a lovely lady. Would definitely recommend to anyone looking for a trustworthy and reliable babysitter in the area."
+      },
+      {
+        "reviewer": "Nicola",
+        "reviewer_profile": "/profile/2868854",
+        "rating": "5 stars",
+        "comment": "Jessica is a very mature young lady that is very good with my boys. One of my boys has behaviour difficulties and she was quickly to respond as she has experience with SEN children. (this is one thing that drew me to Jessica) She is very reliable and has excellent communication, nothing seems too difficult for her and puts your needs first. My boys really liked her from the fist time they meet her and thought she was \u201creally cool actually\u201d lol. I recommend Jessica highly to look after your children as she does a fab job. Thank you!!!! Xx"
+      },
+      {
+        "reviewer": "Dilki",
+        "reviewer_profile": "/profile/2468610",
+        "rating": "5 stars",
+        "comment": "Jess has been introduced to us through our previous babysitter and she is a godsend. I can see from the way she interacts with my boys that she loves working around kids and she has a greater knowledge in child care. My boys love her."
+      }
+    ]
   },
   {
-    "full_name": "Sammy34",
-    "rating": "7",
-    "distance": "- 1.9 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/e4405/5622b6e0.thumbnail.png"
+    "full_name": "Veronica",
+    "ratings": "5",
+    "image_url": "https://pf1.childcare.co.uk/6/0dda0/01076b9d.thumbnail.png",
+    "profile": [
+      {
+        "bio": "My name is Veronica, I am a mother of 3, based in Gravesend/ Northfleet. All I can really say is that I have a strong sense of passion when it comes to children; and being around them; playing with them, teaching them, and watching them grow. Some have been with me throughout primary school, and onto secondary school. We often do activities, such as going out for outings, swimming etc.",
+        "experience": "As mentioned earlier, I have been in this business for quite a while, roughly since 2014."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Athina A",
+        "reviewer_profile": "/profile/3401018",
+        "rating": "5 stars",
+        "comment": "I contacted Veronica via this site and I can whole heartedly say I made the best choice choosing her as my sons childminder. Veronica is literally God sent and truly has a passion and love for take care of children. My son started with Veronica at 10 months old and is still with her now at the age of 2 year 7 months. He has hit and developed into all his milestone. One thing I really like about Veronica is her attention to detail, she is always up to speed with informing me about my child's development and progression, she makes age appropriate recommendation, she is helpful in teaching and supporting my son. My son loves going to her, he enjoys all the activities and adventures. Veronica always takes him on lots of fun day trip, to the zoo, park, play centres and so much more. I can honestly write many pages on how great Veronica is with my son. She is basically like family to me now and I cannot imagine not keeping her in our lives. I want to use this opportunity to thank you Veronica for all you have done for us, for taking great care of my son. I would always always awlays recommend you. Also it has been comforting to know that you are known by other parents in the area and they have also had great things to say about you."
+      },
+      {
+        "reviewer": "Mrs A",
+        "reviewer_profile": "/profile/3248901",
+        "rating": "5 stars",
+        "comment": "When my daughter turned 1 she was attending a local nursery, however she wouldn't settle. After about 3 weeks we had to take her out and keep her home with me. When we found Veronica, I had peace of mind as my daughter settled with her and that enabled me to focus at work without worrying. She is a wonderful Childminder \u2665\ufe0f"
+      },
+      {
+        "reviewer": "Missy",
+        "reviewer_profile": "/profile/3246443",
+        "rating": "5 stars",
+        "comment": "Veronica has looked after my two from 1 year to school and also looks after them during every half term and summer breaks. She is amazing with them. They have fun and educational outings, they also bake with her. Her home is very clean and tidy. My little ones love her, she has been a life saver as my kids struggle to settle with new people, but that wasn't the case with Veronica as they settled immediately with her. They always look forward to going to her."
+      },
+      {
+        "reviewer": "Aku",
+        "reviewer_profile": "/profile/3247309",
+        "rating": "5 stars",
+        "comment": "Veronica has been my children's childminder for 4 years and she has been amazing. Professional and caring, it feels like she's family. I have no worries when at work because she goes out of her way even in emergencies."
+      },
+      {
+        "reviewer": "Tina B12",
+        "reviewer_profile": "/profile/1348298",
+        "rating": "5 stars",
+        "comment": "Veronica has been so wonderful with my kids. She has done the school run for my 10 year old for close to a year and i have no complaints. My 3 and 1 year old absolutely adore her and are always looking forward to spending more time with her. Veronica genuinely cares for the children\u2019s well-being, she engages the children with playful activities and ensures they\u2019re happy. She also takes necessary initiative when required and is great with communicating necessary information about the kids. I would absolutely recommend her to anyone looking for childcare!"
+      }
+    ]
   },
   {
-    "full_name": "Becky",
-    "rating": "6",
-    "distance": "- 1.3 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/v2/5/HvYs/VgEoL.1161864.thumb.jpg"
+    "full_name": "3 Vees Childcare",
+    "ratings": "no reviews",
+    "image_url": "https://pf1.childcare.co.uk/v2/7/1MRC/ZqJEZ.3736238.thumb.jpg",
+    "profile": [
+      {
+        "bio": "Welcome to 3 Vees Childcare! Hello, parents and guardians! I\u2019m Sarah, and I\u2019m thrilled to introduce you to 3 Vees Childcare. As both a childminder and an Assistant Headteacher in a primary school, I am dedicated to providing exceptional care and educational support for your children. I have over twenty years of experience as a qualified teacher, ensuring children thrive under my care. I am married with three daughters: two in university and the youngest in sixth form. I work as a teacher and an Assistant Headteacher on Mondays and Tuesdays; and as a childminder, babysitter, and tutor for the rest of the week.",
+        "experience": "Why Choose 3 Vees Childcare? I bring a wealth of experience to 3 Vees Childcare. I worked as a nursery nurse and later as a senior nursery nurse for seven years, caring for children aged 0-5 years. Since 2013, I have been teaching children from Reception to Year 6 in primary schools. Additionally, my personal experience of raising my own children has enriched my understanding and approach to childcare."
+      }
+    ]
   },
   {
-    "full_name": "Clarisse",
-    "rating": "9",
-    "distance": "- 4.3 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/a69e2/28a47290.thumbnail.png"
+    "full_name": "Victoria  Odunukan",
+    "ratings": "2",
+    "image_url": "https://pf1.childcare.co.uk/5/6b5c7/75dda2dc.thumbnail.png",
+    "profile": [
+      {
+        "bio": "My name is victoria, i'm married, I live with my husband who is also CRB checked and my three children age 23, 21 and 16 are also CRB checked.",
+        "experience": "I have 15 years experience working with children, I have worked as a supervisor for children centre, I have also worked as a nursery assistant before decided to registered as a childminder in order to pursue my passion for working with children. I am registered with ofsted and PACEY member."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Folz",
+        "reviewer_profile": "/profile/3622142",
+        "rating": "5 stars",
+        "comment": "Victoria doubles as a Mother and friend to the kids in her care. There were no hidden charges and her service is dependable. The setting is perfect and clean. I experienced so much peace of mind when she cared for my daughter and I am happy to recommend her to anyone. Once again, thank you Victoria \u2665\ufe0f"
+      },
+      {
+        "reviewer": "Eve",
+        "reviewer_profile": "/profile/3693555",
+        "rating": "5 stars",
+        "comment": "A very kind, friendly and warm individual."
+      }
+    ]
   },
   {
-    "full_name": "Jessica",
-    "rating": "2",
-    "distance": "- 2.1 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/d0d33/328b5313.thumbnail.png"
+    "full_name": "Mrs  Anna  Edem",
+    "ratings": "2",
+    "image_url": "https://pf1.childcare.co.uk/5/b9fca/a12095c7.thumbnail.png",
+    "profile": [
+      {
+        "bio": "I am married with two boys both at school. Newly registered, non smoker i have no pets.",
+        "experience": "I have also worked with both young and adults for over 10 years."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Eve",
+        "reviewer_profile": "/profile/3693555",
+        "rating": "5 stars",
+        "comment": "Mrs Edem is a gem of an individual, she is patient and kind, very good with my son. She is very knowledgeable of the needs of children."
+      },
+      {
+        "reviewer": "Budu",
+        "reviewer_profile": "/profile/3480215",
+        "rating": "5 stars",
+        "comment": "Mrs Anna Edem has taken care of my daughter for over a year till now. I can say she is excellent, loving and cordial with the children under her care. Have good understanding of my daughter needs at each point. Anna is easy going and down to earth human. Well done Mrs Anna Edem."
+      }
+    ]
   },
   {
-    "full_name": "Emily",
-    "rating": "6",
-    "distance": "- 4.3 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/f0ca1/1002b09f.thumbnail.png"
+    "full_name": "Rachel",
+    "ratings": "2",
+    "image_url": "https://pf1.childcare.co.uk/6/34f05/58956e82.thumbnail.png",
+    "profile": [
+      {
+        "bio": "Hi I'm Rachel, I run Li'l Stompers Childminding in Gravesend Kent. Childminding since 2005 as well as being a parent since 2002. I am an accredited, Ofsted Registered childminder and have all the relevant training required. I can offer spaces from 0y-4y I am off Dering Way at the Lion roundabout near kwikfit. I live with my partner Ben who is a mechanic and runs his own building company and have 2 older children aged 17 studying Engineering at college and 21 who's currently studying at Hartpury Uni doing a Sports education degree. we have several pets; cats, a dog and tropical fish tanks I ensure the children get to go out as much as possible as they love it. I much prefer to be outdoors too. The children have an area just for them which they can use whenever they choose. I have puddle suits to help keep them dry which in turn allows them more time outside in the wetter seasons. The woods and beach are my happy places. My setting is very much child led. I will extend the activity by going by what the child is engrossed in at the time. There are no time limits on activities here. Little minds develop best when they're free. The only times they will need to pause their play is meal times, toileting or nappy changes or if the weather has turned bad. (or they're so covered in dirt, water, goop etc that I need to change their clothes :-) ) I encourage the children to embrace who they are and just 'be'. They will need to come in their old clothes that you don't mind getting paint, glue or dirt on, always need to bring wellies and weather suitable clothing so we can take the opportunity when it arises. We do trips (adventuring) to parks, Leeds Castle, Heritage venues/Zoo's/Shops/Train rides and make the most of the local area. If you wish for a strict more nursery style routine, less outings and more indoor setting then this is not for you. I am very laid back, embrace what life gives us and live very much in the moment. Children are only small once and I believe that the freedom they have as a child in developing themselves as their own person gives them strong life skills to work from once they start school. I have house rules and boundaries in place and encourage the children to just 'be', be free, respectful, kind, embrace themselves and others. At my setting, your child becomes part of our family with many hugs, cuddles, laughs, fun and adventure. PUBLIC SERVICE ANNOUNCEMENT: I WILL NOT PROVIDE TEMPORARY CARE FOR CHILDREN OFF SCHOOL OR NURSERY BECAUSE THEY'RE OFF SICK. PLEASE STOP ASKING. THEY'RE OFF SICK FOR A REASON AND SHOULD BE KEPT AT HOME. PLEASE THINK OF OTHERS BEFORE ASKING PROFESSIONALS TO INTENTIONALLY ALLOW ILLNESS INTO THEIR SETTINGS. IT GOES AGAINST TTHE EYFS AND OUR HEALTH AND HYGIENE PROTOCALL.",
+        "experience": "18years Childminding. Open since Sept 2005 Worked in a nursery with children with ADHD and Autism and care for SEN in my setting. Care for children with various spectrum differences. Have 2 children of my own and worked in childcare for 19years. I have references and statements should you require them. Please look on my fb page in the photos to see the kind words from parents."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Patryk",
+        "reviewer_profile": "/profile/3617894",
+        "rating": "5 stars",
+        "comment": "Rachel has been an exceptional childcare provider for our daughter, Mia. From our initial interactions, it became clear that Rachel's approach to childcare is both professional and heartfelt. Her commitment to the wellbeing and development of children under her care is evident in every interaction. A few standout qualities we observed: Personalized Care: Rachel took the time to understand Mia's unique needs, ensuring that she provided tailored attention and care. This personal touch made all the difference in Mia's comfort and adjustment. Developmental Focus: Not only did Mia receive excellent day-to-day care, but Rachel also took proactive measures to support her developmental milestones. She was always keen on discussing Mia's progress and suggesting ways to help her further. Communication: Rachel maintained open lines of communication with us. Whether it was a small update about Mia's day or more significant discussions about her developmental concerns, Rachel ensured we were always informed and involved. Proactive Initiatives: Rachel demonstrated forward-thinking by organizing and planning additional support for Mia's needs. Her willingness to seek out and coordinate resources showcased her dedication to Mia's overall wellbeing and development. Genuine Affection: Above all, what stood out was Rachel's genuine affection for Mia. This bond ensured that Mia was not only taken care of physically but also emotionally and mentally. In conclusion, Rachel is a dedicated childcare professional with a genuine passion for children's wellbeing. We, Patryk and Ewelina, are grateful for the positive impact she's had on Mia and would wholeheartedly recommend her services to any parent seeking compassionate and competent childcare. Warm regards, Patryk and Ewelina"
+      },
+      {
+        "reviewer": "Charleyk",
+        "reviewer_profile": "/profile/2518926",
+        "rating": "5 stars",
+        "comment": "If you are looking for childcare stop and look no further. Rachel is by far the best of the best. My son has been extremely lucky to go to her and we are very sad she\u2019s moving away x Rachel is just amazing I\u2019m really fussy with who my son was left with and I never had a second doubt leaving him with her she gets down to his level plays with him nurtures him and loves him as if he were her own x There really is no other words other than amazing x from days out pool days picnics to making, learning and just helping my son be best he can be, his learnt so much from being with her We are absolutely gutted to be losing her not only a childminder but also become a great friend to me listening to me mum moan etc Thankyou for everything Rachel we will miss you so much xx"
+      }
+    ]
   },
   {
-    "full_name": "Aisha",
-    "rating": "2",
-    "distance": "- 3.2 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/6/135fa/a01a03e6.thumbnail.png"
+    "full_name": "Olufunmi",
+    "ratings": "7",
+    "image_url": "https://pf1.childcare.co.uk/v2/H/XjxA/KaEe6.3465864.thumb.jpg",
+    "profile": [
+      {
+        "bio": "I am an honest ,reliable ,teacher,compassionate,good listener,,patient,skilled at developing and leading children in the learning activities.I also prepare healthy meals.I meet the physical, social and emotional needs of children in my care.Also,I encourage healthy habits and hygiene likewise Toilet training.",
+        "experience": "Had Experience for 8 years as a child Nanny and Baby sitter."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Shraddha",
+        "reviewer_profile": "/profile/3603325",
+        "rating": "5 stars",
+        "comment": "Funmi has been an incredible nanny for my 3-year-old son. She is patient, nurturing, and truly knows how to engage with young children. My son always loved spending time with her, and I\u2019ve noticed a positive difference in his development and behaviour. She has been punctual, reliable, and communicative, always keeping me updated on my son\u2019s day. I can\u2019t recommend her highly enough to any family looking for a caring and trustworthy nanny!"
+      },
+      {
+        "reviewer": "Mel",
+        "reviewer_profile": "/profile/3820760",
+        "rating": "5 stars",
+        "comment": "My little one had a five stars experience. We will call again. Many thanks again."
+      },
+      {
+        "reviewer": "Natty",
+        "reviewer_profile": "/profile/3202376",
+        "rating": "4 stars",
+        "comment": "It's obvious that Fumni has a love for kids and enjoys spending time with them. She was available to support at the last minute which I really appreciated and did good job."
+      },
+      {
+        "reviewer": "brigi",
+        "reviewer_profile": "/profile/2886040",
+        "rating": "5 stars",
+        "comment": "I has a special request due to work commitments on a very short notice. Olufunmi was amazing in arranging such an early request, not only she helped me on a short notice, but also arrived earlier to allow time to find us, she bonded with my 5 years old girl immediately and was helpful through the time by sending updates! I will definitely be looking for your help again. You are a star , what a kind person, trustworthy !"
+      },
+      {
+        "reviewer": "Anca",
+        "reviewer_profile": "/profile/3816964",
+        "rating": "5 stars",
+        "comment": "Funmi was great at bonding with Luca and responded to his needs in an engaged and loving manner. When Luca started crawling she was there to encourage and watch over him. They both were a match in terms of love of music - Luca started dancing and grooving on music in his seat before even crawling. We also had Funmi over for occasional babysitting after starting nursery, which was great."
+      },
+      {
+        "reviewer": "Sesan Ad",
+        "reviewer_profile": "/profile/1617858",
+        "rating": "5 stars",
+        "comment": "Funmi is very passionate about her work and most importantly very hardworking. You can feel safe leaving your child in her care. Thanks Funmi."
+      },
+      {
+        "reviewer": "Priya",
+        "reviewer_profile": "/profile/3660555",
+        "rating": "5 stars",
+        "comment": "Funmi is a wonderful babysitter. She is now the backup nanny for my 1.5 year old twins. She has magic personality, she managed to calm my toddler son who refuses to go to anyone new. By the end of the first day the twins were friends with Funmi! I only had to tell her what our schedule looked like and what the kids eat. She managed everything else. We have tried a few others when our regular nanny is on leave, but no one has managed to make my twins so settled and happy! She was so good that I called her on a weekend so that I could catch up on my office work. I know I will be calling her again :)"
+      }
+    ]
   },
   {
-    "full_name": "Caroline",
-    "rating": "4",
-    "distance": "- Less than one mile away",
-    "image_url": "https://pf1.childcare.co.uk/6/2337d/d170fce5.thumbnail.png"
+    "full_name": "Jennie",
+    "ratings": "2",
+    "image_url": "https://pf1.childcare.co.uk/6/46e3b/be0318de.thumbnail.png",
+    "profile": [
+      {
+        "bio": "I'm Reliable, trustworthy, responsible fun but fair. Do you need childcare through the holidays? Sick days? Emergency short-notice childcare? Babysitting? Or during school time? I have a clear DBS check, safeguarding, first aid & food safety. I have been a nanny for the last 9 years and now I'm a registered childminder, I feel it is important to encourage a child's development, full of positive attention and support their basic needs. Encourage children to have age appropriate-independence with self-feeding and getting coats and shoes on and off by themselves, really gives them a sense of pride and self-awareness, I feel taking children to soft play areas, children's centres, playgroups, libraries, day trips to the beach and even having a walk around the local shops helps a child's social skills and helps their general understanding. Happy to answer any questions.",
+        "experience": "20 years of professional childcare experience, Ofsted registered, I have worked with children aged from newborn to 16 years, also have 3 children of my own, I will provide lunchs and dinners included in the price but if I take your child to any playgroups, soft play, to the shops or parks in good weather then I might ask for a small fee to cover the expense, I drive an 8-seater car with a clean licence and business insurance."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Tinona",
+        "reviewer_profile": "/profile/2862684",
+        "rating": "5 stars",
+        "comment": "Jennie has had my twins since they were 1, and they are now 9. and now has my 4 year old, too. I couldn't have asked for a better childminder. she has taught my children so much and helped them become better little humans! she takes them out regularly in the holidays on fun and educational days out. she is very helpful and always has the children's best interests at heart. my twins also have different behavioural/learning difficulties, and Jennie is amazing at dealing with the different challenges that they face daily. I feel so lucky that my children have had someone to care for them the way jennie has."
+      },
+      {
+        "reviewer": "Emma1122",
+        "reviewer_profile": "/profile/2632885",
+        "rating": "5 stars",
+        "comment": "I used Jenny for my two children ages 5&7. They adored her and she really welcomed them in. As working as a nurse I had early shift times Jenny used to arrive at my house at 6.30am do breakfast,teeth and school runs. She was always so approachable and went out of her way to help when possible. She was very reliable and not once did she ever call in sick or couldn\u2019t come. I would recommend her over and over again and if I needed childcare again I wouldn\u2019t hesitate to go back to Jen- she\u2019s great x"
+      }
+    ]
   },
   {
-    "full_name": "Lorraine",
-    "rating": "9",
-    "distance": "- 2.4 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/6/504e3/3eac21dd.thumbnail.png"
+    "full_name": "Chloe",
+    "ratings": "no reviews",
+    "image_url": "https://pf1.childcare.co.uk/6/4fae1/1034012c.thumbnail.png"
   },
   {
-    "full_name": "Ace1 Childcare",
-    "rating": "4",
-    "distance": "- 3.7 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/6/3e641/17b5929c.thumbnail.png"
+    "full_name": "Kuldish",
+    "ratings": "no reviews",
+    "image_url": "https://pf1.childcare.co.uk/v2/M/CxbA/NF4og.2487264.thumb.jpg"
   },
   {
-    "full_name": "Robyn",
-    "rating": "10",
-    "distance": "- 4.8 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/fb546/6fb2109d.thumbnail.png"
+    "full_name": "Ashleigh",
+    "ratings": "2",
+    "image_url": "https://pf1.childcare.co.uk/6/357e0/0b029180.thumbnail.png",
+    "profile": [
+      {
+        "bio": "My name is Ashleigh Browne. I am 29 years old and currently live in Greenhithe with my partner and my 5 year old stepdaughter. I am a qualified and experienced primary school teacher. I also have experience as a childminding assistant, nanny, SEN personal assistant and tutor. My experience has predominantly been with children ages 1-7, which links well with my Early Childhood Studies degree where I studied the development of children aged 0-8. I am currently looking for a nanny role for a family with a young child/children, to be looked after in their own home. I am also available for tutoring and babysitting. My previous nanny role was with 3 year old twins who I still babysit occasionally now they have started school. While I was nannying, I would take the children to the library weekly to attend nursery rhyme singing sessions and choose new books to read back at home, to messy play sessions and on walks around the area, including to the park. At home, I would supervise the children's play and meal times as well as providing activities to help the children develop various skills. I encouraged the children to share and play respectfully with each other, taking turns and listening to each others wants and needs. At the end of the day, I would ensure that the children's play room was tidy, while also encouraging the children to help with putting away toys they were finished with. I also assisted in potty training both children (girl and boy). I have experience of tutoring primary school aged children, mainly with a focus on Maths and English. I have a strong understanding of the Maths and English curriculum, including phonics, with experience teaching many different phonics schemes. As well as providing specific tutoring based on the child's individual needs, I am also available for 11+ tutoring. I provide face to face, 1:1 tutoring and am able to provide this at your home or from a tutoring base in Gravesend.",
+        "experience": "I am a qualified primary school teacher. I have 5 years of experience and have taught in nursery, reception, year 1 and year 2. I have experience of tutoring primary school aged children, mainly with a focus on Maths and English. On top of my teaching experience, I have also worked as a childminding assistant and nanny, working with a range of children who were predominately aged 1-4 years old. I also have experience of working as a personal assistant for a young child with down's syndrome."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Preet",
+        "reviewer_profile": "/profile/3914397",
+        "rating": "5 stars",
+        "comment": "Ashleigh has been an incredible tutor for my children. Their patience, encouragement, and ability to make learning fun have really boosted my children\u2019s confidence and progress. Lessons are always engaging and tailored to suit individual needs, ensuring a supportive and effective learning experience. We\u2019ve seen a noticeable improvement in both skills and enthusiasm for learning. I couldn\u2019t recommend Ashleigh more highly for any parent looking for a dedicated and professional primary school tutor!"
+      },
+      {
+        "reviewer": "Toby",
+        "reviewer_profile": "/profile/3708683",
+        "rating": "5 stars",
+        "comment": "Ashleigh is superb all-round childcare professional who did a fantastic job of looking after our three-year old twins in our home from March through August 2023. From the very beginning, engagement with my wife and I was extremely professional with all terms and conditions communicated succinctly and formalised in a very straightforward contract. Ashleigh then came to our home for a trial visit to ensure that she was good fit for our children. They took to her immediately and Ashleigh commenced working with them the following week. Everything that Ashleigh does is centred around keeping the children that she is working with fully engaged at all times. Every day that she worked with our twins was filled with reading, activities and learning through play. She put a lot of thought into varying the books that were read to our children, emphasising the meaning through creative use of voices and actions, and pitched her explanations of the nature and purpose of activities at the right level for our children to understand. If either of the children required discipline or correction her stance was firm but non-threatening and she was extremely adept at encouraging our kids to move from one activity to another. From play to reading, from reading to lunch, from lunch to a walk... It was all done quickly, confidently and with minimum fuss. Throughout all of this, Ashleigh constantly emphasised the importance of good natured behaviour and good manners, but in a way that kept both of our children completely enamoured of her at all times. From an administrative point of view, Ashleigh was extremely professional. Her invoices were fully itemised and submitted in a timely manner, her timekeeping was excellent and she kept us provided with updates and photos (via a WhatsApp group that my wife set up for the three of us) throughout every day that she was looking after our children. I would have no hesitation in recommending Ashleigh as a Childminder or Tutor. She takes great pride in her work and strives to deliver excellence in all that she does."
+      }
+    ]
   },
   {
-    "full_name": "Rachel87",
-    "rating": "4",
-    "distance": "- Less than one mile away",
-    "image_url": "https://pf1.childcare.co.uk/5/ef77a/a5d77c41.thumbnail.png"
+    "full_name": "Sarah",
+    "ratings": "no reviews",
+    "image_url": "https://pf1.childcare.co.uk/6/14da3/32571515.thumbnail.png"
   },
   {
-    "full_name": "Mariaruffoni",
-    "rating": "10",
-    "distance": "- 5 miles from BR6 9AA",
-    "image_url": "https://pf1.childcare.co.uk/5/de790/0e1df6db.thumbnail.png"
+    "full_name": "Iuliia",
+    "ratings": "1",
+    "image_url": "https://pf1.childcare.co.uk/v2/L/tOaX/vKxAa.3339448.thumb.jpg",
+    "profile": [
+      {
+        "bio": "I\u2019m mother of 4 kids. Looking for some extra money. I\u2019m always home, you can bring your kid to my house. I can also collect your child/children from school",
+        "experience": "7 years. Since I gave a birth to my first child. I have a teaching degree."
+      }
+    ],
+    "reviews": [
+      {
+        "reviewer": "Eve",
+        "reviewer_profile": "/profile/3850925",
+        "rating": "5 stars",
+        "comment": "This was our first time as parents having to find a childminder. From our initial telephone call Luliia made us feel at ease and was happy to answer any questions. Lulliia first hand experience as a Mum of 4 and her teaching qualifications were the main reasons for our first contact with Luliia. We were invited to her home to meet her and her family. Our 8 year old has special needs including autism , meaning we were anxious to find the perfect person to care for him. Luliia ticked all our boxes. She is kind knowledgable and has a real connection with children. Her own children were very welcoming and showed love and understanding towards our child. It wasnt long before they were all happily playing together . The one thing that shines through is the LOVE that is in this family. We would highly recommend Luliia. She provides a fun filled time with activities love and care, alongside lovely children to play with Thannk you!"
+      }
+    ]
   }
 ]
