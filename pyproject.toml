@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dr-web-engine"
+version = "0.1.0"
+description = "A data retrieval engine based on Playwright."
+authors = [{ name = "Your Name", email = "your.email@example.com" }]
+dependencies = [
+    "playwright",
+    "requests",
+]
+
+[tool.setuptools]
+packages = ["cli", "engine"]
