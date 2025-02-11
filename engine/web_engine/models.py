@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Dict, List, Optional
 
 
@@ -28,10 +28,10 @@ class ExtractionQuery(BaseModel):
     steps: List[ExtractStep] = Field(alias="@steps")
     pagination: Optional[PaginationSpec] = Field(default=None, alias="@pagination")
 
-    class Config:
-        allow_population_by_field_name = True
+    # Updated configuration for Pydantic V2
+    model_config = ConfigDict(populate_by_name=True)
 
 
-# Fix forward references for recursive models
-ExtractStep.update_forward_refs()
-FollowStep.update_forward_refs()
+# Fix forward references for recursive models (updated for Pydantic V2)
+ExtractStep.model_rebuild()
+FollowStep.model_rebuild()

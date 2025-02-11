@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
-from web_cli.web_engine.engine import execute_query, extract_fields
-from web_cli.web_engine.models import ExtractionQuery, ExtractStep, PaginationSpec
+from engine.web_engine.engine import execute_query, extract_fields
+from engine.web_engine.models import ExtractionQuery, ExtractStep, PaginationSpec
 
 
 @pytest.fixture

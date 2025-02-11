@@ -1,5 +1,6 @@
 # Core dependencies
 setuptools
+typer
 playwright==1.42.0  # Browser automation
 pydantic==2.6.4     # Data validation and settings management
 json5==0.9.14       # JSON5 parsing
