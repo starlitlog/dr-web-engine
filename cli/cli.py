@@ -3,6 +3,7 @@ import logging
 import json
 from engine.web_engine.parsers import get_parser
 from engine.web_engine.engine import execute_query
+from engine.web_engine.base.playwright_browser import PlaywrightClient
 
 
 def setup_logging(log_level: str, log_file: str = None):
@@ -31,7 +32,8 @@ def main(
     output: str = typer.Option(..., "-o", "--output", help="Output file name"),
     format: str = typer.Option("json5", "-f", "--format", help="Query language format (default: json5)"),
     log_level: str = typer.Option("error", "-l", "--log-level", help="Logging level (default: error)"),
-    log_file: str = typer.Option(None, "--log-file", help="Path to the log file (default: stdout)")
+    log_file: str = typer.Option(None, "--log-file", help="Path to the log file (default: stdout)"),
+    xvfb: bool = typer.Option(False, "--xvfb", help="Launch browser in headless mode using Xvfb")
 ):
     """OXPath-like JSON Query CLI"""
     # Set up logging
@@ -41,9 +43,10 @@ def main(
         # Get the appropriate parser
         parser_fn = get_parser(format)
         query = parser_fn(query)
+        browser = PlaywrightClient(xvfb)
 
         # Execute the query
-        results = execute_query(query)
+        results = execute_query(query, browser)
 
         # Save the results
         with open(output, "w") as f:
