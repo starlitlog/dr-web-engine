@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dr-web-engine"
-version = "0.5.2"
+version = "0.5.2.1"
 description = "A data retrieval engine based on Playwright."
 authors = [{ name = "Ylli Prifti", email = "ylli@prifti.us" }]
 readme = "README.md"
@@ -15,6 +15,7 @@ dependencies = [
     "pydantic",
     "json5",
     "pyyaml",
+    "typer"
 ]
 
 [project.optional-dependencies]
