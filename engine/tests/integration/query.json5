@@ -1,0 +1,13 @@
+{
+  "@url": "https://www.example.com",
+  "@steps": [
+    {
+      "@xpath": "//div[contains(@class, 'search-result')]",
+      "@fields": {
+        "full_name": ".//div[contains(@class, 'name')]/text()",
+        "ratings": ".//div[contains(@class, 'rating')]/text()",
+        "image_url": ".//div[contains(@class, 'image')]//img/@src"
+      }
+    }
+  ]
+}

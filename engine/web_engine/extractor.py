@@ -70,4 +70,3 @@ class XPathExtractor:
             else:
                 logger.warning(f"Field '{field}' not found with XPath: {xpath}")
         return result
-

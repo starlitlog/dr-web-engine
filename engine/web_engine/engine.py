@@ -1,7 +1,7 @@
 import logging
-from playwright.sync_api import sync_playwright
 from .extractor import XPathExtractor
-from .models import ExtractionQuery, ExtractStep, FollowStep, PaginationSpec
+from .models import ExtractionQuery, ExtractStep
+from .base.browser import BrowserClient
 
 logger = logging.getLogger(__name__)
 
@@ -80,15 +80,14 @@ def execute_step(context, page, step: ExtractStep):  # Ensure step is an Extract
     return results if results else {}
 
 
-def execute_query(query: ExtractionQuery):
+def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
     """Executes the web extraction query using Playwright."""
     try:
-        with sync_playwright() as p:
+        with browser_client as client:  # Use the injected PlaywrightClient
             logger.info("Launching browser...")
 
-            browser = p.chromium.launch(headless=False)
-            context = browser.new_context()
-            page = context.new_page()
+            browser = client.browser  # Use the PlaywrightClient's browser
+            page = client.page         # Use the PlaywrightClient's page
 
             logger.info(f"Navigating to URL: {query.url}")
             page.goto(query.url)
@@ -104,7 +103,7 @@ def execute_query(query: ExtractionQuery):
             while True:
                 for step in query.steps:
                     logger.info(f"Executing step with XPath: {step.xpath}")  # ✅ Fix field access
-                    results.extend(execute_step(context, page, step))
+                    results.extend(execute_step(client.browser.new_context(), page, step))
 
                 # Use `.pagination` method/property instead of dict access
                 pagination = query.pagination
