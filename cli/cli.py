@@ -14,12 +14,16 @@ def setup_logging(log_level: str, log_file: str = None):
         "info": logging.INFO,
         "debug": logging.DEBUG
     }
+    handlers = [logging.StreamHandler()]  # Default to stream logging
+
+    if log_file:
+        log_file_path = str(log_file)  # Explicitly convert to string
+        handlers.append(logging.FileHandler(log_file_path))
+
     logging.basicConfig(
         level=log_levels.get(log_level, logging.ERROR),
         format="%(asctime)s - %(levelname)s - %(message)s",
-        handlers=[
-            logging.FileHandler(log_file) if log_file else logging.StreamHandler()
-        ]
+        handlers=handlers
     )
 
 
@@ -27,10 +31,10 @@ app = typer.Typer()
 
 
 @app.command()
-def main(
+def run(
     query: str = typer.Option(..., "-q", "--query", help="Path to the query file"),
     output: str = typer.Option(..., "-o", "--output", help="Output file name"),
-    format: str = typer.Option("json5", "-f", "--format", help="Query language format (default: json5)"),
+    query_format: str = typer.Option("json5", "-f", "--format", help="Query language format (default: json5)"),
     log_level: str = typer.Option("error", "-l", "--log-level", help="Logging level (default: error)"),
     log_file: str = typer.Option(None, "--log-file", help="Path to the log file (default: stdout)"),
     xvfb: bool = typer.Option(False, "--xvfb", help="Launch browser in headless mode using Xvfb")
@@ -41,7 +45,7 @@ def main(
 
     try:
         # Get the appropriate parser
-        parser_fn = get_parser(format)
+        parser_fn = get_parser(query_format)
         query = parser_fn(query)
         browser = PlaywrightClient(xvfb)
 
