@@ -22,6 +22,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine
 
+      - name: Install Playwright Browsers
+        run: |
+          playwright install --with-deps  # Install missing dependencies & browser binaries
+
       - name: Build the package
         run: python -m build
 
