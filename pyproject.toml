@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=42", "wheel", "build"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "dr-web-engine"
-version = "0.5.0"
+version = "0.5.1.1"
 description = "A data retrieval engine based on Playwright."
 authors = [{ name = "Ylli Prifti", email = "ylli@prifti.us" }]
 readme = "README.md"
@@ -27,7 +27,8 @@ dev = [
 dr-web-engine = "cli.cli:main"
 
 [tool.setuptools]
-packages = ["cli", "engine"]
+packages = ["cli", "engine", "engine.web_engine", "engine.web_engine.utils",
+    "engine.web_engine.parsers", "engine.web_engine.base"]
 
 [tool.setuptools.package-data]
 "cli" = ["*.json", "*.yaml"]
