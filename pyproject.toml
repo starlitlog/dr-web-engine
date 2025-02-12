@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dr-web-engine"
-version = "0.5.1.1"
+version = "0.5.2"
 description = "A data retrieval engine based on Playwright."
 authors = [{ name = "Ylli Prifti", email = "ylli@prifti.us" }]
 readme = "README.md"
@@ -24,11 +24,15 @@ dev = [
 ]
 
 [project.scripts]
-dr-web-engine = "cli.cli:main"
+dr-web-engine = "cli.cli:app"
 
-[tool.setuptools]
-packages = ["cli", "engine", "engine.web_engine", "engine.web_engine.utils",
-    "engine.web_engine.parsers", "engine.web_engine.base"]
+#[tool.setuptools]
+#packages = ["cli", "engine", "engine.web_engine", "engine.web_engine.utils",
+#    "engine.web_engine.parsers", "engine.web_engine.base"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cli*", "engine*"]
 
 [tool.setuptools.package-data]
 "cli" = ["*.json", "*.yaml"]
