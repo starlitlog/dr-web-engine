@@ -1,16 +1,38 @@
 [build-system]
-requires = ["setuptools>=42"]
+requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "dr-web-engine"
-version = "0.1.0"
+version = "0.5.0"
 description = "A data retrieval engine based on Playwright."
-authors = [{ name = "Your Name", email = "your.email@example.com" }]
+authors = [{ name = "Ylli Prifti", email = "ylli@prifti.us" }]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
 dependencies = [
     "playwright",
-    "requests",
+    "pydantic",
+    "json5",
+    "pyyaml",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-playwright",
+]
+
+[project.scripts]
+dr-web-engine = "cli.cli:main"
 
 [tool.setuptools]
 packages = ["cli", "engine"]
+
+[tool.setuptools.package-data]
+"cli" = ["*.json", "*.yaml"]
+"engine" = ["*.json", "*.yaml"]
+
+[tool.setuptools.exclude-package-data]
+"cli" = ["__pycache__"]
+"engine" = ["__pycache__"]
