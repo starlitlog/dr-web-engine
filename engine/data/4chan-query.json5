@@ -1,0 +1,13 @@
+{
+  "@url": "https://boards.4chan.org/pol/catalog",
+  "@steps": [
+    {
+      "@xpath": "//div[contains(@class, 'thread')]",  // Selecting each thread
+      "@fields": {
+        "title": ".//div[contains(@class, 'teaser')]/text()",  // Extracting thread title
+        "link": "./a/@href",  // Link to the thread
+        "number_of_posts": ".//div[contains(@class, 'meta')]/text()"  // Number of posts
+      }
+    }
+  ]
+}
