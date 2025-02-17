@@ -25,9 +25,9 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t starlitlog/dr-web-engine:${{ github.ref }} .
-          # Ensure to use the correct tag, typically something like: ${GITHUB_REF##*/}
+          docker build -t starlitlog/dr-web-engine:latest .
+         
 
       - name: Push Docker Image
         run: |
-          docker push starlitlog/dr-web-engine:${{ github.ref }}
+          docker push starlitlog/dr-web-engine:latest
