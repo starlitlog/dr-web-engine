@@ -1,0 +1,12 @@
+{
+  "@url": "http://dblp.dagstuhl.de/db/journals/?pos=1",
+  "@steps": [
+    {
+      "@xpath": "//header[@id='headline']",  // start with headline
+      "@fields": {
+        "title": "./h1/text()",  // Extracting headline
+        "name": "/..//div[@class='hide-body']//a/text()",  // extract all titles
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+doc("http://dblp.dagstuhl.de/db/journals/?pos=1")
+  //header[@id="headline"]:<title=string(./h1)>
+  /..//div[@class="hide-body"]//a:<name=string(.)>

@@ -33,29 +33,31 @@ class XPathExtractor:
         Extracts a value from an element using the specified XPath and extraction method.
         Supports normalize-space() for trimming and collapsing whitespace.
         """
-        target_element = element.query_selector(f"xpath={xpath}")
-        if not target_element:
-            logger.warning(f"Element not found with XPath: {xpath}")
-            return None
+        target_elements = element.query_selector_all(f"xpath={xpath}")  # Change to query_selector_all
+        if not target_elements:
+            logger.warning(f"No elements found with XPath: {xpath}")
+            return []
 
-        if extraction_method == "text":
-            return target_element.text_content().strip()
-        elif extraction_method == "href":
-            value = target_element.get_attribute(extraction_method)
-            if value and base_url and not bool(urlparse(value).netloc):  # Checks if URL has no domain
-                value = urljoin(base_url, value)
-                logger.debug(f"Normalized relative URL -> {value}")
-                return value
-            return value
-        elif extraction_method == "normalize-space":
-            # Use normalize-space() to trim and collapse whitespace
-            return " ".join(target_element.text_content().split())
-        elif extraction_method == "src" or extraction_method == "alt":
-            return target_element.get_attribute(extraction_method)
+        results = []
+        for target_element in target_elements:
+            if extraction_method == "text":
+                results.append(target_element.text_content().strip())
+            elif extraction_method == "href":
+                value = target_element.get_attribute(extraction_method)
+                if value and base_url and not bool(urlparse(value).netloc):  # Checks if URL has no domain
+                    value = urljoin(base_url, value)
+                    logger.debug(f"Normalized relative URL -> {value}")
+                results.append(value)
+            elif extraction_method == "normalize-space":
+                # Use normalize-space() to trim and collapse whitespace
+                results.append(" ".join(target_element.text_content().split()))
+            elif extraction_method in ["src", "alt"]:
+                results.append(target_element.get_attribute(extraction_method))
+            else:
+                # Default to returning the element itself
+                results.append(target_element)
 
-        else:
-            # Default to returning the element itself
-            return target_element
+        return results
 
     def extract_fields(self, element, fields: Dict[str, str]) -> Dict[str, str]:
         """
