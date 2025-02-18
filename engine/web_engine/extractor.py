@@ -1,72 +1,73 @@
 import logging
-from typing import Dict, Optional
-from urllib.parse import urljoin, urlparse
+from typing import Dict, Optional, Any
+from .base.extractor import BaseExtractor, BaseValueExtractor, ValueExtractorFactory
 
+# Set up the logger
 logger = logging.getLogger(__name__)
 
 
-class XPathExtractor:
+class XPathExtractor(BaseExtractor):
     """Handles extraction of data from elements using XPath expressions."""
 
-    @staticmethod
-    def parse_xpath(xpath: str) -> tuple:
+    def extract_value(self, element: Any, xpath: str, base_url: Optional[str] = None) -> Optional[Any]:
         """
-        Parses an XPath expression to detect functions like /text(), @href, @src, or normalize-space().
-        Returns a tuple of (cleaned_xpath, extraction_method).
-        """
-        if xpath.endswith("/text()"):
-            return xpath[:-7], "text"
-        elif xpath.endswith("/@href"):
-            return xpath[:-6], "href"
-        elif xpath.endswith("/@src"):
-            return xpath[:-5], "src"
-        elif xpath.endswith("/@alt"):
-            return xpath[:-5], "alt"
-        elif xpath.endswith("/normalize-space()"):
-            return xpath[:-18], "normalize-space"
-        else:
-            return xpath, None
+        Extracts a value from an element using the specified XPath, relying on the appropriate extractor
+        determined by ValueExtractorFactory.
 
-    @staticmethod
-    def extract_value(element, xpath: str, extraction_method: Optional[str] = None, base_url: Optional[str] = None):
+        Args:
+            element: The element from which to extract data.
+            xpath: The XPath expression used for extraction.
+            base_url: The base URL for resolving relative links (if applicable).
+
+        Returns:
+            A single extracted value if only one element is found, or a list of extracted values if multiple elements are found.
+            Returns None if no values were found.
         """
-        Extracts a value from an element using the specified XPath and extraction method.
-        Supports normalize-space() for trimming and collapsing whitespace.
-        """
-        target_elements = element.query_selector_all(f"xpath={xpath}")  # Change to query_selector_all
+        extractor: BaseValueExtractor = ValueExtractorFactory.create_extractor(xpath)
+
+        if extractor is None:
+            logger.warning(f"Unsupported XPath format: {xpath}")
+            return None
+
+        # Select all matching elements
+        target_elements = element.query_selector_all(f"xpath={extractor.xpath}")
+
         if not target_elements:
-            logger.warning(f"No elements found with XPath: {xpath}")
-            return []
+            logger.warning(f"No elements found with XPath: {extractor.xpath}")
+            return None
 
         results = []
+
         for target_element in target_elements:
-            if extraction_method == "text":
-                results.append(target_element.text_content().strip())
-            elif extraction_method == "href":
-                value = target_element.get_attribute(extraction_method)
-                if value and base_url and not bool(urlparse(value).netloc):  # Checks if URL has no domain
-                    value = urljoin(base_url, value)
-                    logger.debug(f"Normalized relative URL -> {value}")
-                results.append(value)
-            elif extraction_method == "normalize-space":
-                # Use normalize-space() to trim and collapse whitespace
-                results.append(" ".join(target_element.text_content().split()))
-            elif extraction_method in ["src", "alt"]:
-                results.append(target_element.get_attribute(extraction_method))
-            else:
-                # Default to returning the element itself
-                results.append(target_element)
+            try:
+                value = extractor.extract(target_element, base_url)
+                if value is not None:
+                    results.append(value)
+            except Exception as e:
+                logger.error(f"Error extracting value: {e}")
 
-        return results
+        # Return a single value if only one result exists, otherwise return the list
+        if len(results) == 1:
+            return results[0]  # Return the single extracted value
+        elif len(results) > 1:
+            return results  # Return the list of extracted values
+        else:
+            return None  # In case no valid values were extracted
 
-    def extract_fields(self, element, fields: Dict[str, str]) -> Dict[str, str]:
+    def extract_fields(self, element: Any, fields: Dict[str, str]) -> Dict[str, Any]:
         """
         Extracts multiple fields from an element using XPath expressions.
+
+        Args:
+            element: The element from which to extract fields.
+            fields: A dictionary where keys are field names and values are their corresponding XPath expressions.
+
+        Returns:
+            A dictionary of field names to extracted values.
         """
         result = {}
         for field, xpath in fields.items():
-            cleaned_xpath, extraction_method = self.parse_xpath(xpath)
-            value = self.extract_value(element, cleaned_xpath, extraction_method)
+            value = self.extract_value(element, xpath)
             if value is not None:
                 result[field] = value
             else:
