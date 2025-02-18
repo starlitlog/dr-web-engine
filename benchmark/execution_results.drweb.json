@@ -1,1108 +1,150 @@
 [
     {
         "execution_run": 1,
-        "execution_time": 5.196984052658081,
+        "execution_time": 9.593179941177368,
         "output_file_size": 6261,
         "cpu_usage": [
-            "103.47%"
+            "69.34%",
+            "14.53%",
+            "4.35%",
+            "2.57%"
         ],
         "memory_usage": [
-            "165.4MiB"
+            "120.5MiB",
+            "135.7MiB",
+            "136.5MiB",
+            "136.3MiB"
         ]
     },
     {
         "execution_run": 2,
-        "execution_time": 5.891020059585571,
+        "execution_time": 6.238236904144287,
         "output_file_size": 6261,
         "cpu_usage": [
-            "98.03%"
+            "65.68%",
+            "13.96%",
+            "138.12%"
         ],
         "memory_usage": [
-            "148.6MiB"
+            "120.2MiB",
+            "133.8MiB",
+            "144.5MiB"
         ]
     },
     {
         "execution_run": 3,
-        "execution_time": 5.699721813201904,
+        "execution_time": 5.395977258682251,
         "output_file_size": 6261,
         "cpu_usage": [
-            "137.59%"
+            "65.08%",
+            "18.18%"
         ],
         "memory_usage": [
-            "150.8MiB"
+            "119.5MiB",
+            "133.8MiB"
         ]
     },
     {
         "execution_run": 4,
-        "execution_time": 7.78055214881897,
+        "execution_time": 7.268193006515503,
         "output_file_size": 6261,
         "cpu_usage": [
-            "11.08%"
+            "67.26%",
+            "21.42%",
+            "50.67%",
+            "0.00%"
         ],
         "memory_usage": [
-            "134.5MiB"
+            "118.5MiB",
+            "133.9MiB",
+            "141.5MiB",
+            "0B"
         ]
     },
     {
         "execution_run": 5,
-        "execution_time": 6.6692681312561035,
+        "execution_time": 5.307421922683716,
         "output_file_size": 6261,
         "cpu_usage": [
-            "46.23%"
+            "71.67%",
+            "24.80%"
         ],
         "memory_usage": [
-            "146.5MiB"
+            "119.8MiB",
+            "134.9MiB"
         ]
     },
     {
         "execution_run": 6,
-        "execution_time": 5.959628105163574,
+        "execution_time": 7.275410890579224,
         "output_file_size": 6261,
         "cpu_usage": [
-            "110.85%"
+            "73.39%",
+            "10.09%",
+            "63.50%",
+            "0.00%"
         ],
         "memory_usage": [
-            "152.3MiB"
+            "120.3MiB",
+            "128.7MiB",
+            "142.7MiB",
+            "0B"
         ]
     },
     {
         "execution_run": 7,
-        "execution_time": 5.34916090965271,
+        "execution_time": 6.541912078857422,
         "output_file_size": 6261,
         "cpu_usage": [
-            "93.60%"
+            "39.07%",
+            "10.05%"
         ],
         "memory_usage": [
-            "150.1MiB"
+            "75.09MiB",
+            "126.1MiB"
         ]
     },
     {
         "execution_run": 8,
-        "execution_time": 5.242635011672974,
+        "execution_time": 6.525160074234009,
         "output_file_size": 6261,
         "cpu_usage": [
-            "108.71%"
+            "63.06%",
+            "16.16%",
+            "91.79%"
         ],
         "memory_usage": [
-            "147.4MiB"
+            "120.7MiB",
+            "134.7MiB",
+            "143.4MiB"
         ]
     },
     {
         "execution_run": 9,
-        "execution_time": 6.825723171234131,
+        "execution_time": 6.532222032546997,
         "output_file_size": 6261,
         "cpu_usage": [
-            "104.24%"
+            "65.59%",
+            "16.86%"
         ],
         "memory_usage": [
-            "150.1MiB"
+            "119MiB",
+            "134.9MiB"
         ]
     },
     {
         "execution_run": 10,
-        "execution_time": 5.967132091522217,
+        "execution_time": 6.678915977478027,
         "output_file_size": 6261,
         "cpu_usage": [
-            "120.27%"
+            "63.52%",
+            "17.70%",
+            "129.35%"
         ],
         "memory_usage": [
-            "149.9MiB"
-        ]
-    },
-    {
-        "execution_run": 11,
-        "execution_time": 5.250047922134399,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "116.57%"
-        ],
-        "memory_usage": [
-            "150.3MiB"
-        ]
-    },
-    {
-        "execution_run": 12,
-        "execution_time": 5.514759302139282,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "98.90%"
-        ],
-        "memory_usage": [
-            "150.2MiB"
-        ]
-    },
-    {
-        "execution_run": 13,
-        "execution_time": 5.376617193222046,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "119.49%"
-        ],
-        "memory_usage": [
-            "151.6MiB"
-        ]
-    },
-    {
-        "execution_run": 14,
-        "execution_time": 5.756456136703491,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "107.59%"
-        ],
-        "memory_usage": [
-            "149MiB"
-        ]
-    },
-    {
-        "execution_run": 15,
-        "execution_time": 7.525511980056763,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "63.73%"
-        ],
-        "memory_usage": [
-            "150.2MiB"
-        ]
-    },
-    {
-        "execution_run": 16,
-        "execution_time": 5.430082082748413,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "78.09%"
-        ],
-        "memory_usage": [
-            "145.9MiB"
-        ]
-    },
-    {
-        "execution_run": 17,
-        "execution_time": 5.15018105506897,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "108.89%"
-        ],
-        "memory_usage": [
-            "150MiB"
-        ]
-    },
-    {
-        "execution_run": 18,
-        "execution_time": 5.474277019500732,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "116.58%"
-        ],
-        "memory_usage": [
-            "150.5MiB"
-        ]
-    },
-    {
-        "execution_run": 19,
-        "execution_time": 5.109501838684082,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "99.07%"
-        ],
-        "memory_usage": [
-            "148.3MiB"
-        ]
-    },
-    {
-        "execution_run": 20,
-        "execution_time": 7.590134859085083,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "26.68%",
-            "0.00%"
-        ],
-        "memory_usage": [
-            "135MiB",
-            "0B"
-        ]
-    },
-    {
-        "execution_run": 21,
-        "execution_time": 5.485547780990601,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "124.95%"
-        ],
-        "memory_usage": [
-            "148.6MiB"
-        ]
-    },
-    {
-        "execution_run": 22,
-        "execution_time": 5.217252969741821,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "81.21%"
-        ],
-        "memory_usage": [
-            "146.2MiB"
-        ]
-    },
-    {
-        "execution_run": 23,
-        "execution_time": 5.809828996658325,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "105.95%"
-        ],
-        "memory_usage": [
-            "149.6MiB"
-        ]
-    },
-    {
-        "execution_run": 24,
-        "execution_time": 5.5962629318237305,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "100.23%"
-        ],
-        "memory_usage": [
-            "147.5MiB"
-        ]
-    },
-    {
-        "execution_run": 25,
-        "execution_time": 7.720311880111694,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "27.86%",
-            "0.00%"
-        ],
-        "memory_usage": [
-            "135.1MiB",
-            "0B"
-        ]
-    },
-    {
-        "execution_run": 26,
-        "execution_time": 5.457775115966797,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "86.52%"
-        ],
-        "memory_usage": [
-            "149.6MiB"
-        ]
-    },
-    {
-        "execution_run": 27,
-        "execution_time": 5.849204063415527,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "110.17%"
-        ],
-        "memory_usage": [
-            "147.4MiB"
-        ]
-    },
-    {
-        "execution_run": 28,
-        "execution_time": 5.207427978515625,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "100.00%"
-        ],
-        "memory_usage": [
-            "149.4MiB"
-        ]
-    },
-    {
-        "execution_run": 29,
-        "execution_time": 5.549613952636719,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "113.09%"
-        ],
-        "memory_usage": [
-            "147.5MiB"
-        ]
-    },
-    {
-        "execution_run": 30,
-        "execution_time": 5.364782094955444,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "146.33%"
-        ],
-        "memory_usage": [
-            "37MiB"
-        ]
-    },
-    {
-        "execution_run": 31,
-        "execution_time": 5.123414039611816,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "91.02%"
-        ],
-        "memory_usage": [
-            "146.8MiB"
-        ]
-    },
-    {
-        "execution_run": 32,
-        "execution_time": 5.586080074310303,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "99.16%"
-        ],
-        "memory_usage": [
-            "150.4MiB"
-        ]
-    },
-    {
-        "execution_run": 33,
-        "execution_time": 5.417901039123535,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "106.78%"
-        ],
-        "memory_usage": [
-            "150.1MiB"
-        ]
-    },
-    {
-        "execution_run": 34,
-        "execution_time": 5.312597036361694,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "110.89%"
-        ],
-        "memory_usage": [
-            "144.6MiB"
-        ]
-    },
-    {
-        "execution_run": 35,
-        "execution_time": 5.247241020202637,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "113.02%"
-        ],
-        "memory_usage": [
-            "149.5MiB"
-        ]
-    },
-    {
-        "execution_run": 36,
-        "execution_time": 7.617537021636963,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "95.82%"
-        ],
-        "memory_usage": [
-            "147.4MiB"
-        ]
-    },
-    {
-        "execution_run": 37,
-        "execution_time": 5.591033220291138,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "100.48%"
-        ],
-        "memory_usage": [
-            "147.1MiB"
-        ]
-    },
-    {
-        "execution_run": 38,
-        "execution_time": 5.226538896560669,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "102.91%"
-        ],
-        "memory_usage": [
-            "147.8MiB"
-        ]
-    },
-    {
-        "execution_run": 39,
-        "execution_time": 5.682990074157715,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "150.16%"
-        ],
-        "memory_usage": [
-            "102.9MiB"
-        ]
-    },
-    {
-        "execution_run": 40,
-        "execution_time": 5.328952074050903,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "128.91%"
-        ],
-        "memory_usage": [
-            "149.9MiB"
-        ]
-    },
-    {
-        "execution_run": 41,
-        "execution_time": 5.128544092178345,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "107.76%"
-        ],
-        "memory_usage": [
-            "148.7MiB"
-        ]
-    },
-    {
-        "execution_run": 42,
-        "execution_time": 6.769001245498657,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "75.96%"
-        ],
-        "memory_usage": [
-            "145.7MiB"
-        ]
-    },
-    {
-        "execution_run": 43,
-        "execution_time": 6.2001259326934814,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "106.36%"
-        ],
-        "memory_usage": [
-            "149.6MiB"
-        ]
-    },
-    {
-        "execution_run": 44,
-        "execution_time": 5.173800230026245,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "98.19%"
-        ],
-        "memory_usage": [
-            "150.6MiB"
-        ]
-    },
-    {
-        "execution_run": 45,
-        "execution_time": 5.723346948623657,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "121.16%"
-        ],
-        "memory_usage": [
-            "148.7MiB"
-        ]
-    },
-    {
-        "execution_run": 46,
-        "execution_time": 7.23321008682251,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "81.25%"
-        ],
-        "memory_usage": [
-            "146.6MiB"
-        ]
-    },
-    {
-        "execution_run": 47,
-        "execution_time": 5.137267827987671,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "108.79%"
-        ],
-        "memory_usage": [
-            "147.3MiB"
-        ]
-    },
-    {
-        "execution_run": 48,
-        "execution_time": 5.45327615737915,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "119.91%"
-        ],
-        "memory_usage": [
-            "151.6MiB"
-        ]
-    },
-    {
-        "execution_run": 49,
-        "execution_time": 5.99599814414978,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "89.66%"
-        ],
-        "memory_usage": [
-            "146.3MiB"
-        ]
-    },
-    {
-        "execution_run": 50,
-        "execution_time": 5.346116065979004,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "108.70%"
-        ],
-        "memory_usage": [
-            "147.4MiB"
-        ]
-    },
-    {
-        "execution_run": 51,
-        "execution_time": 6.438122987747192,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "94.19%"
-        ],
-        "memory_usage": [
-            "148.8MiB"
-        ]
-    },
-    {
-        "execution_run": 52,
-        "execution_time": 5.128904104232788,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "104.94%"
-        ],
-        "memory_usage": [
-            "146.7MiB"
-        ]
-    },
-    {
-        "execution_run": 53,
-        "execution_time": 5.697862148284912,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "113.81%"
-        ],
-        "memory_usage": [
-            "147.2MiB"
-        ]
-    },
-    {
-        "execution_run": 54,
-        "execution_time": 5.576221227645874,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "76.75%"
-        ],
-        "memory_usage": [
-            "147.4MiB"
-        ]
-    },
-    {
-        "execution_run": 55,
-        "execution_time": 5.653287887573242,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "93.45%"
-        ],
-        "memory_usage": [
-            "147.5MiB"
-        ]
-    },
-    {
-        "execution_run": 56,
-        "execution_time": 6.8124940395355225,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "98.48%"
-        ],
-        "memory_usage": [
-            "148.6MiB"
-        ]
-    },
-    {
-        "execution_run": 57,
-        "execution_time": 5.147647142410278,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "118.97%"
-        ],
-        "memory_usage": [
-            "150.8MiB"
-        ]
-    },
-    {
-        "execution_run": 58,
-        "execution_time": 9.339637041091919,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "1.42%",
-            "28.03%"
-        ],
-        "memory_usage": [
-            "120.4MiB",
-            "134.8MiB"
-        ]
-    },
-    {
-        "execution_run": 59,
-        "execution_time": 5.146697998046875,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "130.93%"
-        ],
-        "memory_usage": [
-            "151.3MiB"
-        ]
-    },
-    {
-        "execution_run": 60,
-        "execution_time": 5.19351601600647,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "106.76%"
-        ],
-        "memory_usage": [
-            "147MiB"
-        ]
-    },
-    {
-        "execution_run": 61,
-        "execution_time": 5.430820941925049,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "114.74%"
-        ],
-        "memory_usage": [
-            "150.4MiB"
-        ]
-    },
-    {
-        "execution_run": 62,
-        "execution_time": 5.308484077453613,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "99.12%"
-        ],
-        "memory_usage": [
-            "149.3MiB"
-        ]
-    },
-    {
-        "execution_run": 63,
-        "execution_time": 5.8526060581207275,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "104.78%"
-        ],
-        "memory_usage": [
-            "148.9MiB"
-        ]
-    },
-    {
-        "execution_run": 64,
-        "execution_time": 5.252243280410767,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "101.43%"
-        ],
-        "memory_usage": [
-            "148.2MiB"
-        ]
-    },
-    {
-        "execution_run": 65,
-        "execution_time": 5.9601051807403564,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "111.71%"
-        ],
-        "memory_usage": [
-            "149MiB"
-        ]
-    },
-    {
-        "execution_run": 66,
-        "execution_time": 5.939324140548706,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "102.00%"
-        ],
-        "memory_usage": [
-            "151.3MiB"
-        ]
-    },
-    {
-        "execution_run": 67,
-        "execution_time": 5.547478199005127,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "135.92%"
-        ],
-        "memory_usage": [
-            "150.3MiB"
-        ]
-    },
-    {
-        "execution_run": 68,
-        "execution_time": 5.545133829116821,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "88.77%"
-        ],
-        "memory_usage": [
-            "148.1MiB"
-        ]
-    },
-    {
-        "execution_run": 69,
-        "execution_time": 5.332290887832642,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "106.19%"
-        ],
-        "memory_usage": [
-            "150.9MiB"
-        ]
-    },
-    {
-        "execution_run": 70,
-        "execution_time": 6.769425868988037,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "101.19%"
-        ],
-        "memory_usage": [
-            "148.1MiB"
-        ]
-    },
-    {
-        "execution_run": 71,
-        "execution_time": 5.119423866271973,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "98.28%"
-        ],
-        "memory_usage": [
-            "147.4MiB"
-        ]
-    },
-    {
-        "execution_run": 72,
-        "execution_time": 6.470940828323364,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "139.38%"
-        ],
-        "memory_usage": [
-            "151.2MiB"
-        ]
-    },
-    {
-        "execution_run": 73,
-        "execution_time": 6.368525743484497,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "73.78%"
-        ],
-        "memory_usage": [
-            "145.1MiB"
-        ]
-    },
-    {
-        "execution_run": 74,
-        "execution_time": 5.247538089752197,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "119.24%"
-        ],
-        "memory_usage": [
-            "149.5MiB"
-        ]
-    },
-    {
-        "execution_run": 75,
-        "execution_time": 5.234043121337891,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "107.29%"
-        ],
-        "memory_usage": [
-            "150MiB"
-        ]
-    },
-    {
-        "execution_run": 76,
-        "execution_time": 5.851372003555298,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "128.78%"
-        ],
-        "memory_usage": [
-            "148MiB"
-        ]
-    },
-    {
-        "execution_run": 77,
-        "execution_time": 6.832525014877319,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "33.05%"
-        ],
-        "memory_usage": [
-            "135.5MiB"
-        ]
-    },
-    {
-        "execution_run": 78,
-        "execution_time": 5.862951993942261,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "77.63%"
-        ],
-        "memory_usage": [
-            "146.1MiB"
-        ]
-    },
-    {
-        "execution_run": 79,
-        "execution_time": 5.362224102020264,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "129.89%"
-        ],
-        "memory_usage": [
-            "148.1MiB"
-        ]
-    },
-    {
-        "execution_run": 80,
-        "execution_time": 5.9450743198394775,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "102.07%"
-        ],
-        "memory_usage": [
-            "146.6MiB"
-        ]
-    },
-    {
-        "execution_run": 81,
-        "execution_time": 5.581592082977295,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "123.39%"
-        ],
-        "memory_usage": [
-            "150.2MiB"
-        ]
-    },
-    {
-        "execution_run": 82,
-        "execution_time": 6.885586977005005,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "35.35%"
-        ],
-        "memory_usage": [
-            "136.8MiB"
-        ]
-    },
-    {
-        "execution_run": 83,
-        "execution_time": 6.175185203552246,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "97.17%"
-        ],
-        "memory_usage": [
-            "148.6MiB"
-        ]
-    },
-    {
-        "execution_run": 84,
-        "execution_time": 5.700258016586304,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "109.02%"
-        ],
-        "memory_usage": [
-            "151.2MiB"
-        ]
-    },
-    {
-        "execution_run": 85,
-        "execution_time": 5.227986812591553,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "103.20%"
-        ],
-        "memory_usage": [
-            "147.3MiB"
-        ]
-    },
-    {
-        "execution_run": 86,
-        "execution_time": 6.285407066345215,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "105.11%"
-        ],
-        "memory_usage": [
-            "148.6MiB"
-        ]
-    },
-    {
-        "execution_run": 87,
-        "execution_time": 6.735606908798218,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "52.17%"
-        ],
-        "memory_usage": [
-            "147.8MiB"
-        ]
-    },
-    {
-        "execution_run": 88,
-        "execution_time": 6.466374158859253,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "71.14%"
-        ],
-        "memory_usage": [
-            "148.7MiB"
-        ]
-    },
-    {
-        "execution_run": 89,
-        "execution_time": 5.177429914474487,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "107.64%"
-        ],
-        "memory_usage": [
-            "146.6MiB"
-        ]
-    },
-    {
-        "execution_run": 90,
-        "execution_time": 5.3105127811431885,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "113.40%"
-        ],
-        "memory_usage": [
-            "147.4MiB"
-        ]
-    },
-    {
-        "execution_run": 91,
-        "execution_time": 5.7123541831970215,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "111.65%"
-        ],
-        "memory_usage": [
-            "147.2MiB"
-        ]
-    },
-    {
-        "execution_run": 92,
-        "execution_time": 5.928117990493774,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "97.91%"
-        ],
-        "memory_usage": [
-            "147.8MiB"
-        ]
-    },
-    {
-        "execution_run": 93,
-        "execution_time": 5.306408166885376,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "110.93%"
-        ],
-        "memory_usage": [
-            "148.6MiB"
-        ]
-    },
-    {
-        "execution_run": 94,
-        "execution_time": 5.48030424118042,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "113.96%"
-        ],
-        "memory_usage": [
-            "146.8MiB"
-        ]
-    },
-    {
-        "execution_run": 95,
-        "execution_time": 5.678132057189941,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "118.97%"
-        ],
-        "memory_usage": [
-            "148.5MiB"
-        ]
-    },
-    {
-        "execution_run": 96,
-        "execution_time": 5.321497917175293,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "101.92%"
-        ],
-        "memory_usage": [
-            "146.1MiB"
-        ]
-    },
-    {
-        "execution_run": 97,
-        "execution_time": 6.211355924606323,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "126.10%"
-        ],
-        "memory_usage": [
-            "149.1MiB"
-        ]
-    },
-    {
-        "execution_run": 98,
-        "execution_time": 6.388484954833984,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "72.16%"
-        ],
-        "memory_usage": [
-            "146.7MiB"
-        ]
-    },
-    {
-        "execution_run": 99,
-        "execution_time": 5.394200086593628,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "123.13%"
-        ],
-        "memory_usage": [
-            "148.1MiB"
-        ]
-    },
-    {
-        "execution_run": 100,
-        "execution_time": 5.80339503288269,
-        "output_file_size": 6261,
-        "cpu_usage": [
-            "110.04%"
-        ],
-        "memory_usage": [
-            "149.1MiB"
+            "119.1MiB",
+            "132.9MiB",
+            "141.8MiB"
         ]
     }
 ]

@@ -4,14 +4,16 @@ import json
 import os
 from pprint import pprint as pp
 
+NR_RUNS = 10
 
-EXEC_OXPATH = "docker run -d -v ./queries:/app --rm oxpath-runtime -q simple.oxpath -o simple.json -f JSON -xvfb -mval " \
-          "-jsonarr"
+EXEC_OXPATH = "docker run --cpus=2 --memory=1g -d -v ./queries:/app --rm " \
+              "starlitlog/oxpath-runtime -q simple.oxpath -o simple.json -f JSON -xvfb -mval -jsonarr"
 
-EXEC_DRWEB = "docker run -d -v ./queries:/app --rm starlitlog/dr-web-engine -q simple.json5 -o simple.drweb.json --xvfb"
+EXEC_DRWEB = "docker run --cpus=2 --memory=1g -d -v ./queries:/app --rm starlitlog/dr-web-engine " \
+             "-q simple.json5 -o simple.drweb.json --xvfb"
 
-# PARAMS = [EXEC_OXPATH, 'simple.json', 'execution_results.json']
-PARAMS = [EXEC_DRWEB, 'simple.drweb.json', 'execution_results.drweb.json']
+PARAMS = [EXEC_OXPATH, 'simple.json', 'execution_results.json']
+# PARAMS = [EXEC_DRWEB, 'simple.drweb.json', 'execution_results.drweb.json']
 
 
 def run_command(command):
@@ -31,15 +33,12 @@ def run_command(command):
     if not container_id:
         raise ValueError("Failed to get container ID. Ensure the Docker command is correct.")
 
-    # Allow a small delay to ensure the process starts
-    time.sleep(2)
-
     cpu_usage = []
     mem_usage = []
 
     # Monitor the process
     while True:
-        time.sleep(1)  # Sleep briefly
+        time.sleep(0.1)  # Sleep briefly
 
         # Get CPU and memory usage via docker stats
         stats = subprocess.Popen(
@@ -91,7 +90,7 @@ def main():
     o_file = PARAMS[1]
     o_json = PARAMS[2]
 
-    for i in range(100):  # Run command 100 times
+    for i in range(NR_RUNS):  # Run command 100 times
         exec_time, cpu_usage, mem_usage = run_command(cmd)
 
         # Get output file size
