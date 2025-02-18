@@ -50,4 +50,4 @@ RUN pip install dr-web-engine
 # COPY . /app
 
 # Command to run the dr-web-engine (replace with your actual command if it differs)
-CMD ["dr-web-engine"]
+ENTRYPOINT ["dr-web-engine"]
