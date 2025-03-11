@@ -2,9 +2,11 @@
 
 **DR Web Engine** is an open-source data retrieval engine designed for extracting structured data from web pages using Playwright. It allows users to define queries in JSON5 or YAML format and execute them to retrieve data from websites. The project is highly extensible and can be used for web scraping, data extraction, and automation tasks.
 
+<<<<<<< HEAD
 
 [![Publish to PyPI](https://github.com/starlitlog/dr-web-engine/actions/workflows/publish.yml/badge.svg)](https://github.com/starlitlog/dr-web-engine/actions/workflows/publish.yml)
 [![Build and Push Docker Image](https://github.com/starlitlog/dr-web-engine/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/starlitlog/dr-web-engine/actions/workflows/docker-publish.yml)
+[![Build and Test DR Web Engine](https://github.com/starlitlog/dr-web-engine/actions/workflows/python-app.yml/badge.svg)](https://github.com/starlitlog/dr-web-engine/actions/workflows/python-app.yml)
 
 ---
 
