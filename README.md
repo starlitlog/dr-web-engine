@@ -144,6 +144,24 @@ pagination:
 For additional details and use cases, check out the blog posts at:
 - [Queryable Web Blog](https://ylli.prifti.us/category/queryable-web/)
 
+## 📚 Citation
+
+If you use **Dr Web** in your research or project, please cite it using the following BibTeX entry:
+
+```bibtex
+@misc{prifti2025drwebmodernquerybased,
+  title         = {Dr Web: a modern, query-based web data retrieval engine},
+  author        = {Ylli Prifti and Alessandro Provetti and Pasquale de Meo},
+  year          = {2025},
+  eprint        = {2504.05311},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.DB},
+  url           = {https://arxiv.org/abs/2504.05311},
+}
+```
+
+Or check it out on [arXiv](https://arxiv.org/abs/2504.05311).
+
 ---
 
 ## Contributing
