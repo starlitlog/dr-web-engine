@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dr-web-engine"
-version = "0.5.5b"
+version = "0.5.6"
 description = "A data retrieval engine based on Playwright."
 authors = [{ name = "Ylli Prifti", email = "ylli@prifti.us" }]
 readme = "README.md"
