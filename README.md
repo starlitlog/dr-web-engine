@@ -25,11 +25,12 @@
 
 - **🎯 Query-Based Extraction**: Define extractions in JSON5/YAML instead of writing scraping code
 - **🤖 Browser Actions (NEW in v0.6+)**: Click, scroll, wait, fill forms - handle dynamic content
+- **🧠 Conditional Logic (NEW in v0.7+)**: Smart branching based on page conditions and content
 - **⚡ Playwright-Powered**: Reliable automation with modern browser engine
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
 - **🔧 CLI & Docker**: Run from command line or containerized environments
-- **🧪 Thoroughly Tested**: 70+ tests covering all functionality
+- **🧪 Thoroughly Tested**: 95+ tests covering all functionality
 
 ## 📋 Table of Contents
 
@@ -37,6 +38,7 @@
 - [Installation](#-installation) 
 - [Basic Usage](#-basic-usage)
 - [Action System](#-action-system-new)
+- [Conditional Logic](#-conditional-logic-new)
 - [Query Keywords](#-query-keywords-reference)
 - [CLI Reference](#-cli-reference)
 - [Real-World Examples](#-real-world-examples)
@@ -238,6 +240,115 @@ Fill forms and submit them:
 | **fill** | Fill form fields | `{"@type": "fill", "@selector": "input", "@value": "text"}` |
 | **hover** | Hover over elements | `{"@type": "hover", "@selector": ".dropdown-menu"}` |
 
+## 🧠 Conditional Logic (NEW)
+
+Extract different data based on page conditions with smart branching logic:
+
+### Premium vs Free Content Detection
+```json5
+{
+  "@url": "https://news-site.com/article/123",
+  "@steps": [
+    {
+      "@if": {"@exists": "#premium-content"},
+      "@then": [
+        {
+          "@xpath": "//div[@class='premium-article']",
+          "@fields": {
+            "title": ".//h1/text()",
+            "full_content": ".//div[@class='content']/text()",
+            "premium_features": ".//div[@class='extras']/text()"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='free-article']", 
+          "@fields": {
+            "title": ".//h1/text()",
+            "preview": ".//div[@class='preview']/text()",
+            "paywall_message": ".//div[@class='paywall']/text()"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Authentication State Detection
+```json5
+{
+  "@url": "https://forum.example.com",
+  "@steps": [
+    {
+      "@if": {"@exists": ".user-menu"},
+      "@then": [
+        {
+          "@xpath": "//div[@class='authenticated-content']",
+          "@fields": {
+            "username": ".//span[@class='username']/text()",
+            "private_messages": ".//div[@class='messages']/text()",
+            "user_settings": ".//a[@class='settings']/@href"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='guest-content']",
+          "@fields": {
+            "login_prompt": ".//div[@class='login-required']/text()",
+            "signup_link": ".//a[@class='signup']/@href"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Search Results with Fallback
+```json5
+{
+  "@url": "https://search-engine.com/search?q=query",
+  "@steps": [
+    {
+      "@if": {"@min-count": 1, "@selector": ".search-result"},
+      "@then": [
+        {
+          "@xpath": "//div[@class='search-result']",
+          "@fields": {
+            "title": ".//h3/text()",
+            "url": ".//a/@href",
+            "snippet": ".//p[@class='description']/text()"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='no-results']",
+          "@fields": {
+            "message": ".//text()",
+            "suggestions": ".//div[@class='suggestions']//a/text()"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Supported Condition Types
+
+| Condition | Purpose | Example |
+|-----------|---------|---------|
+| **@exists** | Element exists check | `{"@exists": "#premium-section"}` |
+| **@not-exists** | Element absence check | `{"@not-exists": ".advertisement"}` |
+| **@contains** | Text content check | `{"@contains": "Premium Content"}` |
+| **@count** | Exact element count | `{"@count": 3, "@selector": ".item"}` |
+| **@min-count** | Minimum count check | `{"@min-count": 1, "@selector": ".result"}` |
+| **@max-count** | Maximum count check | `{"@max-count": 10, "@selector": ".item"}` |
+
 ## 📖 Query Keywords Reference
 
 ### Core Keywords
@@ -268,6 +379,19 @@ Fill forms and submit them:
 | `@direction` | ❌ | Scroll direction | `"@direction": "down"` |
 | `@pixels` | ❌ | Scroll distance | `"@pixels": 500` |
 | `@value` | ❌ | Form field value | `"@value": "search term"` |
+
+### Conditional Keywords (v0.7+)
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@if` | ✅ | Condition to evaluate | `"@if": {"@exists": "#premium"}` |
+| `@then` | ✅ | Steps if condition true | `"@then": [...]` |
+| `@else` | ❌ | Steps if condition false | `"@else": [...]` |
+| `@exists` | ❌ | Element exists check | `"@exists": "#element-id"` |
+| `@not-exists` | ❌ | Element absence check | `"@not-exists": ".popup"` |
+| `@contains` | ❌ | Text content check | `"@contains": "Premium Content"` |
+| `@count` | ❌ | Exact element count | `"@count": 3` |
+| `@min-count` | ❌ | Minimum count check | `"@min-count": 1` |
+| `@max-count` | ❌ | Maximum count check | `"@max-count": 10` |
 
 ## 🖥️ CLI Reference
 

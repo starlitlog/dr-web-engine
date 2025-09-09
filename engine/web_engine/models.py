@@ -63,9 +63,33 @@ class HoverAction(BaseModel):
 Action = Union[ClickAction, ScrollAction, WaitAction, FillAction, HoverAction]
 
 
+# New Conditional System Models (v0.7+)
+class ConditionSpec(BaseModel):
+    """Defines a condition to evaluate"""
+    exists: Optional[str] = Field(default=None, alias="@exists")  # Element exists check
+    not_exists: Optional[str] = Field(default=None, alias="@not-exists")  # Element doesn't exist
+    contains: Optional[str] = Field(default=None, alias="@contains")  # Text content check
+    selector: Optional[str] = Field(default=None, alias="@selector")  # Element for text checks
+    xpath: Optional[str] = Field(default=None, alias="@xpath")  # XPath alternative
+    count: Optional[int] = Field(default=None, alias="@count")  # Element count check
+    min_count: Optional[int] = Field(default=None, alias="@min-count")  # Minimum count
+    max_count: Optional[int] = Field(default=None, alias="@max-count")  # Maximum count
+
+
+class ConditionalStep(BaseModel):
+    """A conditional execution step"""
+    condition: ConditionSpec = Field(alias="@if")
+    then_steps: List['Step'] = Field(alias="@then")  # Forward reference
+    else_steps: Optional[List['Step']] = Field(default=None, alias="@else")  # Forward reference
+
+
+# Forward reference for recursive step definitions
+Step = Union[ExtractStep, ConditionalStep]
+
+
 class ExtractionQuery(BaseModel):
     url: str = Field(alias="@url")
-    steps: List[ExtractStep] = Field(alias="@steps")
+    steps: List[Step] = Field(alias="@steps")  # Updated to support conditionals
     actions: Optional[List[Action]] = Field(default=None, alias="@actions")  # New actions field
     pagination: Optional[PaginationSpec] = Field(default=None, alias="@pagination")
 
@@ -76,3 +100,4 @@ class ExtractionQuery(BaseModel):
 # Fix forward references for recursive models (updated for Pydantic V2)
 ExtractStep.model_rebuild()
 FollowStep.model_rebuild()
+ConditionalStep.model_rebuild()  # New conditional model

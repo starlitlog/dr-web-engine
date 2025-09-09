@@ -40,6 +40,20 @@ DR Web Engine uses JSON5 or YAML files to define data extraction queries. Each q
 | `@value` | ❌ | Text to fill in form fields | `"@value": "search term"` |
 | `@text` | ❌ | Text to wait for | `"@text": "Loading complete"` |
 
+### Conditional Keywords (NEW in v0.7+)
+
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@if` | ✅ | Condition to evaluate | `"@if": {"@exists": "#premium-section"}` |
+| `@then` | ✅ | Steps to execute if condition is true | `"@then": [...]` |
+| `@else` | ❌ | Steps to execute if condition is false | `"@else": [...]` |
+| `@exists` | ❌ | Check if element exists | `"@exists": "#element-id"` |
+| `@not-exists` | ❌ | Check if element does not exist | `"@not-exists": ".popup"` |
+| `@contains` | ❌ | Check if text contains string | `"@contains": "Premium Content"` |
+| `@count` | ❌ | Check exact element count | `"@count": 3` |
+| `@min-count` | ❌ | Check minimum element count | `"@min-count": 1` |
+| `@max-count` | ❌ | Check maximum element count | `"@max-count": 10` |
+
 ## Basic Query Examples
 
 ### Simple Extraction (JSON5)
@@ -199,6 +213,450 @@ The Action System enables interaction with dynamic web pages before data extract
     }
   ]
 }
+```
+
+## Conditional Logic (NEW in v0.7+)
+
+The Conditional System enables dynamic branching logic in your extraction queries. Extract different data based on page conditions like element presence, text content, or element counts.
+
+### Supported Condition Types
+
+**Element Existence** - Check if elements exist on the page:
+```json5
+{"@exists": "#premium-section"}         // Element exists
+{"@not-exists": ".advertisement"}       // Element does not exist
+{"@exists": "//div[@class='premium']"}  // XPath support
+```
+
+**Text Content** - Check for specific text:
+```json5
+{"@contains": "Premium Content"}                              // Page contains text
+{"@contains": "VIP", "@selector": ".user-badge"}            // Element contains text
+{"@contains": "Error", "@xpath": "//div[@class='status']"}  // XPath text check
+```
+
+**Element Count** - Check number of elements:
+```json5
+{"@count": 5, "@selector": ".item"}           // Exactly 5 items
+{"@min-count": 1, "@selector": ".result"}     // At least 1 result
+{"@max-count": 10, "@xpath": "//article"}     // At most 10 articles
+```
+
+### Basic Conditional Examples
+
+#### Premium vs Free Content Detection
+```json5
+{
+  "@url": "https://news-site.com/article/123",
+  "@steps": [
+    {
+      "@if": {"@exists": "#premium-content"},
+      "@then": [
+        {
+          "@xpath": "//div[@class='premium-article']",
+          "@fields": {
+            "title": ".//h1/text()",
+            "full_content": ".//div[@class='content']/text()",
+            "premium_features": ".//div[@class='extras']/text()"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='free-article']", 
+          "@fields": {
+            "title": ".//h1/text()",
+            "preview": ".//div[@class='preview']/text()",
+            "paywall_message": ".//div[@class='paywall']/text()"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### User Authentication State Detection
+```json5
+{
+  "@url": "https://forum.example.com",
+  "@steps": [
+    {
+      "@if": {"@exists": ".user-menu"},
+      "@then": [
+        {
+          "@xpath": "//div[@class='post authenticated']",
+          "@fields": {
+            "author": ".//span[@class='username']/text()",
+            "content": ".//div[@class='post-body']/text()",
+            "edit_link": ".//a[@class='edit']/@href",
+            "vote_score": ".//span[@class='score']/text()"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='post guest']",
+          "@fields": {
+            "author": ".//span[@class='username']/text()",
+            "content": ".//div[@class='post-preview']/text()",
+            "login_prompt": ".//div[@class='login-required']/text()"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Search Results Count Handling
+```json5
+{
+  "@url": "https://search-engine.com/search?q=query",
+  "@steps": [
+    {
+      "@if": {"@min-count": 1, "@selector": ".search-result"},
+      "@then": [
+        {
+          "@xpath": "//div[@class='search-result']",
+          "@fields": {
+            "title": ".//h3/text()",
+            "url": ".//a/@href",
+            "snippet": ".//p[@class='description']/text()",
+            "rank": "position()"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='no-results']",
+          "@fields": {
+            "message": ".//text()",
+            "suggestions": ".//div[@class='suggestions']//a/text()"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Advanced Conditional Examples
+
+#### Nested Conditionals for Complex Logic
+```json5
+{
+  "@url": "https://ecommerce-site.com/product/123",
+  "@steps": [
+    {
+      "@if": {"@exists": "#product-page"},
+      "@then": [
+        {
+          "@if": {"@contains": "In Stock", "@selector": ".availability"},
+          "@then": [
+            {
+              "@xpath": "//div[@class='product available']",
+              "@fields": {
+                "name": ".//h1/text()",
+                "price": ".//span[@class='price']/text()",
+                "stock_count": ".//span[@class='stock']/text()",
+                "add_to_cart": ".//button[@class='add-cart']/@data-product-id"
+              }
+            }
+          ],
+          "@else": [
+            {
+              "@if": {"@contains": "Pre-order", "@selector": ".availability"},
+              "@then": [
+                {
+                  "@xpath": "//div[@class='product preorder']",
+                  "@fields": {
+                    "name": ".//h1/text()",
+                    "price": ".//span[@class='price']/text()",
+                    "release_date": ".//span[@class='release']/text()",
+                    "preorder_button": ".//button[@class='preorder']/@data-product-id"
+                  }
+                }
+              ],
+              "@else": [
+                {
+                  "@xpath": "//div[@class='product unavailable']",
+                  "@fields": {
+                    "name": ".//h1/text()",
+                    "unavailable_message": ".//div[@class='out-of-stock']/text()",
+                    "notify_button": ".//button[@class='notify']/@data-product-id"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "@else": [
+        {
+          "@xpath": "//div[@class='error-page']",
+          "@fields": {
+            "error_message": ".//text()",
+            "error_code": "./@data-error"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Combining Actions with Conditionals
+```json5
+{
+  "@url": "https://dynamic-site.com",
+  "@actions": [
+    {"@type": "wait", "@until": "element", "@selector": "#content"},
+    {"@type": "click", "@selector": "#load-more"}
+  ],
+  "@steps": [
+    {
+      "@if": {"@contains": "Premium", "@selector": ".user-status"},
+      "@then": [
+        {
+          "@xpath": "//article[@class='premium-content']",
+          "@fields": {
+            "title": ".//h2/text()",
+            "full_text": ".//div[@class='content']/text()",
+            "premium_media": ".//video/@src"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@if": {"@max-count": 0, "@selector": ".paywall"},
+          "@then": [
+            {
+              "@xpath": "//article[@class='free-content']",
+              "@fields": {
+                "title": ".//h2/text()",
+                "preview": ".//div[@class='preview']/text()"
+              }
+            }
+          ],
+          "@else": [
+            {
+              "@xpath": "//div[@class='paywall-message']",
+              "@fields": {
+                "title": ".//h2/text()",
+                "subscription_offer": ".//div[@class='offer']/text()",
+                "price": ".//span[@class='price']/text()"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Multi-Language Content Detection
+```json5
+{
+  "@url": "https://international-news.com/article/456",
+  "@steps": [
+    {
+      "@if": {"@contains": "English", "@selector": "html[lang]"},
+      "@then": [
+        {
+          "@xpath": "//article[@lang='en']",
+          "@fields": {
+            "headline": ".//h1/text()",
+            "content": ".//div[@class='article-body']/p/text()",
+            "author": ".//span[@class='byline']/text()",
+            "language": "'English'"
+          }
+        }
+      ],
+      "@else": [
+        {
+          "@if": {"@contains": "Español", "@selector": "html[lang]"},
+          "@then": [
+            {
+              "@xpath": "//article[@lang='es']",
+              "@fields": {
+                "titular": ".//h1/text()",
+                "contenido": ".//div[@class='article-body']/p/text()",
+                "autor": ".//span[@class='byline']/text()",
+                "idioma": "'Español'"
+              }
+            }
+          ],
+          "@else": [
+            {
+              "@xpath": "//article",
+              "@fields": {
+                "title": ".//h1/text()",
+                "content": ".//div[@class='article-body']/p/text()",
+                "detected_lang": "./@lang | ./ancestor::html/@lang"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Conditional Logic with Following Links
+
+#### Adaptive Content Extraction Based on Page Type
+```json5
+{
+  "@url": "https://blog-aggregator.com",
+  "@steps": [
+    {
+      "@xpath": "//article[@class='post-preview']",
+      "@fields": {
+        "title": ".//h2/a/text()",
+        "excerpt": ".//div[@class='excerpt']/text()"
+      },
+      "@follow": {
+        "@xpath": ".//h2/a/@href",
+        "@steps": [
+          {
+            "@if": {"@exists": ".video-player"},
+            "@then": [
+              {
+                "@xpath": "//div[@class='video-post']",
+                "@fields": {
+                  "type": "'video'",
+                  "title": ".//h1/text()",
+                  "video_url": ".//video/@src",
+                  "duration": ".//span[@class='duration']/text()",
+                  "transcript": ".//div[@class='transcript']/text()"
+                }
+              }
+            ],
+            "@else": [
+              {
+                "@if": {"@exists": ".image-gallery"},
+                "@then": [
+                  {
+                    "@xpath": "//div[@class='gallery-post']",
+                    "@fields": {
+                      "type": "'gallery'",
+                      "title": ".//h1/text()",
+                      "images": ".//img/@src",
+                      "captions": ".//figcaption/text()"
+                    }
+                  }
+                ],
+                "@else": [
+                  {
+                    "@xpath": "//article[@class='text-post']",
+                    "@fields": {
+                      "type": "'text'",
+                      "title": ".//h1/text()",
+                      "content": ".//div[@class='post-content']/p/text()",
+                      "word_count": "string-length(.//div[@class='post-content'])"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### Conditional Best Practices
+
+#### 1. Element Existence Checks
+```json5
+// Good: Specific selectors
+{"@exists": "#premium-badge"}
+{"@exists": ".user-authenticated"}
+
+// Better: Content-based checks
+{"@exists": "//div[contains(@class, 'premium') and contains(text(), 'VIP')]"}
+```
+
+#### 2. Text Content Matching
+```json5
+// Good: Direct text matching
+{"@contains": "Premium Content"}
+
+// Better: Case-insensitive matching with XPath
+{"@contains": "premium", "@selector": "*[contains(translate(text(), 'PREMIUM', 'premium'), 'premium')]"}
+```
+
+#### 3. Robust Count Checks
+```json5
+// Handle edge cases
+{
+  "@if": {"@min-count": 1, "@selector": ".search-result"},
+  "@then": [
+    {
+      "@if": {"@max-count": 50, "@selector": ".search-result"},
+      "@then": [
+        // Normal result extraction
+      ],
+      "@else": [
+        // Handle too many results case
+      ]
+    }
+  ],
+  "@else": [
+    // Handle no results case
+  ]
+}
+```
+
+#### 4. Fallback Strategies
+Always provide `@else` branches for robust scraping:
+```json5
+{
+  "@if": {"@exists": "#new-layout"},
+  "@then": [
+    // Extract using new layout selectors
+  ],
+  "@else": [
+    // Fallback to old layout selectors
+  ]
+}
+```
+
+#### 5. Performance Considerations
+- Use specific selectors to minimize DOM traversal
+- Prefer CSS selectors over complex XPath when possible
+- Avoid deep nesting of conditionals when not necessary
+
+### Error Handling in Conditionals
+
+Conditions gracefully handle errors:
+- Missing elements return `false` for `@exists`
+- Text checks on missing elements return `false`
+- Count checks on missing elements return `0`
+- Failed conditions execute `@else` branch or skip if no `@else`
+
+### Conditional Logic Examples in YAML
+
+```yaml
+url: https://example.com/content
+steps:
+  - if:
+      exists: "#premium-section" 
+    then:
+      - xpath: //div[@class='premium-content']
+        fields:
+          title: .//h1/text()
+          content: .//div[@class='full-text']/text()
+    else:
+      - xpath: //div[@class='free-content']
+        fields:
+          title: .//h1/text()
+          preview: .//div[@class='preview']/text()
 ```
 
 ## Advanced Features

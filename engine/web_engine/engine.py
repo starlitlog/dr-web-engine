@@ -1,8 +1,9 @@
 import logging
 from .extractor import XPathExtractor
-from .models import ExtractionQuery, ExtractStep
+from .models import ExtractionQuery, ExtractStep, ConditionalStep
 from .base.browser import BrowserClient
 from .actions import ActionProcessor
+from .conditionals import ConditionalProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +90,7 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
             browser = client.browser  # Use the PlaywrightClient's browser
             page = client.page         # Use the PlaywrightClient's page
             action_processor = ActionProcessor()  # Initialize action processor
+            conditional_processor = ConditionalProcessor()  # Initialize conditional processor
 
             logger.info(f"Navigating to URL: {query.url}")
             page.goto(query.url)
@@ -108,8 +110,20 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
 
             while True:
                 for step in query.steps:
-                    logger.info(f"Executing step with XPath: {step.xpath}")  # ✅ Fix field access
-                    results.extend(execute_step(client.browser.new_context(), page, step))
+                    if isinstance(step, ConditionalStep):
+                        logger.info("Executing conditional step")
+                        step_results = conditional_processor.process_conditional(page, step)
+                        results.extend(step_results)
+                    elif isinstance(step, ExtractStep):
+                        logger.info(f"Executing extraction step with XPath: {step.xpath}")
+                        step_results = execute_step(client.browser.new_context(), page, step)
+                        if isinstance(step_results, list):
+                            results.extend(step_results)
+                        elif isinstance(step_results, dict) and step_results:
+                            results.append(step_results)
+                    else:
+                        logger.warning(f"Unknown step type: {type(step)}")
+                        continue
 
                 # Use `.pagination` method/property instead of dict access
                 pagination = query.pagination

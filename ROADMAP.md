@@ -2,26 +2,31 @@
 
 This roadmap focuses on the core query engine capabilities needed for comprehensive deep web data extraction. The current version provides basic static extraction - this roadmap outlines the architectural enhancements to support dynamic, interactive web scraping.
 
-## Current State (v0.5.6b)
+## Current State (v0.7.0)
 
 **What Works:**
 - Static HTML extraction with XPath
 - Basic pagination support
 - Single-level link following (@follow)
 - JSON5/YAML query definitions
+- **NEW**: Browser Actions System (click, scroll, wait, fill, hover)
+- **NEW**: Conditional Logic (@if/@then/@else with multiple condition types)
+- Comprehensive test coverage (95+ tests)
 
 **Core Limitations:**
-- Static extraction only (navigate → extract)
-- No interaction capabilities (clicking, scrolling, forms)
-- Linear execution flow (no branching/conditionals)
 - Single-threaded, monolithic architecture
 - Limited extensibility for new step types
+- No loop constructs yet
+- No variable system
+- No parallel execution
 
 ---
 
-## Phase 1: Interaction & Dynamic Content (v0.6.x)
+## Phase 1: Interaction & Dynamic Content (v0.6.x) ✅ COMPLETE
 
 **Priority: Critical** - Modern web apps require interaction flows
+
+**Status: ✅ COMPLETED in v0.6.1**
 
 ### 1.1 Action System
 Add support for browser interactions within queries:
@@ -91,28 +96,33 @@ Support for form filling and submission:
 
 **Priority: High** - Enable complex extraction workflows
 
-### 2.1 Conditional Logic
+**Status: Phase 2.1 ✅ COMPLETED in v0.7.0**
+
+### 2.1 Conditional Logic ✅ COMPLETE
 Branching execution based on page content:
 
 ```json5
 {
-  "@condition": {
-    "@if": {"@exists": "#premium-content"},
-    "@then": [
-      {"@xpath": "//div[@class='premium']", "@fields": {...}}
-    ],
-    "@else": [
-      {"@xpath": "//div[@class='free']", "@fields": {...}}
-    ]
-  }
+  "@url": "https://example.com",
+  "@steps": [
+    {
+      "@if": {"@exists": "#premium-content"},
+      "@then": [
+        {"@xpath": "//div[@class='premium']", "@fields": {...}}
+      ],
+      "@else": [
+        {"@xpath": "//div[@class='free']", "@fields": {...}}
+      ]
+    }
+  ]
 }
 ```
 
-**New Keywords:**
-- `@condition` - Conditional execution
-- `@if/@then/@else` - Branching logic
-- `@exists` - Element existence checks
+**Implemented Keywords:**
+- `@if/@then/@else` - Conditional execution steps
+- `@exists/@not-exists` - Element existence checks
 - `@contains` - Text content checks
+- `@count/@min-count/@max-count` - Element count conditions
 
 ### 2.2 Loop Constructs
 Beyond simple pagination:
