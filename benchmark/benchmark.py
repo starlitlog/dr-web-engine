@@ -7,13 +7,13 @@ from pprint import pprint as pp
 NR_RUNS = 10
 
 EXEC_OXPATH = "docker run --cpus=2 --memory=1g -d -v ./queries:/app --rm " \
-              "starlitlog/oxpath-runtime -q simple.oxpath -o simple.json -f JSON -xvfb -mval -jsonarr"
+              "oxpath-runtime -q simple.oxpath -o simple.json -f JSON -xvfb -mval -jsonarr"
 
 EXEC_DRWEB = "docker run --cpus=2 --memory=1g -d -v ./queries:/app --rm starlitlog/dr-web-engine " \
              "-q simple.json5 -o simple.drweb.json --xvfb"
 
-PARAMS = [EXEC_OXPATH, 'simple.json', 'execution_results.json']
-# PARAMS = [EXEC_DRWEB, 'simple.drweb.json', 'execution_results.drweb.json']
+# PARAMS = [EXEC_OXPATH, 'simple.json', 'execution_results.json']
+PARAMS = [EXEC_DRWEB, 'simple.drweb.json', 'execution_results.drweb.json']
 
 
 def run_command(command):
@@ -38,7 +38,7 @@ def run_command(command):
 
     # Monitor the process
     while True:
-        time.sleep(0.1)  # Sleep briefly
+        time.sleep(1)  # Sleep briefly
 
         # Get CPU and memory usage via docker stats
         stats = subprocess.Popen(

@@ -52,8 +52,7 @@ def execute_step(context, page, step: ExtractStep):  # Ensure step is an Extract
         item = extractor.extract_fields(element, step.fields)
 
         if step.follow:
-            follow_xpath, extraction_method = extractor.parse_xpath(step.follow.xpath)
-            link = extractor.extract_value(element, follow_xpath, extraction_method, base_url=page.url)
+            link = extractor.extract_value(element, step.follow.xpath, base_url=page.url)
 
             if link:
                 logger.info(f"Following link: {link}")

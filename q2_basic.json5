@@ -1,0 +1,13 @@
+{
+  "@url": "https://www.liberoquotidiano.it/",
+  "@steps": [
+    {
+      "@xpath": "//a[contains(@href, '/news/') and contains(@href, 'gattuso')]",
+      "@name": "gattuso_articles",
+      "@fields": {
+        "title": "./text()",
+        "url": "./@href"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "@url": "https://www.liberoquotidiano.it/",
+  "@steps": [
+    {
+      "@xpath": "//a[contains(@href, '/news/') and contains(@href, 'gattuso')]",
+      "@name": "gattuso_articles",
+      "@fields": {
+        "title": "./text()",
+        "url": "./@href",
+        "category": "substring-before(substring-after(./@href, '/news/'), '/')",
+        "extraction_time": "current-dateTime()"
+      },
+      "@follow": {
+        "@xpath": "./@href",
+        "@steps": [
+          {
+            "@xpath": "//main | //article | //div[@id='main-content'] | //div[contains(@class, 'post-content')]",
+            "@name": "article_details",
+            "@fields": {
+              "headline": ".//h1[1]/text() | .//header//h1/text() | .//title/text()",
+              "subtitle": ".//h2[1]/text() | .//p[contains(@class, 'lead')]/text() | .//div[contains(@class, 'subtitle')]/text()",
+              "full_content": "string-join(.//p[position() > 1 and not(contains(@class, 'share')) and not(contains(@class, 'related'))]//text(), ' ')",
+              "paragraphs": ".//p[not(contains(@class, 'share')) and not(contains(@class, 'meta')) and normalize-space(text())]//text()",
+              "author_name": ".//span[contains(@class, 'author')]/text() | .//div[contains(@class, 'byline')]//a/text() | .//meta[@name='author']/@content",
+              "publish_datetime": ".//time[@datetime]/@datetime | .//meta[@property='article:published_time']/@content",
+              "last_modified": ".//time[@class='updated']/@datetime | .//meta[@property='article:modified_time']/@content",
+              "article_section": ".//nav//a[contains(@class, 'current')]/text() | .//meta[@property='article:section']/@content",
+              "keywords": ".//meta[@name='keywords']/@content",
+              "description": ".//meta[@name='description']/@content | .//meta[@property='og:description']/@content"
+            }
+          },
+          {
+            "@xpath": ".//img[not(contains(@class, 'ad')) and not(contains(@src, 'pixel'))]",
+            "@name": "article_images",
+            "@fields": {
+              "src": "./@src | ./@data-src",
+              "alt": "./@alt",
+              "caption": "./following-sibling::figcaption/text() | ./parent::figure//figcaption/text()"
+            }
+          },
+          {
+            "@xpath": ".//div[contains(@class, 'comments')] | .//section[@id='comments']",
+            "@name": "comments_section",
+            "@fields": {
+              "comments_count": "count(.//div[contains(@class, 'comment-content')] | .//article[contains(@class, 'comment')])",
+              "comments_enabled": "boolean(.//form[contains(@class, 'comment-form')] | .//div[@id='respond'])"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
