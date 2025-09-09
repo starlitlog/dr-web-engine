@@ -8,7 +8,7 @@
 
 [![PyPI version](https://badge.fury.io/py/dr-web-engine.svg)](https://badge.fury.io/py/dr-web-engine)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Tests](https://img.shields.io/badge/tests-70%20passed-brightgreen.svg)](#testing)
+[![Tests](https://img.shields.io/badge/tests-103%20passed-brightgreen.svg)](#testing)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [![Publish to PyPI](https://github.com/starlitlog/dr-web-engine/actions/workflows/publish.yml/badge.svg)](https://github.com/starlitlog/dr-web-engine/actions/workflows/publish.yml)
@@ -30,7 +30,7 @@
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
 - **🔧 CLI & Docker**: Run from command line or containerized environments
-- **🧪 Thoroughly Tested**: 95+ tests covering all functionality
+- **🧪 Thoroughly Tested**: 103 tests covering all functionality
 
 ## 📋 Table of Contents
 
