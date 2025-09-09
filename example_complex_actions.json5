@@ -1,0 +1,54 @@
+{
+  "@url": "https://infinite-scroll.com/demo/full-page/",
+  "@actions": [
+    // Wait for initial content to load
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".post",
+      "@timeout": 5000
+    },
+    // Scroll down multiple times to load more content
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 800
+    },
+    {
+      "@type": "wait",
+      "@until": "timeout",
+      "@timeout": 2000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down", 
+      "@pixels": 800
+    },
+    {
+      "@type": "wait",
+      "@until": "timeout",
+      "@timeout": 2000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 800
+    },
+    // Wait for network to be idle (no more loading)
+    {
+      "@type": "wait",
+      "@until": "network-idle",
+      "@timeout": 10000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//article[contains(@class, 'post')]",
+      "@name": "posts",
+      "@fields": {
+        "title": ".//h2/text()",
+        "content": ".//p/text()"
+      }
+    }
+  ]
+}

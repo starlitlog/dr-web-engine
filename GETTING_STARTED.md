@@ -22,8 +22,23 @@ DR Web Engine uses JSON5 or YAML files to define data extraction queries. Each q
 | `@fields` | ✅ | Field definitions (name → xpath) | `"@fields": {"title": ".//h2"}` |
 | `@name` | ❌ | Name for the extracted data group | `"@name": "products"` |
 | `@follow` | ❌ | Follow links for nested extraction | `"@follow": {...}` |
+| `@actions` | ❌ | Pre-extraction browser actions | `"@actions": [...]` |
 | `@pagination` | ❌ | Configure pagination handling | `"@pagination": {...}` |
 | `@limit` | ❌ | Limit pages to process | `"@limit": 5` |
+
+### Action Keywords (NEW in v0.6+)
+
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@type` | ✅ | Action type | `"@type": "click"` |
+| `@selector` | ❌ | CSS selector for element | `"@selector": "#button"` |
+| `@xpath` | ❌ | XPath selector (alternative to @selector) | `"@xpath": "//button[@id='load']"` |
+| `@until` | ❌ | Wait condition type | `"@until": "element"` |
+| `@timeout` | ❌ | Wait timeout in milliseconds | `"@timeout": 5000` |
+| `@direction` | ❌ | Scroll direction | `"@direction": "down"` |
+| `@pixels` | ❌ | Scroll distance in pixels | `"@pixels": 500` |
+| `@value` | ❌ | Text to fill in form fields | `"@value": "search term"` |
+| `@text` | ❌ | Text to wait for | `"@text": "Loading complete"` |
 
 ## Basic Query Examples
 
@@ -57,6 +72,133 @@ steps:
       title: .//h2/text()
       price: .//span[@class='price']/text()
       image: .//img/@src
+```
+
+## Browser Actions (NEW in v0.6+)
+
+The Action System enables interaction with dynamic web pages before data extraction. Perfect for modern JavaScript-heavy sites.
+
+### Supported Action Types
+
+**Click Actions** - Click buttons, links, or any element:
+```json5
+{"@type": "click", "@selector": "#load-more-btn"}
+{"@type": "click", "@xpath": "//button[text()='Show More']"}
+```
+
+**Scroll Actions** - Scroll to trigger infinite loading or reveal content:
+```json5
+{"@type": "scroll", "@direction": "down", "@pixels": 500}
+{"@type": "scroll", "@selector": "#content-bottom"}  // Scroll to element
+```
+
+**Wait Actions** - Wait for dynamic content to load:
+```json5
+{"@type": "wait", "@until": "element", "@selector": ".loaded", "@timeout": 10000}
+{"@type": "wait", "@until": "text", "@selector": "#status", "@text": "Complete"}
+{"@type": "wait", "@until": "network-idle", "@timeout": 5000}
+{"@type": "wait", "@until": "timeout", "@timeout": 3000}  // Simple delay
+```
+
+**Fill Actions** - Fill form fields:
+```json5
+{"@type": "fill", "@selector": "input[name='search']", "@value": "query text"}
+{"@type": "fill", "@xpath": "//input[@placeholder='Search']", "@value": "keywords"}
+```
+
+**Hover Actions** - Trigger hover effects:
+```json5
+{"@type": "hover", "@selector": ".dropdown-trigger"}
+{"@type": "hover", "@xpath": "//div[@class='menu-item']"}
+```
+
+### Action Examples
+
+#### JavaScript-Rendered Content
+```json5
+{
+  "@url": "https://quotes.toscrape.com/js/",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element", 
+      "@selector": ".quote",
+      "@timeout": 10000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 500
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote']",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()"
+      }
+    }
+  ]
+}
+```
+
+#### Infinite Scroll Loading
+```json5
+{
+  "@url": "https://infinite-scroll-site.com",
+  "@actions": [
+    {"@type": "wait", "@until": "element", "@selector": ".item"},
+    {"@type": "scroll", "@direction": "down", "@pixels": 800},
+    {"@type": "wait", "@until": "timeout", "@timeout": 2000},
+    {"@type": "scroll", "@direction": "down", "@pixels": 800}, 
+    {"@type": "wait", "@until": "timeout", "@timeout": 2000},
+    {"@type": "scroll", "@direction": "down", "@pixels": 800},
+    {"@type": "wait", "@until": "network-idle", "@timeout": 10000}
+  ],
+  "@steps": [
+    {
+      "@xpath": "//article[@class='item']",
+      "@fields": {
+        "title": ".//h2/text()",
+        "content": ".//p/text()"
+      }
+    }
+  ]
+}
+```
+
+#### Search Form Interaction
+```json5
+{
+  "@url": "https://example-search.com",
+  "@actions": [
+    {
+      "@type": "fill",
+      "@selector": "input[name='q']",
+      "@value": "dr web engine"
+    },
+    {
+      "@type": "click", 
+      "@selector": "button[type='submit']"
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".search-results"
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='result']",
+      "@fields": {
+        "title": ".//h3/text()",
+        "url": ".//a/@href",
+        "description": ".//p/text()"
+      }
+    }
+  ]
+}
 ```
 
 ## Advanced Features
@@ -608,13 +750,31 @@ Extract basic story information from Hacker News front page:
 }
 ```
 
-#### Level 2: Story with Metadata
+#### Level 2: Story with Metadata and Actions
 
-Add scores, authors, and timestamps:
+Add scores, authors, timestamps, and handle dynamic loading:
 
 ```json5
 {
   "@url": "https://news.ycombinator.com",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".athing",
+      "@timeout": 10000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down", 
+      "@pixels": 500
+    },
+    {
+      "@type": "wait",
+      "@until": "timeout",
+      "@timeout": 2000
+    }
+  ],
   "@steps": [
     {
       "@xpath": "//tr[@class='athing']",
@@ -694,11 +854,29 @@ Since Reddit blocks scraping, we'll use GitHub Trending as our social example:
 }
 ```
 
-#### Level 2: Repository with Full Metadata
+#### Level 2: Repository with Full Metadata and Dynamic Loading
 
 ```json5
 {
   "@url": "https://github.com/trending",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": "article.Box-row",
+      "@timeout": 10000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 800
+    },
+    {
+      "@type": "wait",
+      "@until": "network-idle",
+      "@timeout": 5000
+    }
+  ],
   "@steps": [
     {
       "@xpath": "//article[@class='Box-row']",
@@ -788,22 +966,43 @@ Extract all article titles and links from the homepage:
 }
 ```
 
-#### Level 2: Filter Articles by Content
+#### Level 2: Filter Articles with Dynamic Loading
 
-Extract only articles containing "Giorgia" in the title using XPath `contains()`:
+Extract only articles containing "Giorgia" in the title, handling JavaScript rendering:
 
 ```json5
 {
   "@url": "https://www.liberoquotidiano.it/",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@xpath": "//a[contains(@href, '/news/')]",
+      "@timeout": 15000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 1000
+    },
+    {
+      "@type": "wait",
+      "@until": "timeout",
+      "@timeout": 3000
+    },
+    {
+      "@type": "wait",
+      "@until": "network-idle",
+      "@timeout": 10000
+    }
+  ],
   "@steps": [
     {
       "@xpath": "//a[contains(@href, '/news/') and contains(normalize-space(text()), 'Giorgia')]",
       "@name": "giorgia_articles",
       "@fields": {
         "title": "./text()",
-        "url": "./@href",
-        "category": "substring-before(substring-after(./@href, '/news/'), '/')",
-        "full_url": "concat('https://www.liberoquotidiano.it', ./@href)"
+        "url": "./@href"
       }
     }
   ]
@@ -1043,11 +1242,24 @@ This example demonstrates real-world scraping challenges and provides multiple f
 
 ### 4. Fringe Domain: Lobste.rs
 
-#### Level 1: Basic Story List
+#### Level 1: Basic Story List with Dynamic Loading
 
 ```json5
 {
   "@url": "https://lobste.rs",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".story",
+      "@timeout": 10000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 500
+    }
+  ],
   "@steps": [
     {
       "@xpath": "//li[@class='story']",
@@ -1183,6 +1395,171 @@ This example demonstrates real-world scraping challenges and provides multiple f
 }
 ```
 
+### 5. Form Interaction Examples
+
+#### Search Form with Actions
+
+Demonstrate form filling and submission:
+
+```json5
+{
+  "@url": "https://quotes.toscrape.com/search.aspx",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": "input[name='author']",
+      "@timeout": 10000
+    },
+    {
+      "@type": "fill",
+      "@selector": "input[name='author']",
+      "@value": "Einstein"
+    },
+    {
+      "@type": "fill", 
+      "@selector": "input[name='tag']",
+      "@value": "inspirational"
+    },
+    {
+      "@type": "click",
+      "@selector": "input[type='submit']"
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".quote",
+      "@timeout": 10000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote']",
+      "@name": "search_results",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()",
+        "tags": ".//div[@class='tags']//a/text()"
+      }
+    }
+  ]
+}
+```
+
+#### Dropdown Interaction
+
+Handle dropdown menus and hover effects:
+
+```json5
+{
+  "@url": "https://example-with-dropdown.com",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".dropdown-trigger",
+      "@timeout": 10000
+    },
+    {
+      "@type": "hover",
+      "@selector": ".dropdown-trigger"
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".dropdown-menu",
+      "@timeout": 5000
+    },
+    {
+      "@type": "click",
+      "@xpath": "//a[text()='Category 1']"
+    },
+    {
+      "@type": "wait",
+      "@until": "text",
+      "@selector": "#selected-category",
+      "@text": "Category 1",
+      "@timeout": 5000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='filtered-content']",
+      "@name": "filtered_results",
+      "@fields": {
+        "title": ".//h3/text()",
+        "content": ".//p/text()",
+        "category": ".//span[@class='category']/text()"
+      }
+    }
+  ]
+}
+```
+
+#### Infinite Scroll with Load More Button
+
+Combine scrolling and clicking for complete content loading:
+
+```json5
+{
+  "@url": "https://infinite-scroll-with-button.com",
+  "@actions": [
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".content-item",
+      "@timeout": 10000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 800
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": "#load-more-btn",
+      "@timeout": 5000
+    },
+    {
+      "@type": "click",
+      "@selector": "#load-more-btn"
+    },
+    {
+      "@type": "wait",
+      "@until": "timeout",
+      "@timeout": 3000
+    },
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 800
+    },
+    {
+      "@type": "click",
+      "@selector": "#load-more-btn"
+    },
+    {
+      "@type": "wait",
+      "@until": "network-idle",
+      "@timeout": 10000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='content-item']",
+      "@name": "all_content",
+      "@fields": {
+        "title": ".//h2/text()",
+        "content": ".//p/text()",
+        "timestamp": ".//time/@datetime",
+        "author": ".//span[@class='author']/text()"
+      }
+    }
+  ]
+}
+```
+
 ## Testing These Examples
 
 ### Running the Examples
@@ -1190,22 +1567,53 @@ This example demonstrates real-world scraping challenges and provides multiple f
 Save any of these examples to a `.json5` file and run:
 
 ```bash
-# Basic Hacker News scraping
-dr-web-engine -q hackernews_basic.json5 -o hn_results.json -l info
+# Basic Hacker News scraping with actions
+dr-web-engine -q hackernews_with_actions.json5 -o hn_results.json -l info --xvfb
 
-# GitHub trending with details
-dr-web-engine -q github_trending.json5 -o github_results.json -l debug
+# GitHub trending with dynamic loading
+dr-web-engine -q github_trending_actions.json5 -o github_results.json -l debug --xvfb
 
-# Complex Lobste.rs with comments
-dr-web-engine -q lobsters_complex.json5 -o lobsters_results.json -l debug --log-file scraping.log
+# Complex Libero Quotidiano with anti-scraping handling
+dr-web-engine -q libero_with_actions.json5 -o libero_results.json -l debug --log-file scraping.log --xvfb
+
+# Form interaction example
+dr-web-engine -q search_form_example.json5 -o search_results.json -l info --xvfb
+
+# Infinite scroll with load more buttons
+dr-web-engine -q infinite_scroll_actions.json5 -o infinite_results.json -l debug --xvfb
 ```
 
 ### Expected Challenges and Solutions
 
 1. **Rate Limiting**: Add delays between requests in production
-2. **Dynamic Content**: These sites work well with Playwright's auto-wait
+2. **Dynamic Content**: Use `@actions` with appropriate wait conditions
 3. **Blocked Requests**: Some sites may block automated requests
 4. **Structure Changes**: XPath selectors may need updates if sites change
+5. **JavaScript Heavy Sites**: Always use `--xvfb` mode with action queries
+6. **Timing Issues**: Adjust `@timeout` values based on site performance
+
+### Action-Specific Tips
+
+#### Wait Actions Best Practices
+- Use `"@until": "element"` for waiting for content to load
+- Use `"@until": "network-idle"` after form submissions
+- Use `"@until": "text"` to wait for specific status messages
+- Set appropriate timeouts (5-15 seconds for most cases)
+
+#### Scroll Actions Best Practices  
+- Scroll gradually (`500-800px` increments) for better stability
+- Add wait delays between scrolls to allow content loading
+- Use `"@selector"` to scroll to specific elements when possible
+
+#### Click Actions Best Practices
+- Prefer CSS selectors for modern sites, XPath for complex targeting
+- Wait for elements to be present before clicking
+- Add delays after clicks to allow page transitions
+
+#### Fill Actions Best Practices
+- Clear existing content by clicking first if needed
+- Use specific selectors to target the exact input field
+- Wait for form validation before proceeding to next steps
 
 ### Customization Tips
 

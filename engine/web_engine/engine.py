@@ -2,6 +2,7 @@ import logging
 from .extractor import XPathExtractor
 from .models import ExtractionQuery, ExtractStep
 from .base.browser import BrowserClient
+from .actions import ActionProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -87,6 +88,7 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
 
             browser = client.browser  # Use the PlaywrightClient's browser
             page = client.page         # Use the PlaywrightClient's page
+            action_processor = ActionProcessor()  # Initialize action processor
 
             logger.info(f"Navigating to URL: {query.url}")
             page.goto(query.url)
@@ -95,6 +97,11 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
             if check_for_captcha(page):
                 logger.warning("CAPTCHA detected. Please solve it manually.")
                 input("Press Enter to continue after solving CAPTCHA...")
+
+            # Execute pre-extraction actions if defined
+            if query.actions:
+                logger.info(f"Executing {len(query.actions)} pre-extraction actions")
+                action_processor.execute_actions(page, query.actions)
 
             results = []
             page_count = 0

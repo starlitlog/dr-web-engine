@@ -1,0 +1,35 @@
+{
+  "@url": "https://quotes.toscrape.com/js/",
+  "@actions": [
+    // Wait for JavaScript content to load
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".quote",
+      "@timeout": 10000
+    },
+    // Scroll down to trigger more content loading
+    {
+      "@type": "scroll",
+      "@direction": "down",
+      "@pixels": 500
+    },
+    // Wait a bit more for any additional content
+    {
+      "@type": "wait",
+      "@until": "timeout",
+      "@timeout": 2000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote']",
+      "@name": "quotes",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()",
+        "tags": ".//div[@class='tags']//a/text()"
+      }
+    }
+  ]
+}
