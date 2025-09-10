@@ -30,6 +30,8 @@
 - **🚀 JavaScript Execution (NEW in v0.9+)**: Execute custom JavaScript for complex scenarios and data extraction
 - **📊 JSON-LD Extraction (NEW in v1.0+)**: Extract structured data from JSON-LD script tags
 - **🌐 API Extractor (NEW in v1.0+)**: Intercept and extract data from AJAX/REST API calls
+- **🔌 Plugin System (NEW in v0.10.0+)**: Extensible architecture with internal and community plugins
+- **🤖 AI-Powered Selection (NEW in v0.10.0+)**: Natural language element selection using AI
 - **⚡ Playwright-Powered**: Reliable automation with modern browser engine
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
@@ -47,6 +49,7 @@
 - [JavaScript Execution](#-javascript-execution-new)
 - [JSON-LD Extraction](#-json-ld-extraction-new)
 - [API Extractor](#-api-extractor-new)
+- [Plugin System](#-plugin-system-new)
 - [Query Keywords](#-query-keywords-reference)
 - [CLI Reference](#-cli-reference)
 - [Real-World Examples](#-real-world-examples)
@@ -943,6 +946,106 @@ Monitor and extract from all API endpoints:
 - Site loads content dynamically via AJAX
 - Data comes from REST/GraphQL APIs
 - Need to capture live data updates
+
+## 🔌 Plugin System (NEW)
+
+DR Web Engine v0.10.0+ features a powerful plugin system that allows you to extend functionality with custom processors. The system supports both internal plugins (shipped with the engine) and external community plugins.
+
+### Available Plugins
+
+#### Internal Plugins (Built-in)
+```bash
+# List all available plugins
+drweb plugin list
+```
+
+- **ai-selector** - AI-powered natural language element selection
+- **jsonld-extractor** - JSON-LD structured data extraction  
+- **api-extractor** - API call integration during extraction
+
+#### AI-Powered Selection
+Use natural language to describe elements instead of writing XPath:
+
+```json5
+{
+  "@url": "https://example.com",
+  "@steps": [
+    {
+      "@ai-select": "product prices with discounts",
+      "@name": "prices"
+    },
+    {
+      "@ai-select": "customer review text",
+      "@name": "reviews",
+      "@max-results": 10
+    }
+  ]
+}
+```
+
+**Configuration:**
+```bash
+# OpenAI (recommended)
+export AI_SELECTOR_API_KEY="sk-your-key-here"
+export AI_SELECTOR_MODEL="gpt-4o-mini"  # Best value
+
+# Or use local Ollama (free)
+export AI_SELECTOR_ENDPOINT="http://localhost:11434/api/chat"
+export AI_SELECTOR_MODEL="llama3.2:3b"
+```
+
+### Plugin Management
+
+```bash
+# Install external plugins
+drweb plugin install drweb-plugin-awesome
+
+# List installed plugins
+drweb plugin list
+
+# Get plugin information
+drweb plugin info ai-selector
+
+# Enable/disable plugins
+drweb plugin enable ai-selector
+drweb plugin disable api-extractor
+```
+
+### Plugin Development
+
+Want to create your own plugin? Check out our comprehensive guides:
+
+- **[Plugin Getting Started Guide](docs/PLUGIN_GETTING_STARTED.md)** - Create your first plugin in 10 minutes
+- **[Plugin Development Guide](docs/PLUGIN_DEVELOPMENT_GUIDE.md)** - Advanced development techniques  
+- **[Plugin Registry](docs/PLUGIN_REGISTRY.md)** - Community plugin directory
+- **[Contributing Plugins](docs/CONTRIBUTING_PLUGINS.md)** - Submission guidelines
+
+### Plugin Categories
+
+**Data Processing & ML**
+- Custom data transformations
+- Machine learning integrations
+- Data validation and cleaning
+
+**Authentication & Access** 
+- OAuth integrations
+- Session management
+- Captcha solving
+
+**Anti-Detection & Stealth**
+- Proxy rotation
+- User-agent rotation
+- Browser fingerprinting evasion
+
+**Output & Export**
+- Database connectors
+- Cloud storage integration
+- Custom export formats
+
+**Integrations**
+- Third-party APIs
+- Messaging systems
+- Analytics platforms
 - XPath/CSS selectors miss dynamic content
 - Site has infinite scroll or lazy loading
 
