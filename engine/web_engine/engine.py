@@ -8,9 +8,6 @@ from .processors import StepProcessorRegistry
 from .extract_processor import ExtractStepProcessor
 from .follow_processor import FollowStepProcessor
 from .javascript_processor import JavaScriptStepProcessor
-from .plugins.jsonld_extractor import JsonLdExtractorProcessor
-from .plugins.api_extractor import ApiExtractorProcessor
-from .plugins.ai_selector import AISelectorProcessor
 from .plugin_manager import PluginManager
 
 logger = logging.getLogger(__name__)
@@ -102,14 +99,12 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
             # Initialize step processor registry
             step_registry = StepProcessorRegistry()
             
-            # Register built-in processors
+            # Register core built-in processors (always needed)
             step_registry.register(ExtractStepProcessor())
             step_registry.register(ConditionalProcessor())
             step_registry.register(FollowStepProcessor())
             step_registry.register(JavaScriptStepProcessor())
-            step_registry.register(JsonLdExtractorProcessor())
-            step_registry.register(ApiExtractorProcessor())
-            step_registry.register(AISelectorProcessor())
+            # Note: AI-Selector, JSON-LD, and API extractors are now loaded as internal plugins
             
             # Initialize plugin manager and load plugins
             plugin_manager = PluginManager(step_registry)

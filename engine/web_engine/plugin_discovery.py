@@ -118,6 +118,15 @@ class PluginDiscovery:
             os.path.join(os.getcwd(), ".drweb", "plugins")
         ]
         
+        # Add internal-plugins directory from the DR Web Engine installation
+        # This allows us to ship plugins with the main package
+        import engine
+        engine_path = os.path.dirname(os.path.dirname(engine.__file__))
+        internal_plugins_path = os.path.join(engine_path, "internal-plugins")
+        if os.path.exists(internal_plugins_path):
+            default_dirs.insert(0, internal_plugins_path)  # Check internal plugins first
+            logger.info(f"Added internal plugins directory: {internal_plugins_path}")
+        
         search_dirs = default_dirs + self.plugin_dirs
         
         for plugin_dir in search_dirs:
