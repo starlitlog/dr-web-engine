@@ -138,11 +138,16 @@ class ConditionalProcessor(StepProcessor):
     
     def __init__(self):
         super().__init__()
+        self.priority = 40  # Higher precedence than ExtractStep
         self.evaluator = ConditionEvaluator()
     
     def can_handle(self, step: Any) -> bool:
         """Check if this processor can handle the given step type."""
         return isinstance(step, ConditionalStep)
+    
+    def get_supported_step_types(self) -> List[str]:
+        """Return list of step types this processor supports."""
+        return ["ConditionalStep"]
     
     def execute(self, context: Any, page: Any, step: ConditionalStep) -> List[Any]:
         """Execute the conditional step using the standard processor interface."""

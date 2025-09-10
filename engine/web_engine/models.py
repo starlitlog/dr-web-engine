@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Dict, List, Optional, Union, Literal
+from urllib.parse import urljoin, urlparse
 
 
 class FieldSpec(BaseModel):
@@ -15,7 +16,10 @@ class ExtractStep(BaseModel):
 
 class FollowStep(BaseModel):
     xpath: str = Field(alias="@xpath")
-    steps: List[ExtractStep] = Field(alias="@steps")
+    steps: List['Step'] = Field(alias="@steps")  # Now supports recursive steps!
+    max_depth: Optional[int] = Field(default=3, alias="@max-depth")
+    detect_cycles: bool = Field(default=True, alias="@detect-cycles")
+    follow_external: bool = Field(default=False, alias="@follow-external")
 
 
 class PaginationSpec(BaseModel):

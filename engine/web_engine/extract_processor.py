@@ -18,11 +18,16 @@ class ExtractStepProcessor(StepProcessor):
     
     def __init__(self):
         super().__init__()
+        self.priority = 50  # Lower priority = higher precedence
         self.extractor = XPathExtractor()
     
     def can_handle(self, step: Any) -> bool:
         """Check if this is an ExtractStep."""
         return isinstance(step, ExtractStep)
+    
+    def get_supported_step_types(self) -> List[str]:
+        """Return list of step types this processor supports."""
+        return ["ExtractStep"]
     
     def execute(self, context: Any, page: Any, step: ExtractStep) -> List[Any]:
         """Execute XPath extraction logic."""
@@ -38,27 +43,19 @@ class ExtractStepProcessor(StepProcessor):
 
             # Handle link following if specified
             if step.follow:
-                link = self.extractor.extract_value(element, step.follow.xpath, base_url=page.url)
-
-                if link:
-                    self.logger.info(f"Following link: {link}")
-
-                    with context.new_page() as new_page:
-                        new_page.goto(link)
-                        new_page.wait_for_load_state("domcontentloaded")
-
-                        for follow_step in step.follow.steps:
-                            # Import here to avoid circular imports
-                            from .engine import execute_step
-                            follow_results = execute_step(context, new_page, follow_step)
-
-                            if isinstance(follow_results, dict) and follow_results:
-                                item.update(follow_results)
-                            elif isinstance(follow_results, list) and follow_results:
-                                structured_list = [result for result in follow_results if isinstance(result, dict)]
-                                if structured_list:
-                                    key = follow_step.name or follow_step.xpath
-                                    item.setdefault(key, []).extend(structured_list)
+                # Use the new FollowStepProcessor for enhanced navigation
+                from .follow_processor import FollowStepProcessor
+                follow_processor = FollowStepProcessor()
+                
+                follow_results = follow_processor.execute(context, page, step.follow)
+                if follow_results:
+                    # Merge follow results with the current item
+                    if len(follow_results) == 1 and isinstance(follow_results[0], dict):
+                        item.update(follow_results[0])
+                    else:
+                        # Multiple results or complex structure
+                        follow_key = step.follow.xpath.split('/')[-1] or 'followed_data'
+                        item[follow_key] = follow_results
 
             results.append(item)
 

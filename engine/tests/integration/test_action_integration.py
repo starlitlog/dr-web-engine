@@ -6,8 +6,8 @@ from engine.web_engine.models import ExtractionQuery, ExtractStep, ClickAction, 
 
 @patch('engine.web_engine.engine.BrowserClient')
 @patch('engine.web_engine.engine.check_for_captcha')
-@patch('engine.web_engine.engine.execute_step')
-def test_execute_query_with_actions(mock_execute_step, mock_check_for_captcha, MockBrowserClient):
+@patch('engine.web_engine.engine.StepProcessorRegistry')
+def test_execute_query_with_actions(MockStepProcessorRegistry, mock_check_for_captcha, MockBrowserClient):
     # Setup mock browser client to match actual engine.py usage
     mock_browser_client = MagicMock()
     mock_client = MagicMock()
@@ -21,6 +21,11 @@ def test_execute_query_with_actions(mock_execute_step, mock_check_for_captcha, M
 
     # Setup mock for checking CAPTCHA
     mock_check_for_captcha.return_value = False
+
+    # Setup mock step processor registry
+    mock_registry_instance = MagicMock()
+    mock_registry_instance.process_step.return_value = [{"title": "Test Item"}]
+    MockStepProcessorRegistry.return_value = mock_registry_instance
 
     # Setup mock elements for actions
     mock_click_element = MagicMock()
@@ -39,9 +44,6 @@ def test_execute_query_with_actions(mock_execute_step, mock_check_for_captcha, M
         ]
     })
 
-    # Mock result for the steps
-    mock_execute_step.return_value = [{"title": "Test Item"}]
-
     # Execute the function
     results = execute_query(query, mock_browser_client)
 
@@ -55,7 +57,7 @@ def test_execute_query_with_actions(mock_execute_step, mock_check_for_captcha, M
     mock_page.evaluate.assert_called_with("window.scrollBy(0, 500)")
 
     # Verify extraction step was executed
-    mock_execute_step.assert_called_once()
+    mock_registry_instance.process_step.assert_called()
     
     # Assert results
     assert results == [{"title": "Test Item"}]
@@ -63,8 +65,8 @@ def test_execute_query_with_actions(mock_execute_step, mock_check_for_captcha, M
 
 @patch('engine.web_engine.engine.BrowserClient')
 @patch('engine.web_engine.engine.check_for_captcha')
-@patch('engine.web_engine.engine.execute_step')
-def test_execute_query_no_actions(mock_execute_step, mock_check_for_captcha, MockBrowserClient):
+@patch('engine.web_engine.engine.StepProcessorRegistry')
+def test_execute_query_no_actions(MockStepProcessorRegistry, mock_check_for_captcha, MockBrowserClient):
     # Setup mock browser client to match actual engine.py usage
     mock_browser_client = MagicMock()
     mock_client = MagicMock()
@@ -79,6 +81,11 @@ def test_execute_query_no_actions(mock_execute_step, mock_check_for_captcha, Moc
     # Setup mock for checking CAPTCHA
     mock_check_for_captcha.return_value = False
 
+    # Setup mock step processor registry
+    mock_registry_instance = MagicMock()
+    mock_registry_instance.process_step.return_value = [{"title": "Test Item"}]
+    MockStepProcessorRegistry.return_value = mock_registry_instance
+
     # Setup query without actions
     query = ExtractionQuery(**{
         "@url": "https://example.com",
@@ -87,9 +94,6 @@ def test_execute_query_no_actions(mock_execute_step, mock_check_for_captcha, Moc
         ]
     })
 
-    # Mock result for the steps
-    mock_execute_step.return_value = [{"title": "Test Item"}]
-
     # Execute the function
     results = execute_query(query, mock_browser_client)
 
@@ -97,7 +101,7 @@ def test_execute_query_no_actions(mock_execute_step, mock_check_for_captcha, Moc
     # Only page.goto should have been called, not action-related methods
 
     # Verify extraction step was executed
-    mock_execute_step.assert_called_once()
+    mock_registry_instance.process_step.assert_called()
     
     # Assert results
     assert results == [{"title": "Test Item"}]
@@ -105,8 +109,8 @@ def test_execute_query_no_actions(mock_execute_step, mock_check_for_captcha, Moc
 
 @patch('engine.web_engine.engine.BrowserClient')
 @patch('engine.web_engine.engine.check_for_captcha')
-@patch('engine.web_engine.engine.execute_step')
-def test_execute_query_with_form_actions(mock_execute_step, mock_check_for_captcha, MockBrowserClient):
+@patch('engine.web_engine.engine.StepProcessorRegistry')
+def test_execute_query_with_form_actions(MockStepProcessorRegistry, mock_check_for_captcha, MockBrowserClient):
     # Setup mock browser client to match actual engine.py usage
     mock_browser_client = MagicMock()
     mock_client = MagicMock()
@@ -149,8 +153,10 @@ def test_execute_query_with_form_actions(mock_execute_step, mock_check_for_captc
         ]
     })
 
-    # Mock result for the steps
-    mock_execute_step.return_value = [{"title": "Search Result"}]
+    # Setup mock step processor registry
+    mock_registry_instance = MagicMock()
+    mock_registry_instance.process_step.return_value = [{"title": "Search Result"}]
+    MockStepProcessorRegistry.return_value = mock_registry_instance
 
     # Execute the function
     results = execute_query(query, mock_browser_client)
@@ -161,7 +167,7 @@ def test_execute_query_with_form_actions(mock_execute_step, mock_check_for_captc
     mock_page.wait_for_selector.assert_called_once_with(".results", timeout=5000)
 
     # Verify extraction step was executed
-    mock_execute_step.assert_called_once()
+    mock_registry_instance.process_step.assert_called_once()
     
     # Assert results
     assert results == [{"title": "Search Result"}]
@@ -215,8 +221,8 @@ def test_action_processor_called_with_correct_parameters(mock_execute_step, mock
 
 @patch('engine.web_engine.engine.BrowserClient')
 @patch('engine.web_engine.engine.check_for_captcha')
-@patch('engine.web_engine.engine.execute_step')
-def test_execute_query_actions_with_pagination(mock_execute_step, mock_check_for_captcha, MockBrowserClient):
+@patch('engine.web_engine.engine.StepProcessorRegistry')
+def test_execute_query_actions_with_pagination(MockStepProcessorRegistry, mock_check_for_captcha, MockBrowserClient):
     # Setup mock browser client to match actual engine.py usage
     mock_browser_client = MagicMock()
     mock_client = MagicMock()
@@ -247,8 +253,10 @@ def test_execute_query_actions_with_pagination(mock_execute_step, mock_check_for
         "@pagination": {"@xpath": "//a[@class='next']", "@limit": 2}
     })
 
-    # Mock result for the steps
-    mock_execute_step.return_value = [{"title": "Test Item"}]
+    # Setup mock step processor registry
+    mock_registry_instance = MagicMock()
+    mock_registry_instance.process_step.return_value = [{"title": "Test Item"}]
+    MockStepProcessorRegistry.return_value = mock_registry_instance
 
     # Simulate pagination - first page has next link, second page doesn't
     mock_page.query_selector.side_effect = [
@@ -263,7 +271,7 @@ def test_execute_query_actions_with_pagination(mock_execute_step, mock_check_for
     mock_page.wait_for_selector.assert_called_once_with(".content", timeout=5000)
 
     # Verify extraction steps were executed
-    assert mock_execute_step.call_count == 2
+    assert mock_registry_instance.process_step.call_count == 2
     
     # Assert results from both pages
     assert results == [{"title": "Test Item"}, {"title": "Test Item"}]
