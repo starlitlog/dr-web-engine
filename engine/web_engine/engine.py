@@ -7,6 +7,7 @@ from .conditionals import ConditionalProcessor
 from .processors import StepProcessorRegistry
 from .extract_processor import ExtractStepProcessor
 from .follow_processor import FollowStepProcessor
+from .javascript_processor import JavaScriptStepProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -99,6 +100,7 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
             step_registry.register(ExtractStepProcessor())
             step_registry.register(ConditionalProcessor())
             step_registry.register(FollowStepProcessor())
+            step_registry.register(JavaScriptStepProcessor())
 
             logger.info(f"Navigating to URL: {query.url}")
             page.goto(query.url)

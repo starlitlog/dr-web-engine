@@ -4,10 +4,11 @@ Handles browser interactions like clicking, scrolling, and waiting.
 """
 
 import logging
+import json
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 
-from .models import Action, ClickAction, ScrollAction, WaitAction, FillAction, HoverAction
+from .models import Action, ClickAction, ScrollAction, WaitAction, FillAction, HoverAction, JavaScriptAction
 
 logger = logging.getLogger(__name__)
 
@@ -204,6 +205,40 @@ class HoverActionHandler(ActionHandler):
             logger.error(f"Failed to hover over element: {e}")
 
 
+class JavaScriptActionHandler(ActionHandler):
+    """Handles JavaScript execution actions."""
+    
+    def can_handle(self, action: Action) -> bool:
+        return isinstance(action, JavaScriptAction)
+    
+    def execute(self, page: Any, action: JavaScriptAction) -> Any:
+        """Execute JavaScript code and optionally return the result."""
+        try:
+            logger.info(f"Executing JavaScript: {action.code[:100]}...")
+            
+            # Execute the JavaScript code
+            result = page.evaluate(action.code)
+            
+            # If there's a wait condition, wait for it
+            if action.wait_for:
+                logger.info(f"Waiting for condition: {action.wait_for}")
+                try:
+                    page.wait_for_function(action.wait_for, timeout=action.timeout)
+                    logger.info("Wait condition satisfied")
+                except Exception as wait_error:
+                    logger.warning(f"Wait condition failed: {wait_error}")
+            
+            # Log the result if any
+            if result is not None:
+                logger.info(f"JavaScript execution returned: {str(result)[:200]}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Failed to execute JavaScript: {e}")
+            return None
+
+
 class ActionProcessor:
     """Main processor for executing actions."""
     
@@ -213,7 +248,8 @@ class ActionProcessor:
             ScrollActionHandler(),
             WaitActionHandler(),
             FillActionHandler(),
-            HoverActionHandler()
+            HoverActionHandler(),
+            JavaScriptActionHandler()
         ]
     
     def execute_action(self, page: Any, action: Action) -> None:

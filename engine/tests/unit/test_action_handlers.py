@@ -264,7 +264,7 @@ class TestActionProcessor:
     def test_initialization(self):
         processor = ActionProcessor()
         
-        assert len(processor.handlers) == 5
+        assert len(processor.handlers) == 6  # Updated for JavaScript handler
         assert any(isinstance(h, ClickActionHandler) for h in processor.handlers)
         assert any(isinstance(h, ScrollActionHandler) for h in processor.handlers)
         assert any(isinstance(h, WaitActionHandler) for h in processor.handlers)

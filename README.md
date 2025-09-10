@@ -27,6 +27,7 @@
 - **🤖 Browser Actions (NEW in v0.6+)**: Click, scroll, wait, fill forms - handle dynamic content
 - **🧠 Conditional Logic (NEW in v0.7+)**: Smart branching based on page conditions and content
 - **🕸️ Kleene Star Navigation (NEW in v0.8+)**: Recursive link following with cycle detection and depth control
+- **🚀 JavaScript Execution (NEW in v0.9+)**: Execute custom JavaScript for complex scenarios and data extraction
 - **⚡ Playwright-Powered**: Reliable automation with modern browser engine
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
@@ -41,6 +42,7 @@
 - [Action System](#-action-system-new)
 - [Conditional Logic](#-conditional-logic-new)
 - [Kleene Star Navigation](#-kleene-star-navigation-new)
+- [JavaScript Execution](#-javascript-execution-new)
 - [Query Keywords](#-query-keywords-reference)
 - [CLI Reference](#-cli-reference)
 - [Real-World Examples](#-real-world-examples)
@@ -241,6 +243,7 @@ Fill forms and submit them:
 | **wait** | Wait for conditions | `{"@type": "wait", "@until": "element", "@selector": ".loaded"}` |
 | **fill** | Fill form fields | `{"@type": "fill", "@selector": "input", "@value": "text"}` |
 | **hover** | Hover over elements | `{"@type": "hover", "@selector": ".dropdown-menu"}` |
+| **javascript** | Execute custom JavaScript | `{"@type": "javascript", "@code": "window.loadMore();"}` |
 
 ## 🧠 Conditional Logic (NEW)
 
@@ -551,6 +554,153 @@ Follow related links in Wikipedia articles:
 | `@detect-cycles` | ❌ | Enable cycle detection | `"@detect-cycles": true` |
 | `@follow-external` | ❌ | Follow external domains | `"@follow-external": false` |
 
+### JavaScript Keywords (v0.9+)
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@javascript` | ✅ | JavaScript code for data extraction | `"@javascript": "return extractData('.item', {...});"` |
+| `@code` | ✅ | JavaScript code for actions | `"@code": "window.loadMore();"` |
+| `@wait-for` | ❌ | JavaScript condition to wait for | `"@wait-for": "document.querySelectorAll('.item').length > 10"` |
+| `@return-json` | ❌ | Parse return value as JSON | `"@return-json": true` |
+| `@timeout` | ❌ | Execution timeout (ms) | `"@timeout": 10000` |
+
+## 🚀 JavaScript Execution (NEW)
+
+Execute custom JavaScript code for complex scenarios that require dynamic logic, data manipulation, or advanced browser interactions beyond standard actions:
+
+### JavaScript Actions
+Execute JavaScript within the browser action pipeline:
+
+```json5
+{
+  "@url": "https://dynamic-site.com",
+  "@actions": [
+    {
+      "@type": "javascript",
+      "@code": "window.loadMoreContent(); return document.querySelectorAll('.item').length;",
+      "@wait-for": "document.querySelectorAll('.item').length > 10",
+      "@timeout": 10000
+    },
+    {
+      "@type": "javascript", 
+      "@code": "window.scrollTo(0, document.body.scrollHeight); await new Promise(r => setTimeout(r, 2000));"
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='item']",
+      "@fields": {
+        "title": ".//h3/text()",
+        "price": ".//span[@class='price']/text()"
+      }
+    }
+  ]
+}
+```
+
+### JavaScript Data Extraction
+Use JavaScript for complex data extraction that goes beyond XPath capabilities:
+
+```json5
+{
+  "@url": "https://complex-spa.com/data",
+  "@steps": [
+    {
+      "@javascript": "return Array.from(document.querySelectorAll('.product-card')).map(card => ({ title: card.querySelector('h3').textContent.trim(), price: parseFloat(card.querySelector('.price').textContent.replace('$', '')), inStock: !card.querySelector('.out-of-stock'), rating: card.querySelectorAll('.star.filled').length }));",
+      "@name": "products",
+      "@return-json": true,
+      "@timeout": 5000
+    }
+  ]
+}
+```
+
+### Advanced Data Processing
+Process and transform data using JavaScript's full capabilities:
+
+```json5
+{
+  "@url": "https://analytics-dashboard.com",
+  "@steps": [
+    {
+      "@javascript": "const data = Array.from(document.querySelectorAll('.metric')).map(el => ({ name: el.querySelector('.name').textContent, value: parseFloat(el.querySelector('.value').textContent) })); return { metrics: data, total: data.reduce((sum, item) => sum + item.value, 0), average: data.reduce((sum, item) => sum + item.value, 0) / data.length };",
+      "@name": "dashboard_summary",
+      "@return-json": true
+    }
+  ]
+}
+```
+
+### Built-in JavaScript Utilities
+DR Web Engine provides common utility functions in all JavaScript execution contexts:
+
+```json5
+{
+  "@url": "https://example.com",
+  "@steps": [
+    {
+      "@javascript": "return extractData('.product', { title: 'h3', price: '.price', description: '.desc' });",
+      "@name": "products"
+    }
+  ]
+}
+```
+
+**Available Utility Functions:**
+- `extractText(selector)` - Extract text content from elements
+- `extractAttribute(selector, attribute)` - Extract attribute values  
+- `extractData(selector, fields)` - Extract structured data from elements
+- `waitForElements(selector, maxWait)` - Wait for elements to appear
+- `scrollAndWait(pixels, waitTime)` - Scroll page and wait
+
+### Dynamic Content Loading
+Handle infinite scroll and dynamic content loading:
+
+```json5
+{
+  "@url": "https://infinite-scroll-site.com",
+  "@actions": [
+    {
+      "@type": "javascript",
+      "@code": "let itemCount = 0; while (itemCount < 100) { await scrollAndWait(500, 2000); const newCount = document.querySelectorAll('.item').length; if (newCount === itemCount) break; itemCount = newCount; } return itemCount;",
+      "@timeout": 30000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='item']",
+      "@fields": {
+        "title": ".//h2/text()",
+        "content": ".//p/text()"
+      }
+    }
+  ]
+}
+```
+
+### Form Manipulation and Complex Interactions
+Handle complex form interactions and multi-step processes:
+
+```json5
+{
+  "@url": "https://complex-form.com",
+  "@actions": [
+    {
+      "@type": "javascript",
+      "@code": "const form = document.querySelector('#complex-form'); form.querySelector('select[name=\"category\"]').value = 'electronics'; form.querySelector('input[name=\"price-min\"]').value = '100'; form.querySelector('input[name=\"price-max\"]').value = '500'; form.dispatchEvent(new Event('change', {bubbles: true})); await waitForElements('.filtered-results', 10000);"
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='filtered-results']//div[@class='product']",
+      "@fields": {
+        "name": ".//h3/text()",
+        "price": ".//span[@class='price']/text()"
+      }
+    }
+  ]
+}
+```
+
 ## 🖥️ CLI Reference
 
 ```bash
@@ -743,6 +893,7 @@ python -m pytest engine/tests/ --cov=engine/web_engine --cov-report=html
 - [Query Keywords](#-query-keywords-reference): Complete keyword reference
 - [Action System](#-action-system-new): Browser interaction examples
 - [Kleene Star Navigation](#-kleene-star-navigation-new): Recursive link following patterns
+- [JavaScript Execution](#-javascript-execution-new): Custom logic and data processing
 - [CLI Usage](#-cli-reference): Command-line options and automation
 - [Real Examples](#-real-world-examples): Production-ready query patterns
 

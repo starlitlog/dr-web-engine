@@ -2080,6 +2080,113 @@ dr-web-engine -q infinite_scroll_actions.json5 -o infinite_results.json -l debug
 - **Implement respectful delays** for production use
 - **Test selectors** in browser dev tools first
 
+## JavaScript Execution (NEW in v0.9+)
+
+Execute custom JavaScript code for complex scenarios that require dynamic logic, data manipulation, or advanced browser interactions beyond standard actions.
+
+### JavaScript Actions
+Execute JavaScript within the browser action pipeline for dynamic content manipulation:
+
+```json5
+{
+  "@url": "https://dynamic-site.com",
+  "@actions": [
+    {
+      "@type": "javascript",
+      "@code": "window.loadMoreContent(); return document.querySelectorAll('.item').length;",
+      "@wait-for": "document.querySelectorAll('.item').length > 5",
+      "@timeout": 10000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='item']",
+      "@fields": {
+        "title": ".//h3/text()",
+        "price": ".//span[@class='price']/text()"
+      }
+    }
+  ]
+}
+```
+
+### JavaScript Data Extraction
+Use JavaScript for complex data extraction that goes beyond XPath capabilities:
+
+```json5
+{
+  "@url": "https://spa-dashboard.com",
+  "@steps": [
+    {
+      "@javascript": "return Array.from(document.querySelectorAll('.metric-card')).map(card => ({ name: card.querySelector('.metric-name').textContent.trim(), value: parseFloat(card.querySelector('.metric-value').textContent), trend: card.querySelector('.trend-indicator').className.includes('up') ? 'up' : 'down' }));",
+      "@name": "metrics",
+      "@return-json": true,
+      "@timeout": 5000
+    }
+  ]
+}
+```
+
+### Built-in JavaScript Utilities
+
+DR Web Engine provides common utility functions in all JavaScript execution contexts:
+
+```json5
+{
+  "@url": "https://e-commerce.com",
+  "@steps": [
+    {
+      "@javascript": "return extractData('.product-card', { title: 'h3', price: '.price', rating: '.rating' });",
+      "@name": "products"
+    }
+  ]
+}
+```
+
+**Available Utility Functions:**
+- `extractText(selector)` - Extract text content from elements
+- `extractAttribute(selector, attribute)` - Extract attribute values  
+- `extractData(selector, fields)` - Extract structured data from elements
+- `waitForElements(selector, maxWait)` - Wait for elements to appear
+- `scrollAndWait(pixels, waitTime)` - Scroll page and wait
+
+### Advanced Example: Infinite Scroll with Data Processing
+
+```json5
+{
+  "@url": "https://social-feed.com",
+  "@actions": [
+    {
+      "@type": "javascript",
+      "@code": "let posts = []; let lastCount = 0; while (posts.length < 50) { await scrollAndWait(800, 2000); const currentPosts = document.querySelectorAll('.post'); if (currentPosts.length === lastCount) break; lastCount = currentPosts.length; } return lastCount;",
+      "@timeout": 60000
+    }
+  ],
+  "@steps": [
+    {
+      "@javascript": "return Array.from(document.querySelectorAll('.post')).map(post => { const timeEl = post.querySelector('.timestamp'); const timeAgo = timeEl ? timeEl.textContent : ''; const isRecent = timeAgo.includes('hour') || timeAgo.includes('minute'); return { author: post.querySelector('.author').textContent, content: post.querySelector('.content').textContent.substring(0, 200), timestamp: timeAgo, isRecent: isRecent, likes: parseInt(post.querySelector('.likes').textContent) || 0 }; });",
+      "@name": "social_posts",
+      "@return-json": true
+    }
+  ]
+}
+```
+
+### JavaScript vs XPath: When to Use Each
+
+**Use XPath when:**
+- Simple text/attribute extraction
+- Standard DOM traversal
+- Performance is critical
+- Query should be readable by non-developers
+
+**Use JavaScript when:**
+- Complex data processing or calculations
+- Dynamic content manipulation
+- Conditional logic based on element properties
+- Integration with page JavaScript APIs
+- Real-time data transformation
+
 ## Format Support
 
 DR Web Engine supports both JSON5 and YAML formats:

@@ -2,23 +2,25 @@
 
 This roadmap focuses on the core query engine capabilities needed for comprehensive deep web data extraction. The current version provides basic static extraction - this roadmap outlines the architectural enhancements to support dynamic, interactive web scraping.
 
-## Current State (v0.7.0)
+## Current State (v0.9.0)
 
 **What Works:**
 - Static HTML extraction with XPath
 - Basic pagination support
-- Single-level link following (@follow)
+- **Enhanced multi-level navigation** with @follow (Kleene star patterns)
 - JSON5/YAML query definitions
-- **NEW**: Browser Actions System (click, scroll, wait, fill, hover)
-- **NEW**: Conditional Logic (@if/@then/@else with multiple condition types)
-- Comprehensive test coverage (95+ tests)
+- **Browser Actions System** (click, scroll, wait, fill, hover, **javascript**)
+- **Conditional Logic** (@if/@then/@else with multiple condition types)
+- **🆕 JavaScript Execution** (actions and data extraction steps)
+- **🆕 Modular Step Processor Architecture** (plugin-ready)
+- **🆕 Plugin Registry System** with priority ordering
+- Comprehensive test coverage (130+ tests)
 
-**Core Limitations:**
-- Single-threaded, monolithic architecture
-- Limited extensibility for new step types
-- No loop constructs yet
-- No variable system
-- No parallel execution
+**Completed Major Refactoring:**
+- ✅ Modular step processor pipeline
+- ✅ Plugin registry with lifecycle management
+- ✅ Enhanced navigation with cycle detection
+- ✅ JavaScript execution capabilities
 
 ---
 
@@ -267,61 +269,64 @@ class DrWebEnginePlugin(ABC):
 
 ---
 
-## Phase 5: Advanced Features (v1.0.x)
+## Phase 5: JavaScript Integration (v0.9.x) ✅ COMPLETE
 
-**Priority: Medium** - Power-user capabilities
+**Priority: High** - Enable custom logic injection
 
-### 5.1 JavaScript Execution
-Execute custom JS for complex scenarios:
+**Status: ✅ COMPLETED in v0.9.0**
 
-```json5
-{
-  "@javascript": {
-    "@code": "window.loadMoreContent(); return document.querySelectorAll('.item').length;",
-    "@wait-for": "return-value > 10"
-  }
-}
-```
-
-### 5.2 Multi-Tab/Window Support
-Coordinate across browser contexts:
+### 5.1 JavaScript Actions ✅ COMPLETE
+Execute custom JS within browser actions:
 
 ```json5
 {
-  "@tabs": {
-    "main": {"@url": "https://example.com"},
-    "reference": {"@url": "https://reference.com"}
-  },
-  "@cross-reference": {
-    "@from": "main",
-    "@to": "reference",
-    "@lookup": "product-id"
-  }
-}
-```
-
-### 5.3 Advanced Selectors
-Beyond XPath:
-
-```json5
-{
-  "@selectors": [
-    {"@type": "xpath", "@expression": "//div[@class='item']"},
-    {"@type": "css", "@expression": "div.item"},
-    {"@type": "text", "@contains": "Product Name"},
-    {"@type": "visual", "@image": "button-template.png"}
+  "@actions": [
+    {
+      "@type": "javascript",
+      "@code": "window.loadMoreContent(); return document.querySelectorAll('.item').length;",
+      "@wait-for": "document.querySelectorAll('.item').length > 10",
+      "@timeout": 10000
+    }
   ]
 }
 ```
 
-## Phase 4: Architecture Refactoring (v0.8.x) 🚧 CURRENT
+### 5.2 JavaScript Data Extraction ✅ COMPLETE
+Execute JavaScript for data extraction steps:
+
+```json5
+{
+  "@steps": [
+    {
+      "@javascript": "return Array.from(document.querySelectorAll('.item')).map(el => ({title: el.querySelector('h3').textContent, price: el.querySelector('.price').textContent}));",
+      "@name": "products",
+      "@return-json": true,
+      "@timeout": 5000
+    }
+  ]
+}
+```
+
+### 5.3 Built-in JavaScript Utilities ✅ COMPLETE
+Common utility functions available:
+
+```javascript
+// Available in all JavaScript execution contexts
+extractText(selector)              // Extract text from elements
+extractAttribute(selector, attr)   // Extract attributes
+extractData(selector, fields)      // Extract structured data  
+waitForElements(selector, maxWait) // Wait for elements
+scrollAndWait(pixels, waitTime)    // Scroll and wait
+```
+
+## Phase 4: Architecture Refactoring (v0.8.x) ✅ COMPLETE
 
 **Priority: High** - Foundation for extensibility and multi-level navigation
 
-**Status: Ready to start after v0.7.0**
+**Status: ✅ COMPLETED in v0.8.0**
 
-### 4.1 Step Processor Pipeline ⭐ NEXT
-Extract step processing into modular, extensible system:
+### 4.1 Step Processor Pipeline ✅ COMPLETE
+Extracted step processing into modular, extensible system:
 
 ```python
 class StepProcessor(ABC):
@@ -333,37 +338,42 @@ class StepProcessor(ABC):
 
 class ExtractStepProcessor(StepProcessor): ...
 class ConditionalStepProcessor(StepProcessor): ...
+class FollowStepProcessor(StepProcessor): ...
+class JavaScriptStepProcessor(StepProcessor): ...
 ```
 
-**Benefits:**
-- Clean separation of concerns
-- Foundation for plugins  
-- Easier testing and debugging
-- Support for custom step types
+**Achieved Benefits:**
+- ✅ Clean separation of concerns
+- ✅ Foundation for plugins ready
+- ✅ Easier testing and debugging
+- ✅ Support for custom step types
 
-### 4.2 Plugin Registry System
-Enable custom step processors:
+### 4.2 Plugin Registry System ✅ COMPLETE
+Implemented custom step processor system:
 
 ```python
 class StepProcessorRegistry:
     def register(self, processor: StepProcessor): ...
     def find_processor(self, step): ...
+    # Plus: priority ordering, lifecycle management, fast lookup
 ```
 
-### 4.3 Enhanced Step Models
-Support recursive navigation:
+### 4.3 Enhanced Step Models ✅ COMPLETE
+Implemented recursive navigation with full Kleene star support:
 
 ```python
 class FollowStep(BaseModel):
-    steps: List[Step]  # Union[ExtractStep, ConditionalStep, FollowStep]  
+    steps: List[Step]  # Union[ExtractStep, ConditionalStep, FollowStep, JavaScriptStep]  
     max_depth: Optional[int] = Field(default=3)
     detect_cycles: bool = Field(default=True)
+    follow_external: bool = Field(default=False)
 ```
 
-**Implementation Approach:**
-- ✅ **Incremental refactoring** - each phase maintains all tests passing
-- ✅ **Backward compatible** - no API changes  
-- ✅ **Safe rollback** - each increment is committable
+**Implementation Results:**
+- ✅ **Incremental refactoring** - all tests passing throughout
+- ✅ **Backward compatible** - no breaking API changes  
+- ✅ **Safe rollback** - each increment was committable
+- ✅ **Enhanced beyond original scope** - JavaScript execution added
 
 ---
 
@@ -377,23 +387,27 @@ class FollowStep(BaseModel):
 ### Phase 2 (High Impact) ✅ COMPLETE
 1. **Conditional Logic** ✅ - Enables complex scenarios (v0.7.0)
 
-### Phase 4 (Foundation) 🚧 NEXT PRIORITY
-1. **Step Processor Pipeline** - Enables all other features
-2. **Plugin System** - Critical for long-term extensibility
-3. **Enhanced Step Models** - Support for recursive navigation
+### Phase 4 (Foundation) ✅ COMPLETE
+1. **Step Processor Pipeline** ✅ - Enables all other features
+2. **Plugin System** ✅ - Critical for long-term extensibility  
+3. **Enhanced Step Models** ✅ - Support for recursive navigation
 
-### Phase 3 (Enhanced Navigation)
-1. **Multi-Level Link Following** - Kleene star patterns
-2. **Cycle Detection** - Prevent infinite loops  
-3. **Depth Control** - Limit crawling depth
+### Phase 5 (JavaScript Integration) ✅ COMPLETE
+1. **JavaScript Actions** ✅ - Custom logic in browser interactions
+2. **JavaScript Data Extraction** ✅ - JS-powered extraction steps
+3. **Built-in Utilities** ✅ - Common helper functions
 
-### Phases 5+ (Future)
-- Advanced navigation strategies
-- Performance optimizations
-- Community plugin ecosystem
-- JavaScript execution
+### Phase 3 (Enhanced Navigation) ✅ COMPLETE  
+1. **Multi-Level Link Following** ✅ - Kleene star patterns (v0.8.0)
+2. **Cycle Detection** ✅ - Prevent infinite loops (v0.8.0)
+3. **Depth Control** ✅ - Limit crawling depth (v0.8.0)
+
+### Phase 6+ (Future)
+- Community plugin ecosystem 
+- Advanced selectors (CSS, visual, AI-powered)
 - Multi-tab coordination
-- Visual selectors
+- Performance optimizations
+- Enterprise features
 
 ---
 

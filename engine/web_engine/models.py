@@ -63,8 +63,16 @@ class HoverAction(BaseModel):
     xpath: Optional[str] = Field(default=None, alias="@xpath")
 
 
+class JavaScriptAction(BaseModel):
+    type: Literal["javascript"] = Field(alias="@type")
+    code: str = Field(alias="@code")  # JavaScript code to execute
+    wait_for: Optional[str] = Field(default=None, alias="@wait-for")  # JS condition to wait for
+    timeout: Optional[int] = Field(default=5000, alias="@timeout")  # Timeout in milliseconds
+    return_value: Optional[str] = Field(default=None, alias="@return-as")  # Variable name for return value
+
+
 # Union type for all action types
-Action = Union[ClickAction, ScrollAction, WaitAction, FillAction, HoverAction]
+Action = Union[ClickAction, ScrollAction, WaitAction, FillAction, HoverAction, JavaScriptAction]
 
 
 # New Conditional System Models (v0.7+)
@@ -87,8 +95,16 @@ class ConditionalStep(BaseModel):
     else_steps: Optional[List['Step']] = Field(default=None, alias="@else")  # Forward reference
 
 
+class JavaScriptStep(BaseModel):
+    """Execute JavaScript for data extraction"""
+    code: str = Field(alias="@javascript")  # JavaScript code to execute
+    name: Optional[str] = Field(default=None, alias="@name")  # Name for results
+    timeout: Optional[int] = Field(default=5000, alias="@timeout")  # Timeout in milliseconds
+    return_json: bool = Field(default=True, alias="@return-json")  # Whether to parse return as JSON
+
+
 # Forward reference for recursive step definitions
-Step = Union[ExtractStep, ConditionalStep]
+Step = Union[ExtractStep, ConditionalStep, JavaScriptStep]
 
 
 class ExtractionQuery(BaseModel):
