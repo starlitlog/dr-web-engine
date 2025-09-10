@@ -1,0 +1,36 @@
+{
+  // Form interaction example - filling and submitting forms
+  "@url": "https://httpbin.org/forms/post",
+  "@actions": [
+    {
+      "@type": "fill",
+      "@selector": "input[name='email']",
+      "@value": "test@example.com"
+    },
+    {
+      "@type": "fill", 
+      "@selector": "input[name='password']",
+      "@value": "password123"
+    },
+    {
+      "@type": "click",
+      "@selector": "button[type='submit']"
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".response",
+      "@timeout": 5000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//pre | //div[@class='response']",
+      "@name": "form_response",
+      "@fields": {
+        "content": ".//text()",
+        "status": "normalize-space(.)"
+      }
+    }
+  ]
+}

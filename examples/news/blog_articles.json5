@@ -1,0 +1,35 @@
+{
+  // News and blog article extraction
+  "@url": "https://blog.ycombinator.com/",
+  "@steps": [
+    {
+      "@xpath": "//article | //div[contains(@class, 'post')]",
+      "@name": "blog_posts",
+      "@fields": {
+        "title": ".//h1//text() | .//h2//text() | .//h3//text()",
+        "excerpt": ".//p[1]/text() | .//div[contains(@class, 'excerpt')]/text()",
+        "date": ".//time/@datetime | .//span[contains(@class, 'date')]/text()",
+        "author": ".//span[contains(@class, 'author')]/text() | .//div[contains(@class, 'byline')]//a/text()",
+        "read_more_link": ".//a[contains(@class, 'read-more')]/@href | .//h1/a/@href | .//h2/a/@href"
+      },
+      "@follow": {
+        "@xpath": ".//a[contains(@class, 'read-more')]/@href | .//h1/a/@href | .//h2/a/@href",
+        "@steps": [
+          {
+            "@xpath": "//article | //main | //div[@id='content'] | //div[contains(@class, 'post-content')]",
+            "@name": "full_article",
+            "@fields": {
+              "headline": ".//h1/text()",
+              "full_content": "string-join(.//p//text(), ' ')",
+              "publish_date": ".//time/@datetime | .//meta[@property='article:published_time']/@content",
+              "author_name": ".//span[contains(@class, 'author')]/text() | .//meta[@name='author']/@content",
+              "categories": ".//div[contains(@class, 'categories')]//a/text() | .//meta[@property='article:section']/@content",
+              "tags": ".//div[contains(@class, 'tags')]//a/text()",
+              "featured_image": ".//img[1]/@src | .//meta[@property='og:image']/@content"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

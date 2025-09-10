@@ -1,0 +1,69 @@
+{
+  // Google search for "Ylli+Prifti" using AI-Selector
+  // This demonstrates AI-powered element selection on Google's search results
+  
+  "@url": "https://www.google.com/search?q=Ylli+Prifti",
+  
+  "@actions": [
+    // Wait for search results to load completely
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": "#search",
+      "@timeout": 10000
+    },
+    // Accept cookies if prompted (common on Google)
+    {
+      "@type": "click", 
+      "@selector": "button[id*='accept'], button[id*='consent'], #L2AGLb",
+      "@timeout": 3000
+    }
+  ],
+  
+  "@steps": [
+    // Use AI to find search result titles
+    {
+      "@ai-select": "search result titles or headlines",
+      "@name": "search_titles",
+      "@max-results": 10
+    },
+    
+    // Use AI to find the clickable links for each result
+    {
+      "@ai-select": "main search result links that lead to the actual websites",
+      "@name": "search_links", 
+      "@max-results": 10
+    },
+    
+    // Use AI to find result descriptions/snippets
+    {
+      "@ai-select": "search result descriptions or snippets below the titles",
+      "@name": "search_descriptions",
+      "@max-results": 10
+    },
+    
+    // Use AI to find any displayed URLs
+    {
+      "@ai-select": "green URL text showing the website addresses",
+      "@name": "displayed_urls",
+      "@max-results": 10
+    },
+    
+    // Traditional fallback approach for comparison
+    {
+      "@xpath": "//div[@id='search']//h3//a",
+      "@name": "traditional_links",
+      "@fields": {
+        "title": "./text()",
+        "url": "./@href"
+      }
+    },
+    
+    // Another AI approach - get everything as structured data
+    {
+      "@ai-select": "complete search results including title, link, and description",
+      "@name": "complete_results",
+      "@max-results": 5
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "@url": "https://www.childcare.co.uk/search/Babysitters/DA12+1AB",
+  "@steps": [
+    {
+      "@xpath": "//div[contains(@class, 'search-result')]",  // Selecting each search result
+      "@fields": {
+        "full_name": ".//div[contains(@class, 'items-baseline')]/div[1]/span[1]/text()",
+        "ratings": ".//div[contains(@class, 'rating')]/span[1]/text()",
+        //"distance": ".//span[contains(@class, 'distance')]/span[2]/normalize-space()",
+        "image_url": ".//div[contains(@class, 'profile-image')]//img[1]/@src"
+      },
+      "@follow": {  // Following the profile link
+        "@xpath": ".//div[contains(@class, 'profile-image')]//a[1]/@href",
+        "@steps": [
+          {
+            "@xpath": "//div[contains(@class, 'profile featured')]",  // Extracting profile details
+            "@name": "profile",
+            "@fields": {
+              "bio": ".//h3[text()='About Me']/../p/normalize-space()",
+              "experience": ".//h3[text()='My Experience']/../p/normalize-space()"
+            }
+          },
+          {
+            "@xpath": "//div[@id='reviews']//div[contains(@class, 'review')]",  // Extracting reviews
+            "@name": "reviews",
+            "@fields": {
+              "reviewer": ".//p[2]//a/text()",
+              "reviewer_profile": ".//p[2]//a/@href",
+              "rating": ".//div[contains(@class, 'rating')]//img/@alt",
+              "comment": ".//p[1]/normalize-space()"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

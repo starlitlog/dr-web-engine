@@ -1,0 +1,39 @@
+{
+  // E-commerce product catalog extraction
+  "@url": "https://books.toscrape.com/",
+  "@steps": [
+    {
+      "@xpath": "//article[@class='product_pod']",
+      "@name": "products",
+      "@fields": {
+        "title": ".//h3/a/@title",
+        "price": ".//p[@class='price_color']/text()",
+        "availability": ".//p[contains(@class, 'availability')]/text()",
+        "rating": ".//p[contains(@class, 'star-rating')]/@class",
+        "image_url": ".//div[@class='image_container']//img/@src",
+        "product_url": ".//h3/a/@href"
+      },
+      "@follow": {
+        "@xpath": ".//h3/a/@href",
+        "@steps": [
+          {
+            "@xpath": "//article[@class='product_page']",
+            "@name": "product_details",
+            "@fields": {
+              "description": ".//div[@id='product_description']/following-sibling::p/text()",
+              "upc": ".//table//tr[th[text()='UPC']]/td/text()",
+              "price_excl_tax": ".//table//tr[th[contains(text(), 'Price (excl. tax)')]]/td/text()",
+              "price_incl_tax": ".//table//tr[th[contains(text(), 'Price (incl. tax)')]]/td/text()",
+              "availability_num": ".//table//tr[th[text()='Availability']]/td/text()",
+              "num_reviews": ".//table//tr[th[contains(text(), 'Number of reviews')]]/td/text()"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "@pagination": {
+    "@xpath": "//li[@class='next']/a/@href",
+    "@limit": 2
+  }
+}

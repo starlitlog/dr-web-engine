@@ -1,0 +1,40 @@
+{
+  // Reddit posts and comments extraction
+  "@url": "https://old.reddit.com/r/technology",
+  "@steps": [
+    {
+      "@xpath": "//div[contains(@class, 'thing')][@data-type='link']",
+      "@name": "reddit_posts",
+      "@fields": {
+        "title": ".//p[@class='title']//a/text()",
+        "url": ".//p[@class='title']//a/@href",
+        "author": ".//p[contains(@class, 'tagline')]//a[contains(@class, 'author')]/text()",
+        "subreddit": ".//p[contains(@class, 'tagline')]//a[contains(@class, 'subreddit')]/text()",
+        "score": ".//div[contains(@class, 'score')]/text()",
+        "comments_count": ".//a[contains(@class, 'comments')]/text()",
+        "post_time": ".//p[contains(@class, 'tagline')]//time/@datetime",
+        "domain": ".//span[@class='domain']//a/text()",
+        "post_id": "./@data-fullname"
+      },
+      "@follow": {
+        "@xpath": ".//a[contains(@class, 'comments')]/@href",
+        "@max-depth": 1,
+        "@steps": [
+          {
+            "@xpath": "//div[contains(@class, 'thing')][@data-type='comment'][not(contains(@class, 'collapsed'))]",
+            "@name": "comments",
+            "@fields": {
+              "comment_text": ".//div[contains(@class, 'md')]//p/text()",
+              "comment_author": ".//p[contains(@class, 'tagline')]//a[contains(@class, 'author')]/text()",
+              "comment_score": ".//span[contains(@class, 'score')]/text()",
+              "comment_time": ".//p[contains(@class, 'tagline')]//time/@datetime",
+              "comment_id": "./@data-fullname",
+              "parent_id": "./@data-parent",
+              "depth": "count(ancestor::div[contains(@class, 'child')])"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

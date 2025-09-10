@@ -1,0 +1,43 @@
+{
+  // Extract data from API endpoints intercepted during page loading
+  "@url": "https://ecommerce-site.com/products/123",
+  "@steps": [
+    {
+      // Extract product data from specific API endpoint
+      "@api": {
+        "@endpoint": "/api/products/\\d+",  // Regex pattern to match product API
+        "@method": "GET",
+        "@response-type": "json",
+        "@fields": ["id", "name", "price", "availability", "images", "reviews"]
+      },
+      "@name": "product_api_data"
+    },
+    {
+      // Extract related products from recommendations API
+      "@api": {
+        "@endpoint": "/api/recommendations",
+        "@response-type": "json",
+        "@json-path": "$.data.items",  // Extract specific path from response
+        "@fields": ["id", "title", "price", "image"]
+      },
+      "@name": "related_products"
+    },
+    {
+      // Extract all review data
+      "@api": {
+        "@endpoint": "/api/reviews",
+        "@response-type": "json",
+        "@json-path": "$.reviews",
+        "@fields": ["rating", "comment", "author", "date"]
+      },
+      "@name": "product_reviews"
+    },
+    {
+      // Capture all API calls (no specific endpoint pattern)
+      "@api": {
+        "@response-type": "json"
+      },
+      "@name": "all_api_calls"
+    }
+  ]
+}

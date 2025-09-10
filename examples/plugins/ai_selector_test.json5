@@ -1,0 +1,18 @@
+{
+  // Simple AI-Selector test with quotes site (no CAPTCHA)
+  
+  "@url": "https://quotes.toscrape.com",
+  
+  "@steps": [
+    {
+      "@ai-select": "quote text content",
+      "@name": "quotes",
+      "@max-results": 5
+    },
+    {
+      "@ai-select": "author names",
+      "@name": "authors",
+      "@max-results": 5
+    }
+  ]
+}

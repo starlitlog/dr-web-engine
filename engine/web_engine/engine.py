@@ -8,6 +8,9 @@ from .processors import StepProcessorRegistry
 from .extract_processor import ExtractStepProcessor
 from .follow_processor import FollowStepProcessor
 from .javascript_processor import JavaScriptStepProcessor
+from .plugins.jsonld_extractor import JsonLdExtractorProcessor
+from .plugins.api_extractor import ApiExtractorProcessor
+from .plugins.ai_selector import AISelectorProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -101,6 +104,9 @@ def execute_query(query: ExtractionQuery, browser_client: BrowserClient):
             step_registry.register(ConditionalProcessor())
             step_registry.register(FollowStepProcessor())
             step_registry.register(JavaScriptStepProcessor())
+            step_registry.register(JsonLdExtractorProcessor())
+            step_registry.register(ApiExtractorProcessor())
+            step_registry.register(AISelectorProcessor())
 
             logger.info(f"Navigating to URL: {query.url}")
             page.goto(query.url)

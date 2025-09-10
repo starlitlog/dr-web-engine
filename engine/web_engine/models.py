@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
-from typing import Dict, List, Optional, Union, Literal
+from typing import Dict, List, Optional, Union, Literal, Any
 from urllib.parse import urljoin, urlparse
 
 
@@ -103,8 +103,39 @@ class JavaScriptStep(BaseModel):
     return_json: bool = Field(default=True, alias="@return-json")  # Whether to parse return as JSON
 
 
+class JsonLdStep(BaseModel):
+    """Extract JSON-LD structured data"""
+    schema_type: Optional[str] = Field(default=None, alias="@schema")  # Filter by schema.org type
+    fields: Optional[List[str]] = Field(default=None, alias="@fields")  # Specific fields to extract
+    name: Optional[str] = Field(default=None, alias="@name")  # Name for results
+    all_schemas: bool = Field(default=False, alias="@all-schemas")  # Extract all JSON-LD data
+
+
+class ApiStep(BaseModel):
+    """Extract data from API endpoints discovered on the page"""
+    endpoint_pattern: Optional[str] = Field(default=None, alias="@endpoint")  # API endpoint pattern to match
+    method: Literal["GET", "POST", "PUT", "DELETE"] = Field(default="GET", alias="@method")  # HTTP method
+    headers: Optional[Dict[str, str]] = Field(default=None, alias="@headers")  # Custom headers
+    params: Optional[Dict[str, Union[str, int]]] = Field(default=None, alias="@params")  # Query parameters
+    body: Optional[Dict[str, Any]] = Field(default=None, alias="@body")  # Request body for POST/PUT
+    response_type: Literal["json", "text", "xml"] = Field(default="json", alias="@response-type")  # Expected response type
+    json_path: Optional[str] = Field(default=None, alias="@json-path")  # JSONPath to extract specific data
+    fields: Optional[List[str]] = Field(default=None, alias="@fields")  # Specific fields to extract from JSON
+    name: Optional[str] = Field(default=None, alias="@name")  # Name for results
+    timeout: Optional[int] = Field(default=10000, alias="@timeout")  # Request timeout in milliseconds
+    follow_pagination: bool = Field(default=False, alias="@follow-pagination")  # Auto-follow pagination links
+    max_pages: Optional[int] = Field(default=10, alias="@max-pages")  # Maximum pages to follow
+
+
+class AiSelectStep(BaseModel):
+    """AI-powered element selection using natural language"""
+    find: str = Field(alias="@ai-select")  # Natural language description
+    name: Optional[str] = Field(default=None, alias="@name")  # Name for results
+    max_results: Optional[int] = Field(default=10, alias="@max-results")  # Maximum number of results
+
+
 # Forward reference for recursive step definitions
-Step = Union[ExtractStep, ConditionalStep, JavaScriptStep]
+Step = Union[ExtractStep, ConditionalStep, JavaScriptStep, JsonLdStep, ApiStep, AiSelectStep]
 
 
 class ExtractionQuery(BaseModel):

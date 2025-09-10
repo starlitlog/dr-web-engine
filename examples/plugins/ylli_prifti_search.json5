@@ -1,0 +1,82 @@
+{
+  // Smart Google search extraction for "Ylli Prifti" 
+  // Uses AI-Selector to intelligently find titles and links
+  
+  "@url": "https://www.google.com/search?q=Ylli+Prifti&num=20",
+  
+  "@actions": [
+    // Handle Google's consent/cookies dialog
+    {
+      "@type": "wait",
+      "@until": "timeout", 
+      "@timeout": 2000
+    },
+    {
+      "@type": "click",
+      "@selector": "button:has-text('Accept all'), button:has-text('I agree'), #L2AGLb",
+      "@timeout": 3000
+    },
+    // Wait for search results
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": "#search, .g",
+      "@timeout": 10000
+    }
+  ],
+  
+  "@steps": [
+    // Method 1: AI finds titles and links separately
+    {
+      "@ai-select": "clickable blue titles of search results that mention Ylli Prifti",
+      "@name": "ai_titles",
+      "@max-results": 15
+    },
+    
+    {
+      "@ai-select": "main clickable links for search results about Ylli Prifti", 
+      "@name": "ai_links",
+      "@max-results": 15
+    },
+    
+    // Method 2: AI finds complete result blocks
+    {
+      "@ai-select": "complete search result entries with title, link and description for Ylli Prifti",
+      "@name": "ai_complete_results",
+      "@max-results": 10
+    },
+    
+    // Method 3: Smart academic/professional results
+    {
+      "@ai-select": "search results that appear to be from academic, professional, or research websites",
+      "@name": "ai_academic_results", 
+      "@max-results": 8
+    },
+    
+    // Method 4: Social media and profile results
+    {
+      "@ai-select": "search results from LinkedIn, Twitter, GitHub, or other professional profiles",
+      "@name": "ai_profile_results",
+      "@max-results": 5
+    },
+    
+    // Method 5: News or publication results
+    {
+      "@ai-select": "search results from news sites, publications, or research papers",
+      "@name": "ai_news_results",
+      "@max-results": 5
+    },
+    
+    // Traditional approach for comparison/fallback
+    {
+      "@xpath": "//div[contains(@class, 'g') and not(contains(@class, 'related-question'))]",
+      "@name": "traditional_results",
+      "@fields": {
+        "title": ".//h3//text()",
+        "link": ".//h3/parent::a/@href | .//h3/../@href",
+        "snippet": ".//span[contains(@class, 'st')] | .//div[contains(@class, 'VwiC3b')]/text()",
+        "displayed_url": ".//cite//text()"
+      }
+    }
+  ]
+}

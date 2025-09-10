@@ -1,0 +1,17 @@
+{
+  // Debug the quotes site structure
+  
+  "@url": "https://quotes.toscrape.com",
+  
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote']",
+      "@name": "quote_structure",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()",
+        "tags": ".//div[@class='tags']//a/text()"
+      }
+    }
+  ]
+}

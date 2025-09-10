@@ -1,0 +1,19 @@
+{
+  // Basic pagination example
+  "@url": "https://quotes.toscrape.com/",
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote']",
+      "@name": "quotes",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()",
+        "tags": ".//div[@class='tags']//a/text()"
+      }
+    }
+  ],
+  "@pagination": {
+    "@xpath": "//li[@class='next']/a/@href",
+    "@limit": 3
+  }
+}

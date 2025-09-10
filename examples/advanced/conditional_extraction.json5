@@ -1,0 +1,48 @@
+{
+  // Advanced conditional extraction based on page content
+  "@url": "https://quotes.toscrape.com/",
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote']",
+      "@name": "quotes_with_conditions",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()",
+        "tags": ".//div[@class='tags']//a/text()"
+      },
+      "@follow": {
+        "@xpath": ".//small[@class='author']//a/@href",
+        "@steps": [
+          {
+            "@if": {
+              "@exists": ".author-born-date"
+            },
+            "@then": [
+              {
+                "@xpath": "//div[@class='author-details']",
+                "@name": "author_with_birthdate",
+                "@fields": {
+                  "name": ".//h3[@class='author-title']/text()",
+                  "birth_date": ".//span[@class='author-born-date']/text()",
+                  "birth_location": ".//span[@class='author-born-location']/text()",
+                  "description": ".//div[@class='author-description']/text()"
+                }
+              }
+            ],
+            "@else": [
+              {
+                "@xpath": "//div[@class='author-details']",
+                "@name": "author_without_birthdate", 
+                "@fields": {
+                  "name": ".//h3[@class='author-title']/text()",
+                  "description": ".//div[@class='author-description']/text()",
+                  "note": "'No birth information available'"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

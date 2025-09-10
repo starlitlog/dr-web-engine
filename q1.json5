@@ -1,0 +1,21 @@
+  {
+    "@url": "https://www.google.com/search?q=Ylli+Prifti",
+    "@actions": [
+      {
+        "@type": "wait",
+        "@until": "element",
+        "@selector": "#search",
+        "@timeout": 8000
+      }
+    ],
+    "@steps": [
+      {
+        "@ai-select": "blue clickable titles of search results",
+        "@name": "titles"
+      },
+      {
+        "@ai-select": "clickable links that go to the actual websites from search results",
+        "@name": "links"
+      }
+    ]
+  }

@@ -1,0 +1,29 @@
+{
+  // Click and navigation example - interacting with buttons and links
+  "@url": "https://quotes.toscrape.com/",
+  "@actions": [
+    // Click on a random quote's author to go to their page
+    {
+      "@type": "click",
+      "@xpath": "(//small[@class='author']//a)[1]"
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".author-details",
+      "@timeout": 5000
+    }
+  ],
+  "@steps": [
+    {
+      "@xpath": "//div[@class='author-details']",
+      "@name": "author_info",
+      "@fields": {
+        "name": ".//h3[@class='author-title']/text()",
+        "birth_date": ".//span[@class='author-born-date']/text()",
+        "birth_location": ".//span[@class='author-born-location']/text()",
+        "description": ".//div[@class='author-description']/text()"
+      }
+    }
+  ]
+}

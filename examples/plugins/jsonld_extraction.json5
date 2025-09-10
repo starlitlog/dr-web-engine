@@ -1,0 +1,29 @@
+{
+  // Extract structured data from JSON-LD scripts
+  "@url": "https://schema.org/Product",
+  "@steps": [
+    {
+      // Extract all Product schema data
+      "@json-ld": {
+        "@schema": "Product",
+        "@fields": ["name", "description", "brand", "offers", "image"]
+      },
+      "@name": "product_data"
+    },
+    {
+      // Extract all structured data (any schema type)
+      "@json-ld": {
+        "@all-schemas": true
+      },
+      "@name": "all_structured_data"
+    },
+    {
+      // Extract Organization data with specific fields
+      "@json-ld": {
+        "@schema": "Organization", 
+        "@fields": ["name", "address", "contactPoint", "url"]
+      },
+      "@name": "organization_info"
+    }
+  ]
+}

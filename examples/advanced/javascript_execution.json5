@@ -1,0 +1,45 @@
+{
+  // Advanced JavaScript execution for dynamic data extraction
+  "@url": "https://quotes.toscrape.com/js/",
+  "@steps": [
+    {
+      "@javascript": "
+        // Wait for quotes to load and get additional metadata
+        const quotes = Array.from(document.querySelectorAll('.quote'));
+        return quotes.map(quote => {
+          const text = quote.querySelector('.text')?.textContent || '';
+          const author = quote.querySelector('.author')?.textContent || '';
+          const tags = Array.from(quote.querySelectorAll('.tag')).map(t => t.textContent);
+          
+          return {
+            text: text,
+            author: author,
+            tags: tags,
+            word_count: text.split(' ').length,
+            has_love_tag: tags.includes('love'),
+            quote_length: text.length,
+            extracted_at: new Date().toISOString()
+          };
+        });
+      ",
+      "@name": "enhanced_quotes",
+      "@timeout": 10000,
+      "@return-json": true
+    },
+    {
+      "@javascript": "
+        // Get page statistics
+        return {
+          total_quotes: document.querySelectorAll('.quote').length,
+          unique_authors: [...new Set(Array.from(document.querySelectorAll('.author')).map(a => a.textContent))].length,
+          all_tags: [...new Set(Array.from(document.querySelectorAll('.tag')).map(t => t.textContent))],
+          page_title: document.title,
+          page_url: window.location.href,
+          timestamp: Date.now()
+        };
+      ",
+      "@name": "page_statistics",
+      "@return-json": true
+    }
+  ]
+}

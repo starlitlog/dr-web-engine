@@ -1,0 +1,319 @@
+{
+  // AI-Selector Plugin Examples (Proposed Feature)
+  // These examples demonstrate how AI-powered element selection would work
+  
+  // Example 1: Simple Natural Language Selection
+  "simple_product_extraction": {
+    "@url": "https://any-ecommerce-site.com/product",
+    "@steps": [
+      {
+        "@ai-select": "the main product title at the top of the page",
+        "@name": "product_name"
+      },
+      {
+        "@ai-select": "the current price, including any discounts",
+        "@name": "price"
+      },
+      {
+        "@ai-select": "all product images in the gallery",
+        "@name": "images"
+      }
+    ]
+  },
+
+  // Example 2: Context-Aware Selection
+  "context_aware_extraction": {
+    "@url": "https://news-site.com/article",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "the main article headline",
+          "@context": "not in sidebar or navigation",
+          "@type": "heading"
+        },
+        "@name": "headline"
+      },
+      {
+        "@ai-select": {
+          "@find": "article publication date",
+          "@format": "date",
+          "@near": "author name"
+        },
+        "@name": "publish_date"
+      }
+    ]
+  },
+
+  // Example 3: Learning from Examples
+  "review_extraction_with_examples": {
+    "@url": "https://reviews-site.com/product",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "customer reviews",
+          "@examples": [
+            "This product exceeded my expectations...",
+            "★★★★☆ Good value for money",
+            "Verified Purchase - Would recommend"
+          ],
+          "@extract": {
+            "review_text": "the review content",
+            "rating": "star rating or numerical score",
+            "author": "reviewer's name or username",
+            "date": "when the review was posted",
+            "verified": "whether it's a verified purchase"
+          }
+        },
+        "@name": "reviews"
+      }
+    ]
+  },
+
+  // Example 4: Visual-Based Selection
+  "visual_element_selection": {
+    "@url": "https://shopping-site.com",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "the orange 'Add to Cart' button",
+          "@visual": {
+            "@color": "orange",
+            "@shape": "rectangular button",
+            "@position": "right side of product info"
+          }
+        },
+        "@name": "add_to_cart_button"
+      },
+      {
+        "@ai-select": {
+          "@find": "product cards in a grid layout",
+          "@visual": {
+            "@layout": "grid",
+            "@contains": ["image", "title", "price"]
+          }
+        },
+        "@name": "product_grid"
+      }
+    ]
+  },
+
+  // Example 5: Semantic Understanding
+  "semantic_content_extraction": {
+    "@url": "https://blog.example.com",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "paragraphs discussing artificial intelligence",
+          "@semantic": {
+            "@topics": ["AI", "machine learning", "neural networks"],
+            "@min_relevance": 0.7
+          }
+        },
+        "@name": "ai_content"
+      },
+      {
+        "@ai-select": {
+          "@find": "quotes or testimonials",
+          "@pattern": "quoted text with attribution"
+        },
+        "@name": "quotes"
+      }
+    ]
+  },
+
+  // Example 6: Adaptive Cross-Site Extraction
+  "universal_product_extractor": {
+    "@url": "https://any-unknown-store.com/product/*",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@template": "ecommerce_product",
+          "@extract": {
+            "name": "product title or name",
+            "price": "current price with currency",
+            "original_price": "original price if on sale",
+            "description": "main product description",
+            "specifications": "technical specs or features",
+            "availability": "in stock, out of stock, or availability info",
+            "images": "all product images",
+            "reviews_count": "number of reviews",
+            "average_rating": "average star rating"
+          },
+          "@confidence": 0.75,
+          "@fallback": "use_standard_xpath"
+        },
+        "@name": "product_universal"
+      }
+    ]
+  },
+
+  // Example 7: Intelligent Form Interaction
+  "smart_form_filling": {
+    "@url": "https://form-site.com/signup",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "email input field",
+          "@type": "email",
+          "@action": "fill",
+          "@value": "test@example.com"
+        }
+      },
+      {
+        "@ai-select": {
+          "@find": "password field",
+          "@type": "password", 
+          "@requirements": "look for password requirements nearby",
+          "@action": "fill",
+          "@value": "SecurePass123!"
+        }
+      },
+      {
+        "@ai-select": {
+          "@find": "submit or sign up button",
+          "@type": "submit",
+          "@context": "main form, not newsletter signup",
+          "@action": "click"
+        }
+      }
+    ]
+  },
+
+  // Example 8: Sentiment-Based Selection
+  "sentiment_analysis_extraction": {
+    "@url": "https://forum.example.com/thread",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "posts expressing positive sentiment",
+          "@sentiment": "positive",
+          "@confidence": 0.8,
+          "@extract": {
+            "content": "post text",
+            "author": "username",
+            "timestamp": "post time"
+          }
+        },
+        "@name": "positive_posts"
+      },
+      {
+        "@ai-select": {
+          "@find": "posts with questions or asking for help",
+          "@pattern": "interrogative",
+          "@indicators": ["?", "how to", "help", "anyone know"]
+        },
+        "@name": "questions"
+      }
+    ]
+  },
+
+  // Example 9: Relationship-Based Selection
+  "related_elements_extraction": {
+    "@url": "https://marketplace.com/listings",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "prices that appear near product images",
+          "@relationship": {
+            "@to": "product images",
+            "@distance": "close",
+            "@position": "below or beside"
+          }
+        },
+        "@name": "image_price_pairs"
+      },
+      {
+        "@ai-select": {
+          "@find": "seller information",
+          "@relationship": {
+            "@parent": "listing card",
+            "@includes": ["name", "rating", "location"]
+          }
+        },
+        "@name": "sellers"
+      }
+    ]
+  },
+
+  // Example 10: Multi-Language Support
+  "multilingual_extraction": {
+    "@url": "https://international-news.com",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "news headlines",
+          "@languages": ["en", "es", "fr", "de"],
+          "@translate": true,
+          "@output_language": "en"
+        },
+        "@name": "international_headlines"
+      },
+      {
+        "@ai-select": {
+          "@find": "publication dates in any format",
+          "@normalize": "ISO-8601"
+        },
+        "@name": "dates"
+      }
+    ]
+  },
+
+  // Example 11: Dynamic Content Handling
+  "dynamic_content_smart_extraction": {
+    "@url": "https://spa-website.com",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "content that loads dynamically",
+          "@wait": {
+            "@strategy": "smart",  // AI determines when content is ready
+            "@indicators": ["spinner disappears", "content appears"],
+            "@max_wait": 10000
+          },
+          "@retry": {
+            "@attempts": 3,
+            "@backoff": "exponential"
+          }
+        },
+        "@name": "dynamic_content"
+      }
+    ]
+  },
+
+  // Example 12: Data Validation and Cleaning
+  "intelligent_data_cleaning": {
+    "@url": "https://messy-data-site.com",
+    "@steps": [
+      {
+        "@ai-select": {
+          "@find": "phone numbers in any format",
+          "@clean": {
+            "@normalize": "international",  // +1-234-567-8900
+            "@validate": true
+          }
+        },
+        "@name": "phone_numbers"
+      },
+      {
+        "@ai-select": {
+          "@find": "email addresses",
+          "@clean": {
+            "@validate": true,
+            "@exclude_invalid": true
+          }
+        },
+        "@name": "emails"
+      },
+      {
+        "@ai-select": {
+          "@find": "prices in mixed currencies",
+          "@clean": {
+            "@convert_to": "USD",
+            "@include_original": true
+          }
+        },
+        "@name": "normalized_prices"
+      }
+    ]
+  }
+}

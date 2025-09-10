@@ -2,6 +2,8 @@
 
 This guide will teach you how to write queries for DR Web Engine to extract structured data from web pages.
 
+💡 **Quick Start**: Check out our [examples directory](examples/) for ready-to-use patterns organized by use case!
+
 ## Query Structure Overview
 
 DR Web Engine uses JSON5 or YAML files to define data extraction queries. Each query contains:
@@ -2186,6 +2188,213 @@ DR Web Engine provides common utility functions in all JavaScript execution cont
 - Conditional logic based on element properties
 - Integration with page JavaScript APIs
 - Real-time data transformation
+
+## JSON-LD Extraction (NEW in v1.0+)
+
+Extract structured data directly from JSON-LD script tags embedded in web pages. This is often the cleanest way to get product information, article metadata, and business details.
+
+### Basic JSON-LD Extraction
+
+Many e-commerce sites include product information in structured format:
+
+```json5
+{
+  "@url": "https://online-store.com/product/smartphone",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@schema": "Product",
+        "@fields": ["name", "description", "brand", "offers"]
+      },
+      "@name": "product_info"
+    }
+  ]
+}
+```
+
+### Article Metadata Extraction
+
+News sites and blogs often include rich article metadata:
+
+```json5
+{
+  "@url": "https://tech-news.com/article/ai-breakthrough",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@schema": "Article",
+        "@fields": ["headline", "author", "datePublished", "articleBody"]
+      },
+      "@name": "article_data"
+    }
+  ]
+}
+```
+
+### Business Information Extraction
+
+Extract company details from business websites:
+
+```json5
+{
+  "@url": "https://company.com/about",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@schema": "Organization",
+        "@fields": ["name", "address", "contactPoint", "url", "sameAs"]
+      },
+      "@name": "company_info"
+    }
+  ]
+}
+```
+
+### Extract All Structured Data
+
+Get all JSON-LD data regardless of schema type:
+
+```json5
+{
+  "@url": "https://restaurant.com",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@all-schemas": true
+      },
+      "@name": "all_structured_data"
+    }
+  ]
+}
+```
+
+### JSON-LD Best Practices
+
+**Check for JSON-LD availability:**
+- View page source and search for `<script type="application/ld+json">`
+- Use browser dev tools to inspect structured data
+- Many sites use schema.org vocabulary
+
+**Common Schema Types:**
+- `Product` - E-commerce products
+- `Article` - News articles, blog posts
+- `Organization` - Companies, businesses
+- `Person` - People, authors
+- `Event` - Events, conferences
+- `Recipe` - Cooking recipes
+- `LocalBusiness` - Local businesses
+
+**When to Use JSON-LD:**
+- Site has structured data markup
+- Need clean, semantically correct data
+- Standard data types (products, articles, businesses)
+- Want to avoid brittle XPath selectors
+
+## API Extractor (NEW in v1.0+)
+
+Capture data directly from AJAX/REST API calls that websites make to load dynamic content. This is powerful for extracting data that isn't visible in the initial HTML but is loaded asynchronously.
+
+### Basic API Extraction
+
+Many modern websites load product details via API calls:
+
+```json5
+{
+  "@url": "https://shop.example.com/products/123",
+  "@steps": [
+    {
+      "@api": {
+        "@endpoint": "/api/products/\\d+",  // Regex to match product API
+        "@method": "GET",
+        "@response-type": "json",
+        "@fields": ["id", "name", "price", "stock", "images"]
+      },
+      "@name": "product_data"
+    }
+  ]
+}
+```
+
+### Search Results API
+
+Extract search results that load dynamically:
+
+```json5
+{
+  "@url": "https://search-site.com/search?q=smartphones",
+  "@steps": [
+    {
+      "@api": {
+        "@endpoint": "/api/search",
+        "@response-type": "json",
+        "@json-path": "$.data.results",  // Extract specific JSON path
+        "@fields": ["title", "price", "rating", "availability"]
+      },
+      "@name": "search_results"
+    }
+  ]
+}
+```
+
+### User Profile Data
+
+Extract user information from social media or profile sites:
+
+```json5
+{
+  "@url": "https://social-site.com/profile/username",
+  "@steps": [
+    {
+      "@api": {
+        "@endpoint": "/api/users/",
+        "@response-type": "json",
+        "@fields": ["username", "bio", "followers", "following", "posts"]
+      },
+      "@name": "profile_info"
+    }
+  ]
+}
+```
+
+### Capture All API Calls
+
+Monitor all API requests and responses:
+
+```json5
+{
+  "@url": "https://dynamic-app.com",
+  "@steps": [
+    {
+      "@api": {
+        "@response-type": "json"
+        // No endpoint pattern = captures all API calls
+      },
+      "@name": "all_api_data"
+    }
+  ]
+}
+```
+
+### API Extractor Best Practices
+
+**Identify API Endpoints:**
+- Open browser developer tools (F12)
+- Go to Network tab and filter by XHR/Fetch
+- Reload the page and watch for API calls
+- Note the URL patterns and response formats
+
+**Common API Patterns:**
+- `/api/products/123` - Product details
+- `/api/search?q=query` - Search results
+- `/api/users/profile` - User information
+- `/api/reviews?product_id=123` - Reviews and ratings
+
+**When to Use API Extractor:**
+- Content loads dynamically via AJAX
+- Data comes from REST/GraphQL APIs
+- Site has infinite scroll or lazy loading
+- XPath selectors miss dynamically loaded content
+- Need live data updates
 
 ## Format Support
 

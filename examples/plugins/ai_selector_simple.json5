@@ -1,0 +1,176 @@
+{
+  // AI-Selector Plugin - Simple Usage Examples
+  // Configure via environment variables:
+  // export AI_SELECTOR_ENDPOINT="https://api.openai.com/v1/chat/completions"
+  // export AI_SELECTOR_API_KEY="sk-..."
+  // export AI_SELECTOR_MODEL="gpt-4o-mini"  # Best value (replaces gpt-3.5-turbo)
+  
+  // Example 1: Basic Natural Language Selection
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      "@ai-select": "all quotes on the page",
+      "@name": "quotes"
+    },
+    {
+      "@ai-select": "author names",
+      "@name": "authors"
+    },
+    {
+      "@ai-select": "tags or categories for each quote",
+      "@name": "tags"
+    }
+  ]
+}
+
+// Example 2: E-commerce Product Extraction
+{
+  "@url": "https://books.toscrape.com",
+  "@steps": [
+    {
+      "@ai-select": "product titles or book names",
+      "@name": "titles",
+      "@max-results": 20
+    },
+    {
+      "@ai-select": "prices with currency symbols",
+      "@name": "prices"
+    },
+    {
+      "@ai-select": "availability or stock information",
+      "@name": "availability"
+    }
+  ]
+}
+
+// Example 3: News Article Extraction
+{
+  "@url": "https://news-site.com",
+  "@steps": [
+    {
+      "@ai-select": "main article headline",
+      "@name": "headline",
+      "@max-results": 1
+    },
+    {
+      "@ai-select": "article publication date",
+      "@name": "date"
+    },
+    {
+      "@ai-select": "author byline or writer name",
+      "@name": "author"
+    },
+    {
+      "@ai-select": "main article text content",
+      "@name": "content"
+    }
+  ]
+}
+
+// Example 4: Search Results Extraction
+{
+  "@url": "https://search-engine.com/results?q=web+scraping",
+  "@steps": [
+    {
+      "@ai-select": "search result titles",
+      "@name": "titles"
+    },
+    {
+      "@ai-select": "search result URLs or links",
+      "@name": "links"
+    },
+    {
+      "@ai-select": "search result descriptions or snippets",
+      "@name": "descriptions"
+    }
+  ]
+}
+
+// Example 5: Social Media Posts
+{
+  "@url": "https://social-media.com/feed",
+  "@steps": [
+    {
+      "@ai-select": "post content or messages",
+      "@name": "posts"
+    },
+    {
+      "@ai-select": "usernames or post authors",
+      "@name": "users"
+    },
+    {
+      "@ai-select": "timestamps or post dates",
+      "@name": "timestamps"
+    },
+    {
+      "@ai-select": "like counts or engagement numbers",
+      "@name": "likes"
+    }
+  ]
+}
+
+// Example 6: Form Elements
+{
+  "@url": "https://example.com/signup",
+  "@steps": [
+    {
+      "@ai-select": "email input field",
+      "@name": "email_field",
+      "@max-results": 1
+    },
+    {
+      "@ai-select": "password input field",
+      "@name": "password_field",
+      "@max-results": 1
+    },
+    {
+      "@ai-select": "submit or sign up button",
+      "@name": "submit_button",
+      "@max-results": 1
+    }
+  ]
+}
+
+// Example 7: Table Data Extraction
+{
+  "@url": "https://data-site.com/statistics",
+  "@steps": [
+    {
+      "@ai-select": "table headers or column names",
+      "@name": "headers"
+    },
+    {
+      "@ai-select": "table data cells or values",
+      "@name": "data"
+    },
+    {
+      "@ai-select": "totals or summary rows",
+      "@name": "totals"
+    }
+  ]
+}
+
+// Example 8: Mixed with Traditional XPath
+{
+  "@url": "https://hybrid-example.com",
+  "@steps": [
+    // Use AI for hard-to-select elements
+    {
+      "@ai-select": "promotional banner text",
+      "@name": "promo"
+    },
+    // Use traditional XPath for precise selection
+    {
+      "@xpath": "//div[@id='specific-content']",
+      "@fields": {
+        "title": ".//h2/text()",
+        "description": ".//p/text()"
+      }
+    },
+    // Back to AI for dynamic content
+    {
+      "@ai-select": "user reviews or testimonials",
+      "@name": "reviews"
+    }
+  ]
+}

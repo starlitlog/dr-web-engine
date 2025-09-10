@@ -28,6 +28,8 @@
 - **🧠 Conditional Logic (NEW in v0.7+)**: Smart branching based on page conditions and content
 - **🕸️ Kleene Star Navigation (NEW in v0.8+)**: Recursive link following with cycle detection and depth control
 - **🚀 JavaScript Execution (NEW in v0.9+)**: Execute custom JavaScript for complex scenarios and data extraction
+- **📊 JSON-LD Extraction (NEW in v1.0+)**: Extract structured data from JSON-LD script tags
+- **🌐 API Extractor (NEW in v1.0+)**: Intercept and extract data from AJAX/REST API calls
 - **⚡ Playwright-Powered**: Reliable automation with modern browser engine
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
@@ -43,6 +45,8 @@
 - [Conditional Logic](#-conditional-logic-new)
 - [Kleene Star Navigation](#-kleene-star-navigation-new)
 - [JavaScript Execution](#-javascript-execution-new)
+- [JSON-LD Extraction](#-json-ld-extraction-new)
+- [API Extractor](#-api-extractor-new)
 - [Query Keywords](#-query-keywords-reference)
 - [CLI Reference](#-cli-reference)
 - [Real-World Examples](#-real-world-examples)
@@ -89,6 +93,16 @@ dr-web-engine -q quotes.json5 -o results.json
   }
 ]
 ```
+
+### 5. Explore more examples
+Check out our comprehensive [examples directory](examples/) with organized use cases:
+- **[Basic patterns](examples/basic/)**: Simple extraction for beginners
+- **[Browser actions](examples/actions/)**: Dynamic content and interactions  
+- **[E-commerce](examples/ecommerce/)**: Product catalogs and marketplaces
+- **[News & blogs](examples/news/)**: Article and content extraction
+- **[Social media](examples/social/)**: Forums and social platforms
+- **[Advanced features](examples/advanced/)**: Conditionals and JavaScript
+- **[Plugin examples](examples/plugins/)**: JSON-LD and API extraction
 
 ## 📦 Installation
 
@@ -563,6 +577,27 @@ Follow related links in Wikipedia articles:
 | `@return-json` | ❌ | Parse return value as JSON | `"@return-json": true` |
 | `@timeout` | ❌ | Execution timeout (ms) | `"@timeout": 10000` |
 
+### JSON-LD Keywords (v1.0+)
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@json-ld` | ✅ | JSON-LD extraction configuration | `"@json-ld": {"@schema": "Product"}` |
+| `@schema` | ❌ | Filter by schema.org type | `"@schema": "Product"` |
+| `@fields` | ❌ | Specific fields to extract | `"@fields": ["name", "price"]` |
+| `@all-schemas` | ❌ | Extract all JSON-LD data | `"@all-schemas": true` |
+
+### API Extractor Keywords (v1.0+)
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@api` | ✅ | API extraction configuration | `"@api": {"@endpoint": "/api/products"}` |
+| `@endpoint` | ❌ | API URL pattern (regex) | `"@endpoint": "/api/products/\\d+"` |
+| `@method` | ❌ | HTTP method | `"@method": "GET"` |
+| `@response-type` | ❌ | Response format | `"@response-type": "json"` |
+| `@json-path` | ❌ | JSONPath to extract data | `"@json-path": "$.data.items"` |
+| `@fields` | ❌ | Specific fields to extract | `"@fields": ["id", "name"]` |
+| `@timeout` | ❌ | Request timeout (ms) | `"@timeout": 10000` |
+| `@headers` | ❌ | Custom headers | `"@headers": {"Auth": "Bearer xyz"}` |
+| `@params` | ❌ | Query parameters | `"@params": {"limit": 20}` |
+
 ## 🚀 JavaScript Execution (NEW)
 
 Execute custom JavaScript code for complex scenarios that require dynamic logic, data manipulation, or advanced browser interactions beyond standard actions:
@@ -700,6 +735,222 @@ Handle complex form interactions and multi-step processes:
   ]
 }
 ```
+
+## 📊 JSON-LD Extraction (NEW)
+
+Extract structured data directly from JSON-LD script tags embedded in web pages. Many websites include rich structured data using schema.org vocabulary that can be extracted without complex XPath selectors:
+
+### Extract Product Information
+Extract e-commerce product data from structured markup:
+
+```json5
+{
+  "@url": "https://online-store.com/product/laptop",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@schema": "Product",
+        "@fields": ["name", "description", "brand", "offers"]
+      },
+      "@name": "product_data"
+    }
+  ]
+}
+```
+
+### Extract Article Metadata
+Get article information from news sites and blogs:
+
+```json5
+{
+  "@url": "https://tech-blog.com/article/ai-trends",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@schema": "Article",
+        "@fields": ["headline", "author", "datePublished", "articleBody"]
+      },
+      "@name": "article_info"
+    }
+  ]
+}
+```
+
+### Extract Organization Data
+Get company information from business websites:
+
+```json5
+{
+  "@url": "https://company.com/about",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@schema": "Organization",
+        "@fields": ["name", "address", "contactPoint", "sameAs"]
+      },
+      "@name": "company_details"
+    }
+  ]
+}
+```
+
+### Extract All Structured Data
+Capture all JSON-LD data regardless of schema type:
+
+```json5
+{
+  "@url": "https://restaurant.com",
+  "@steps": [
+    {
+      "@json-ld": {
+        "@all-schemas": true
+      },
+      "@name": "all_structured_data"
+    }
+  ]
+}
+```
+
+### Advanced JSON-LD Features
+
+**Schema Type Filtering:**
+- Filter by schema.org types (Product, Article, Organization, Event, etc.)
+- Handles both simple types and full URLs
+- Supports multiple type declarations
+
+**Field Selection:**
+- Extract only specific fields you need
+- Preserves nested object structure (offers, addresses, etc.)
+- Automatic cleaning of JSON-LD metadata
+
+**Graph Structure Support:**
+- Handles @graph structures common in complex JSON-LD
+- Processes multiple items within single script tags
+- Maintains relationships between structured data items
+
+### When to Use JSON-LD vs XPath
+
+**Use JSON-LD when:**
+- Site has structured data markup (check page source for `<script type="application/ld+json">`)
+- Need clean, semantically correct data
+- Want to extract standard e-commerce/article/business data
+- Site uses schema.org vocabulary
+
+**Use XPath when:**
+- No structured data available
+- Need visual/layout-specific extraction
+- Custom data not covered by schema.org
+- Need to extract from specific page regions
+
+## 🌐 API Extractor (NEW)
+
+Extract data directly from AJAX/REST API calls made by web pages. The API Extractor monitors network requests and captures responses from dynamic content loading.
+
+### Product API Extraction
+Extract product data from e-commerce API calls:
+
+```json5
+{
+  "@url": "https://shop.example.com/products/123",
+  "@steps": [
+    {
+      "@api": {
+        "@endpoint": "/api/products/\\d+",  // Regex pattern to match
+        "@method": "GET",
+        "@response-type": "json",
+        "@fields": ["id", "name", "price", "availability", "images"]
+      },
+      "@name": "product_data"
+    }
+  ]
+}
+```
+
+### Search Results API
+Extract search results from dynamic loading:
+
+```json5
+{
+  "@url": "https://search-site.com/results?q=laptops",
+  "@steps": [
+    {
+      "@api": {
+        "@endpoint": "/api/search",
+        "@response-type": "json",
+        "@json-path": "$.data.results",  // Extract specific JSON path
+        "@fields": ["title", "price", "rating", "url"]
+      },
+      "@name": "search_results"
+    }
+  ]
+}
+```
+
+### User Profile Data
+Extract user data from profile APIs:
+
+```json5
+{
+  "@url": "https://social-site.com/profile/123",
+  "@steps": [
+    {
+      "@api": {
+        "@endpoint": "/api/users/\\d+",
+        "@method": "GET",
+        "@response-type": "json",
+        "@fields": ["username", "bio", "followers", "following"]
+      },
+      "@name": "profile_data"
+    }
+  ]
+}
+```
+
+### Capture All API Calls
+Monitor and extract from all API endpoints:
+
+```json5
+{
+  "@url": "https://dynamic-site.com",
+  "@steps": [
+    {
+      "@api": {
+        "@response-type": "json"
+        // No endpoint pattern = captures all API calls
+      },
+      "@name": "all_api_data"
+    }
+  ]
+}
+```
+
+### API Extractor Keywords Reference
+
+| Keyword | Purpose | Example |
+|---------|---------|---------|
+| **@endpoint** | API URL pattern (regex) | `"/api/products/\\d+"` |
+| **@method** | HTTP method | `"GET"`, `"POST"`, `"PUT"` |
+| **@response-type** | Expected response format | `"json"`, `"text"`, `"xml"` |
+| **@json-path** | JSONPath to extract data | `"$.data.items"` |
+| **@fields** | Specific fields to extract | `["id", "name", "price"]` |
+| **@timeout** | Request timeout (ms) | `10000` |
+| **@headers** | Custom request headers | `{"Authorization": "Bearer xyz"}` |
+| **@params** | Query parameters | `{"limit": 20, "page": 1}` |
+
+### When to Use API Extractor
+
+**Use API Extractor when:**
+- Site loads content dynamically via AJAX
+- Data comes from REST/GraphQL APIs
+- Need to capture live data updates
+- XPath/CSS selectors miss dynamic content
+- Site has infinite scroll or lazy loading
+
+**Use other methods when:**
+- Content is server-side rendered
+- Static HTML extraction is sufficient
+- No network requests for target data
+- Need specific DOM element targeting
 
 ## 🖥️ CLI Reference
 
@@ -894,8 +1145,11 @@ python -m pytest engine/tests/ --cov=engine/web_engine --cov-report=html
 - [Action System](#-action-system-new): Browser interaction examples
 - [Kleene Star Navigation](#-kleene-star-navigation-new): Recursive link following patterns
 - [JavaScript Execution](#-javascript-execution-new): Custom logic and data processing
+- [JSON-LD Extraction](#-json-ld-extraction-new): Structured data extraction
+- [API Extractor](#-api-extractor-new): Dynamic API data capture
 - [CLI Usage](#-cli-reference): Command-line options and automation
 - [Real Examples](#-real-world-examples): Production-ready query patterns
+- [📚 Examples Directory](examples/): Organized examples by use case
 
 ## 🤝 Contributing
 
