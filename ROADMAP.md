@@ -124,50 +124,19 @@ Branching execution based on page content:
 - `@contains` - Text content checks
 - `@count/@min-count/@max-count` - Element count conditions
 
-### 2.2 Loop Constructs
-Beyond simple pagination:
+**Phase 2 Status: ✅ COMPLETE**
 
-```json5
-{
-  "@loop": {
-    "@while": {"@exists": ".load-more"},
-    "@do": [
-      {"@action": {"@type": "click", "@selector": ".load-more"}},
-      {"@wait": {"@until": "network-idle"}},
-      {"@extract": {"@xpath": "//div[@class='item']", "@fields": {...}}}
-    ]
-  }
-}
-```
-
-**Loop Types:**
-- `@while` - Condition-based loops
-- `@for-each` - Iterate over elements
-- `@repeat` - Fixed iteration count
-
-### 2.3 Variable System
-Store and reuse data between steps:
-
-```json5
-{
-  "@variables": {
-    "base_url": {"@extract": "//base/@href"},
-    "auth_token": {"@extract": "//meta[@name='csrf-token']/@content"}
-  },
-  "@steps": [
-    {
-      "@url": "{{base_url}}/api/data",
-      "@headers": {"X-CSRF-Token": "{{auth_token}}"}
-    }
-  ]
-}
-```
+Phase 2.2 (Loop Constructs) and 2.3 (Variable System) have been **removed from roadmap** as they are redundant:
+- **Loops**: XPath naturally processes arrays; actions + pagination handle dynamic loading
+- **Variables**: Over-engineering for current use cases; can be added later if needed
 
 ---
 
-## Phase 3: Advanced Navigation (v0.8.x)
+## Phase 3: Multi-Level Navigation (v0.8.x) 
 
-**Priority: Medium** - Complex crawling patterns
+**Priority: Medium** - Enhanced link following (Kleene star)
+
+**Note: Redesigned after Phase 4 architecture improvements**
 
 ### 3.1 Multi-Level Navigation
 Beyond single @follow:
@@ -345,6 +314,57 @@ Beyond XPath:
 }
 ```
 
+## Phase 4: Architecture Refactoring (v0.8.x) 🚧 CURRENT
+
+**Priority: High** - Foundation for extensibility and multi-level navigation
+
+**Status: Ready to start after v0.7.0**
+
+### 4.1 Step Processor Pipeline ⭐ NEXT
+Extract step processing into modular, extensible system:
+
+```python
+class StepProcessor(ABC):
+    @abstractmethod
+    def can_handle(self, step) -> bool: ...
+    
+    @abstractmethod  
+    def execute(self, context, page, step) -> List[Any]: ...
+
+class ExtractStepProcessor(StepProcessor): ...
+class ConditionalStepProcessor(StepProcessor): ...
+```
+
+**Benefits:**
+- Clean separation of concerns
+- Foundation for plugins  
+- Easier testing and debugging
+- Support for custom step types
+
+### 4.2 Plugin Registry System
+Enable custom step processors:
+
+```python
+class StepProcessorRegistry:
+    def register(self, processor: StepProcessor): ...
+    def find_processor(self, step): ...
+```
+
+### 4.3 Enhanced Step Models
+Support recursive navigation:
+
+```python
+class FollowStep(BaseModel):
+    steps: List[Step]  # Union[ExtractStep, ConditionalStep, FollowStep]  
+    max_depth: Optional[int] = Field(default=3)
+    detect_cycles: bool = Field(default=True)
+```
+
+**Implementation Approach:**
+- ✅ **Incremental refactoring** - each phase maintains all tests passing
+- ✅ **Backward compatible** - no API changes  
+- ✅ **Safe rollback** - each increment is committable
+
 ---
 
 ## Implementation Priorities
@@ -354,18 +374,23 @@ Beyond XPath:
 2. **Wait Conditions** - Required for dynamic content
 3. **Form Interactions** - Common use case
 
-### Phase 2 (High Impact)
-1. **Conditional Logic** - Enables complex scenarios
-2. **Variable System** - Supports advanced workflows
-3. **Loop Constructs** - Beyond simple pagination
+### Phase 2 (High Impact) ✅ COMPLETE
+1. **Conditional Logic** ✅ - Enables complex scenarios (v0.7.0)
 
-### Phase 4 (Foundation)
+### Phase 4 (Foundation) 🚧 NEXT PRIORITY
 1. **Step Processor Pipeline** - Enables all other features
-2. **Extension Points** - Critical for long-term extensibility
-3. **Plugin Architecture** - Community contributions
+2. **Plugin System** - Critical for long-term extensibility
+3. **Enhanced Step Models** - Support for recursive navigation
 
-### Phases 3 & 5 (Nice to Have)
+### Phase 3 (Enhanced Navigation)
+1. **Multi-Level Link Following** - Kleene star patterns
+2. **Cycle Detection** - Prevent infinite loops  
+3. **Depth Control** - Limit crawling depth
+
+### Phases 5+ (Future)
 - Advanced navigation strategies
+- Performance optimizations
+- Community plugin ecosystem
 - JavaScript execution
 - Multi-tab coordination
 - Visual selectors

@@ -8,6 +8,7 @@ from typing import Any, List
 from abc import ABC, abstractmethod
 
 from .models import ConditionSpec, ConditionalStep, Step, ExtractStep
+from .processors import StepProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -132,12 +133,20 @@ class ConditionEvaluator:
             return False
 
 
-class ConditionalProcessor:
+class ConditionalProcessor(StepProcessor):
     """Processes conditional steps in extraction queries"""
     
     def __init__(self):
+        super().__init__()
         self.evaluator = ConditionEvaluator()
-        self.logger = logger
+    
+    def can_handle(self, step: Any) -> bool:
+        """Check if this processor can handle the given step type."""
+        return isinstance(step, ConditionalStep)
+    
+    def execute(self, context: Any, page: Any, step: ConditionalStep) -> List[Any]:
+        """Execute the conditional step using the standard processor interface."""
+        return self.process_conditional(page, step)
     
     def process_conditional(self, page: Any, conditional: ConditionalStep) -> List[Any]:
         """Process a conditional step and return results from executed branch"""

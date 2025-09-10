@@ -84,8 +84,8 @@ def test_execute_step(MockBrowserClient, MockExtractor):
 # 4. Test `execute_query` function
 @patch('engine.web_engine.engine.BrowserClient')
 @patch('engine.web_engine.engine.check_for_captcha')
-@patch('engine.web_engine.engine.execute_step')
-def test_execute_query(mock_execute_step, mock_check_for_captcha, MockBrowserClient):
+@patch('engine.web_engine.engine.StepProcessorRegistry')
+def test_execute_query(MockStepProcessorRegistry, mock_check_for_captcha, MockBrowserClient):
     # Setup mock for BrowserClient and page
     mock_browser_client = MagicMock()
     mock_browser = MagicMock()
@@ -93,12 +93,19 @@ def test_execute_query(mock_execute_step, mock_check_for_captcha, MockBrowserCli
 
     mock_browser_client.__enter__.return_value = mock_browser
     mock_browser_client.__exit__.return_value = None
+    mock_browser.browser = mock_browser
+    mock_browser.page = mock_page
     mock_browser.new_context.return_value = mock_browser
     mock_browser.new_page.return_value = mock_page
     MockBrowserClient.return_value = mock_browser_client
 
     # Setup mock for checking CAPTCHA
     mock_check_for_captcha.return_value = False
+
+    # Setup mock step processor registry
+    mock_registry_instance = MagicMock()
+    mock_registry_instance.process_step.return_value = [{"field1": "Test Value"}]
+    MockStepProcessorRegistry.return_value = mock_registry_instance
 
     # Setup mock query data
     query = ExtractionQuery(**{
@@ -108,22 +115,19 @@ def test_execute_query(mock_execute_step, mock_check_for_captcha, MockBrowserCli
      }
     )
 
-    # Mock result for the steps
-    mock_execute_step.return_value = [{"field1": "Test Value"}]
-
     # Execute the function
     results = execute_query(query, mock_browser_client)
 
     # Assert results
     assert results == [{"field1": "Test Value"}]
-    mock_execute_step.assert_called_once()
+    mock_registry_instance.process_step.assert_called()
 
 
 # 5. Test pagination in `execute_query`
 @patch('engine.web_engine.engine.BrowserClient')
 @patch('engine.web_engine.engine.check_for_captcha')
-@patch('engine.web_engine.engine.execute_step')
-def test_execute_query_pagination(mock_execute_step, mock_check_for_captcha, MockBrowserClient):
+@patch('engine.web_engine.engine.StepProcessorRegistry')
+def test_execute_query_pagination(MockStepProcessorRegistry, mock_check_for_captcha, MockBrowserClient):
     # Setup mock for BrowserClient and browser
     mock_browser_client = MagicMock()
     mock_browser = MagicMock()
@@ -133,6 +137,8 @@ def test_execute_query_pagination(mock_execute_step, mock_check_for_captcha, Moc
     # Mock context and page
     mock_context = MagicMock()
     mock_page = MagicMock()
+    mock_browser.browser = mock_browser
+    mock_browser.page = mock_page
     mock_browser.new_context.return_value = mock_context
     mock_context.new_page.return_value = mock_page
 
@@ -141,15 +147,17 @@ def test_execute_query_pagination(mock_execute_step, mock_check_for_captcha, Moc
     # Setup mock for checking CAPTCHA
     mock_check_for_captcha.return_value = False
 
+    # Setup mock step processor registry
+    mock_registry_instance = MagicMock()
+    mock_registry_instance.process_step.return_value = [{"field1": "Test Value"}]
+    MockStepProcessorRegistry.return_value = mock_registry_instance
+
     # Setup query with pagination
     query = ExtractionQuery(**{
         "@url": "https://example.com",
         "@steps": [ExtractStep(**{"@xpath": "//div", "@name": "FieldName", "@fields": {"field1": ".//span"}})],
         "@pagination": PaginationSpec(**{"@xpath": "//a[@class='next']", "@limit": 2})
     })
-
-    # Mock result for the steps
-    mock_execute_step.return_value = [{"field1": "Test Value"}]
 
     # Simulate the first page with pagination
     mock_page.query_selector.return_value = MagicMock(get_attribute=lambda x: "https://example.com/page2")
@@ -160,7 +168,7 @@ def test_execute_query_pagination(mock_execute_step, mock_check_for_captcha, Moc
     print("Actual results:", results)
     print("Expected results:", [{"field1": "Test Value"}])
 
-    # Assert that pagination was handled
+    # Assert that pagination was handled  
     assert results == [{'field1': 'Test Value'}, {'field1': 'Test Value'}]
-    mock_execute_step.assert_called()
+    mock_registry_instance.process_step.assert_called()
 
