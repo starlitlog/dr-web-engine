@@ -1,0 +1,87 @@
+{
+    "benchmark_info": {
+        "total_runs": 10,
+        "timestamp": "2025-09-09T22:03:11.680142",
+        "command": "docker run --cpus=2 --memory=1g -d -v ./queries:/app --rm starlitlog/dr-web-engine -q simple.json5 -o simple.drweb.json --xvfb"
+    },
+    "execution_time": {
+        "statistics": {
+            "min": 2.671182155609131,
+            "max": 8.704952955245972,
+            "mean": 4.1391596555709835,
+            "median": 3.03653347492218,
+            "std_dev": 2.1598630017294016,
+            "p95": 8.704952955245972,
+            "p99": 8.704952955245972
+        },
+        "unit": "seconds"
+    },
+    "output_file_size": {
+        "statistics": {
+            "min": 2,
+            "max": 6276,
+            "mean": 1256.8,
+            "median": 2.0,
+            "std_dev": 2645.3506719861884,
+            "p95": 6276,
+            "p99": 6276
+        },
+        "unit": "bytes",
+        "consistent": false
+    },
+    "resource_usage": {
+        "peak_cpu_per_run": {
+            "statistics": {
+                "min": 12.57,
+                "max": 67.84,
+                "mean": 45.32333333333334,
+                "median": 55.56,
+                "std_dev": 29.022150735831648,
+                "p95": 67.84,
+                "p99": 67.84
+            },
+            "unit": "percent"
+        },
+        "average_cpu_per_run": {
+            "statistics": {
+                "min": 5.283333333333333,
+                "max": 67.84,
+                "mean": 34.17277777777778,
+                "median": 29.395,
+                "std_dev": 31.550824180700598,
+                "p95": 67.84,
+                "p99": 67.84
+            },
+            "unit": "percent"
+        },
+        "peak_memory_per_run": {
+            "statistics": {
+                "min": 106.9,
+                "max": 158.6,
+                "mean": 141.03333333333333,
+                "median": 157.6,
+                "std_dev": 29.564562119763128,
+                "p95": 158.6,
+                "p99": 158.6
+            },
+            "unit": "MB"
+        },
+        "average_memory_per_run": {
+            "statistics": {
+                "min": 91.73333333333333,
+                "max": 138.15,
+                "mean": 112.26111111111112,
+                "median": 106.9,
+                "std_dev": 23.668182658801044,
+                "p95": 138.15,
+                "p99": 138.15
+            },
+            "unit": "MB"
+        }
+    },
+    "performance_insights": {
+        "execution_time_variance": 52.181195736733564,
+        "consistent_output": false,
+        "average_throughput": 157.97580607886835
+    }
+}

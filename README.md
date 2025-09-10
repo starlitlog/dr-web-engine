@@ -26,6 +26,7 @@
 - **🎯 Query-Based Extraction**: Define extractions in JSON5/YAML instead of writing scraping code
 - **🤖 Browser Actions (NEW in v0.6+)**: Click, scroll, wait, fill forms - handle dynamic content
 - **🧠 Conditional Logic (NEW in v0.7+)**: Smart branching based on page conditions and content
+- **🕸️ Kleene Star Navigation (NEW in v0.8+)**: Recursive link following with cycle detection and depth control
 - **⚡ Playwright-Powered**: Reliable automation with modern browser engine
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
@@ -39,6 +40,7 @@
 - [Basic Usage](#-basic-usage)
 - [Action System](#-action-system-new)
 - [Conditional Logic](#-conditional-logic-new)
+- [Kleene Star Navigation](#-kleene-star-navigation-new)
 - [Query Keywords](#-query-keywords-reference)
 - [CLI Reference](#-cli-reference)
 - [Real-World Examples](#-real-world-examples)
@@ -349,6 +351,153 @@ Extract different data based on page conditions with smart branching logic:
 | **@min-count** | Minimum count check | `{"@min-count": 1, "@selector": ".result"}` |
 | **@max-count** | Maximum count check | `{"@max-count": 10, "@selector": ".item"}` |
 
+## 🕸️ Kleene Star Navigation (NEW)
+
+Navigate and extract data recursively through multiple levels of links with cycle detection and depth control:
+
+### Multi-Level Link Following
+Extract data by following links recursively with the enhanced `@follow` system:
+
+```json5
+{
+  "@url": "https://news-site.com",
+  "@steps": [
+    {
+      "@xpath": "//div[@class='category-section']",
+      "@fields": {
+        "category": ".//h2/text()"
+      },
+      "@follow": {
+        "@xpath": ".//a[@class='article-link']/@href",
+        "@max-depth": 2,
+        "@detect-cycles": true,
+        "@follow-external": false,
+        "@steps": [
+          {
+            "@xpath": "//article",
+            "@fields": {
+              "title": ".//h1/text()",
+              "content": ".//div[@class='article-body']/text()",
+              "author": ".//span[@class='author']/text()",
+              "date": ".//time/@datetime"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### Forum Thread Navigation
+Navigate through forum discussions with nested replies:
+
+```json5
+{
+  "@url": "https://forum.example.com/threads/123",
+  "@steps": [
+    {
+      "@xpath": "//div[@class='thread-post']",
+      "@fields": {
+        "post_content": ".//div[@class='post-body']/text()",
+        "author": ".//span[@class='author']/text()",
+        "timestamp": ".//time/@datetime"
+      },
+      "@follow": {
+        "@xpath": ".//a[contains(@class, 'reply-link')]/@href",
+        "@max-depth": 3,
+        "@detect-cycles": true,
+        "@steps": [
+          {
+            "@xpath": "//div[@class='reply']",
+            "@fields": {
+              "reply_content": ".//div[@class='reply-body']/text()",
+              "reply_author": ".//span[@class='reply-author']/text()",
+              "reply_time": ".//time/@datetime"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### E-commerce Category Crawling
+Navigate through product categories and subcategories:
+
+```json5
+{
+  "@url": "https://shop.example.com/categories",
+  "@steps": [
+    {
+      "@xpath": "//div[@class='main-category']",
+      "@fields": {
+        "main_category": ".//h2/text()"
+      },
+      "@follow": {
+        "@xpath": ".//a[@class='subcategory-link']/@href",
+        "@max-depth": 3,
+        "@detect-cycles": true,
+        "@follow-external": false,
+        "@steps": [
+          {
+            "@xpath": "//div[@class='product-card']",
+            "@fields": {
+              "product_name": ".//h3/text()",
+              "price": ".//span[@class='price']/text()",
+              "rating": ".//div[@class='rating']/@data-rating",
+              "image": ".//img/@src"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### Wikipedia Article Chain
+Follow related links in Wikipedia articles:
+
+```json5
+{
+  "@url": "https://en.wikipedia.org/wiki/Machine_Learning",
+  "@steps": [
+    {
+      "@xpath": "//div[@id='content']",
+      "@fields": {
+        "title": ".//h1/text()",
+        "summary": ".//div[@class='mw-parser-output']/p[1]/text()"
+      },
+      "@follow": {
+        "@xpath": ".//div[@class='mw-parser-output']//a[starts-with(@href, '/wiki/')]/@href",
+        "@max-depth": 2,
+        "@detect-cycles": true,
+        "@follow-external": false,
+        "@steps": [
+          {
+            "@xpath": "//div[@id='content']",
+            "@fields": {
+              "related_title": ".//h1/text()",
+              "related_summary": ".//div[@class='mw-parser-output']/p[1]/text()"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### Follow Configuration Options
+
+| Option | Description | Default | Example |
+|--------|-------------|---------|---------|
+| `@max-depth` | Maximum recursion depth | 3 | `"@max-depth": 5` |
+| `@detect-cycles` | Prevent infinite loops | true | `"@detect-cycles": false` |
+| `@follow-external` | Follow external domains | false | `"@follow-external": true` |
+
 ## 📖 Query Keywords Reference
 
 ### Core Keywords
@@ -366,7 +515,7 @@ Extract different data based on page conditions with smart branching logic:
 | `@actions` | Browser actions (v0.6+) | `"@actions": [...]` |
 | `@pagination` | Pagination config | `"@pagination": {"@xpath": "//a[@class='next']"}` |
 | `@limit` | Page limit | `"@limit": 5` |
-| `@follow` | Follow links | `"@follow": {"@xpath": ".//a/@href"}` |
+| `@follow` | Follow links (Kleene star support) | `"@follow": {"@xpath": ".//a/@href", "@steps": [...]}` |
 
 ### Action Keywords (v0.6+)
 | Keyword | Required | Description | Example |
@@ -392,6 +541,15 @@ Extract different data based on page conditions with smart branching logic:
 | `@count` | ❌ | Exact element count | `"@count": 3` |
 | `@min-count` | ❌ | Minimum count check | `"@min-count": 1` |
 | `@max-count` | ❌ | Maximum count check | `"@max-count": 10` |
+
+### Follow Keywords (v0.8+)
+| Keyword | Required | Description | Example |
+|---------|----------|-------------|---------|
+| `@xpath` | ✅ | XPath to extract links | `"@xpath": ".//a/@href"` |
+| `@steps` | ✅ | Steps to execute on followed pages | `"@steps": [...]` |
+| `@max-depth` | ❌ | Maximum recursion depth | `"@max-depth": 3` |
+| `@detect-cycles` | ❌ | Enable cycle detection | `"@detect-cycles": true` |
+| `@follow-external` | ❌ | Follow external domains | `"@follow-external": false` |
 
 ## 🖥️ CLI Reference
 
@@ -584,6 +742,7 @@ python -m pytest engine/tests/ --cov=engine/web_engine --cov-report=html
 ### Quick References
 - [Query Keywords](#-query-keywords-reference): Complete keyword reference
 - [Action System](#-action-system-new): Browser interaction examples
+- [Kleene Star Navigation](#-kleene-star-navigation-new): Recursive link following patterns
 - [CLI Usage](#-cli-reference): Command-line options and automation
 - [Real Examples](#-real-world-examples): Production-ready query patterns
 
