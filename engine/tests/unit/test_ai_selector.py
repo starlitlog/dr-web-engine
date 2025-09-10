@@ -55,7 +55,7 @@ class TestAISelectorProcessor:
     
     def test_can_handle_ai_step(self, processor):
         """Test that processor can handle AI selection steps."""
-        ai_step = AiSelectStep(find="test description")
+        ai_step = AiSelectStep(**{"@ai-select": "test description"})
         assert processor.can_handle(ai_step)
     
     def test_cannot_handle_non_ai_step(self, processor):
@@ -101,7 +101,7 @@ class TestAISelectorProcessor:
     def test_fallback_selector_generic(self, processor):
         """Test fallback selector for unknown terms."""
         xpath = processor._fallback_selector("some unknown element")
-        assert xpath == "//div | //span | //p"
+        assert xpath == "//*[text() and not(self::script) and not(self::style)]"
     
     @patch('requests.post')
     def test_get_ai_selector_success(self, mock_post, processor):
@@ -135,6 +135,7 @@ class TestAISelectorProcessor:
         
         # Should fallback to pattern-based selector
         assert xpath is not None
+        assert "price" in xpath.lower()  # Should use price fallback
         assert "price" in xpath.lower()
     
     def test_get_ai_selector_no_api_key(self, processor):
@@ -151,7 +152,7 @@ class TestAISelectorProcessor:
         """Test XPath execution and result extraction."""
         # Mock elements found by XPath
         mock_element1 = Mock()
-        mock_element1.text_content.return_value = "$19.99"
+        mock_element1.text_content.return_value = " $19.99 "  # With whitespace
         mock_element1.get_attribute.side_effect = lambda attr: {
             "href": None,
             "src": None,
@@ -160,10 +161,16 @@ class TestAISelectorProcessor:
         }.get(attr)
         
         mock_element2 = Mock()
-        mock_element2.text_content.return_value = "$29.99"
+        mock_element2.text_content.return_value = " $29.99 "
         mock_element2.get_attribute.side_effect = lambda attr: None
         
-        mock_page.query_selector_all.return_value = [mock_element1, mock_element2]
+        # Mock query_selector_all to return elements when called with xpath= prefix
+        def mock_query_selector_all(selector):
+            if selector == "xpath=//span[@class='price']":
+                return [mock_element1, mock_element2]
+            return []
+        
+        mock_page.query_selector_all = mock_query_selector_all
         
         results = processor._execute_xpath(mock_page, "//span[@class='price']", 10)
         
@@ -176,7 +183,7 @@ class TestAISelectorProcessor:
     def test_execute_xpath_with_url(self, processor, mock_page):
         """Test XPath execution with URL extraction."""
         mock_element = Mock()
-        mock_element.text_content.return_value = "Click here"
+        mock_element.text_content.return_value = " Click here "
         mock_element.get_attribute.side_effect = lambda attr: {
             "href": "https://example.com/link",
             "src": None,
@@ -184,7 +191,13 @@ class TestAISelectorProcessor:
             "title": None
         }.get(attr)
         
-        mock_page.query_selector_all.return_value = [mock_element]
+        # Mock query_selector_all with xpath= prefix
+        def mock_query_selector_all(selector):
+            if selector == "xpath=//a":
+                return [mock_element]
+            return []
+        
+        mock_page.query_selector_all = mock_query_selector_all
         
         results = processor._execute_xpath(mock_page, "//a", 10)
         
@@ -203,7 +216,7 @@ class TestAISelectorProcessor:
     @patch('requests.post')
     def test_execute_with_cache(self, mock_post, processor, mock_page):
         """Test execution with caching."""
-        step = AiSelectStep(find="test element")
+        step = AiSelectStep(**{"@ai-select": "test element"})
         
         # Mock successful API response
         mock_response = Mock()
@@ -221,7 +234,13 @@ class TestAISelectorProcessor:
         mock_element = Mock()
         mock_element.text_content.return_value = "Test content"
         mock_element.get_attribute.return_value = None
-        mock_page.query_selector_all.return_value = [mock_element]
+        # Mock query_selector_all with xpath= prefix
+        def mock_query_selector_all(selector):
+            if selector.startswith("xpath="):
+                return [mock_element]
+            return []
+        
+        mock_page.query_selector_all = mock_query_selector_all
         
         # First execution - should call API
         results1 = processor.execute(None, mock_page, step)
@@ -235,7 +254,7 @@ class TestAISelectorProcessor:
     
     def test_execute_max_results_limit(self, processor, mock_page):
         """Test max results limiting."""
-        step = AiSelectStep(find="test element", max_results=2)
+        step = AiSelectStep(**{"@ai-select": "test element", "@max-results": 2})
         
         # Mock multiple elements
         elements = []
@@ -245,7 +264,13 @@ class TestAISelectorProcessor:
             el.get_attribute.return_value = None
             elements.append(el)
         
-        mock_page.query_selector_all.return_value = elements
+        # Mock query_selector_all with xpath= prefix
+        def mock_query_selector_all(selector):
+            if selector.startswith("xpath="):
+                return elements
+            return []
+        
+        mock_page.query_selector_all = mock_query_selector_all
         processor.cache["test_key"] = "//div"
         
         # Mock cache key generation to use known key
@@ -259,7 +284,7 @@ class TestAISelectorProcessor:
     
     def test_execute_with_exception(self, processor, mock_page):
         """Test execution with exception handling."""
-        step = AiSelectStep(find="test element")
+        step = AiSelectStep(**{"@ai-select": "test element"})
         
         # Mock exception during execution
         mock_page.query_selector_all.side_effect = Exception("Test error")

@@ -190,8 +190,8 @@ XPath for "{description}":"""
                         self.logger.warning(f"Invalid XPath from AI: {xpath}")
                         return None
                 else:
-                    self.logger.error(f"AI API error: {response.status_code}")
-                    return None
+                    self.logger.error(f"AI API error: {response.status_code}, falling back to patterns")
+                    return self._fallback_selector(description)
                     
             else:
                 # Fallback to simple patterns

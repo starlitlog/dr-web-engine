@@ -12,7 +12,7 @@ setup(
     license="MIT",
     packages=find_packages(),
     install_requires=[
-        "dr-web-engine>=0.10.0",
+        # "dr-web-engine>=0.10.0",  # Commented out for local development
         "requests>=2.25.0",
         "pydantic>=2.0.0"
     ],
