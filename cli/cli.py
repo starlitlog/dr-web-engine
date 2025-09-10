@@ -4,6 +4,7 @@ import json
 from engine.web_engine.parsers import get_parser
 from engine.web_engine.engine import execute_query
 from engine.web_engine.base.playwright_browser import PlaywrightClient
+from .plugin_cli import plugin_app
 
 
 def setup_logging(log_level: str, log_file: str = None):
@@ -27,7 +28,10 @@ def setup_logging(log_level: str, log_file: str = None):
     )
 
 
-app = typer.Typer()
+app = typer.Typer(help="DR Web Engine - Data Retrieval Engine")
+
+# Add plugin management commands
+app.add_typer(plugin_app)
 
 
 @app.command()

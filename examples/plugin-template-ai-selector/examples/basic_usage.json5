@@ -1,0 +1,92 @@
+{
+  // Basic AI-Selector Plugin Usage Examples
+  
+  // Example 1: E-commerce Product Extraction
+  "@url": "https://books.toscrape.com",
+  "@steps": [
+    {
+      "@ai-select": "book titles or product names",
+      "@name": "titles",
+      "@max-results": 20
+    },
+    {
+      "@ai-select": "prices with currency symbols",
+      "@name": "prices"
+    },
+    {
+      "@ai-select": "availability or stock status",
+      "@name": "availability"
+    },
+    {
+      "@ai-select": "product rating or star ratings",
+      "@name": "ratings"
+    }
+  ]
+}
+
+// Example 2: News Article Extraction
+{
+  "@url": "https://news-site.com",
+  "@steps": [
+    {
+      "@ai-select": "main article headlines",
+      "@name": "headlines",
+      "@max-results": 10
+    },
+    {
+      "@ai-select": "article publication dates",
+      "@name": "dates"
+    },
+    {
+      "@ai-select": "author names or bylines",
+      "@name": "authors"
+    },
+    {
+      "@ai-select": "article summary or excerpt text",
+      "@name": "summaries"
+    }
+  ]
+}
+
+// Example 3: Social Media Content
+{
+  "@url": "https://social-site.com/feed",
+  "@steps": [
+    {
+      "@ai-select": "post content or message text",
+      "@name": "posts",
+      "@max-results": 50
+    },
+    {
+      "@ai-select": "usernames or profile names",
+      "@name": "users"
+    },
+    {
+      "@ai-select": "post timestamps or time ago",
+      "@name": "timestamps"
+    },
+    {
+      "@ai-select": "like counts or engagement metrics",
+      "@name": "engagement"
+    }
+  ]
+}
+
+// Example 4: Search Results
+{
+  "@url": "https://search-engine.com/search?q=web+scraping",
+  "@steps": [
+    {
+      "@ai-select": "search result titles",
+      "@name": "titles"
+    },
+    {
+      "@ai-select": "search result URLs or links",
+      "@name": "links"
+    },
+    {
+      "@ai-select": "search result descriptions or snippets",
+      "@name": "descriptions"
+    }
+  ]
+}
