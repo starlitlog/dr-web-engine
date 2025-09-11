@@ -1,0 +1,23 @@
+{
+  "@url": "https://news.ycombinator.com",
+  "@steps": [
+    {
+      // OpenAI Chat Completion format
+      "@format": "openai-chat",
+      "@output": "hn_stories_openai.jsonl",
+      "@system-prompt": "You are a news analyst. Analyze the following Hacker News stories and provide insights about trends and topics.",
+      "@user-template": "Story: {text}\nURL: {url}\nScore: {score}\n\nAnalyze this story for technical trends and relevance.",
+      "@compression": "compact",
+      "@max-tokens": 2000,
+      "@token-model": "gpt-4",
+      "@step": {
+        "@xpath": "//tr[@class='athing']",
+        "@fields": {
+          "text": ".//a[@class='storylink' or @class='titlelink']/text()",
+          "url": ".//a[@class='storylink' or @class='titlelink']/@href",
+          "score": "following-sibling::tr//span[@class='score']/text()"
+        }
+      }
+    }
+  ]
+}

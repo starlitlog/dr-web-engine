@@ -1,0 +1,23 @@
+{
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      // JSONL output for streaming to AI systems
+      "@format": "jsonl",
+      "@output": "quotes_for_ai.jsonl",
+      "@streaming": true,
+      "@batch-size": 50,
+      "@compression": "minimal",
+      "@include-metadata": true,
+      "@timestamps": true,
+      "@step": {
+        "@xpath": "//div[@class='quote']",
+        "@fields": {
+          "text": ".//span[@class='text']/text()",
+          "author": ".//small[@class='author']/text()",
+          "tags": ".//a[@class='tag']/text()"
+        }
+      }
+    }
+  ]
+}

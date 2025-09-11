@@ -1,0 +1,34 @@
+{
+  "@url": "https://stackoverflow.com/questions/tagged/python",
+  "@steps": [
+    {
+      // Ultra-compressed output for token-sensitive AI models
+      "@format": "token-optimized",
+      "@output": "so_questions_compressed.jsonl",
+      "@compression": "ultra",
+      "@max-tokens": 500,
+      "@token-model": "gpt-3.5-turbo",
+      "@field-mapping": {
+        "question_title": "q",
+        "question_body": "body", 
+        "vote_count": "votes",
+        "answer_count": "ans",
+        "view_count": "views"
+      },
+      "@exclude": ["metadata", "sidebar", "related"],
+      "@streaming": true,
+      "@batch-size": 100,
+      "@step": {
+        "@xpath": "//div[@class='question-summary']",
+        "@fields": {
+          "question_title": ".//h3/a/text()",
+          "question_body": ".//div[@class='excerpt']//text()",
+          "vote_count": ".//span[@class='vote-count-post']/text()",
+          "answer_count": ".//div[@class='answered-accepted']//text() | .//div[@class='answered']//text() | .//div[@class='unanswered']//text()",
+          "view_count": ".//div[@class='views']//text()",
+          "tags": ".//a[@class='post-tag']/text()"
+        }
+      }
+    }
+  ]
+}

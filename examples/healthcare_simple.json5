@@ -1,0 +1,13 @@
+{
+  "@url": "https://www.mayoclinic.org/diseases-conditions",
+  "@steps": [
+    {
+      // Simple healthcare data extraction
+      "@xpath": "//div[contains(@class, 'cmp-link')]//a",
+      "@fields": {
+        "condition": "./span/text()",
+        "link": "./@href"
+      }
+    }
+  ]
+}

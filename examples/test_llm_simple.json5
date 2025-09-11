@@ -1,0 +1,13 @@
+{
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      // Test LLM formatting with simple extract first, then format
+      "@xpath": "//div[@class='quote'][1]",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()"
+      }
+    }
+  ]
+}

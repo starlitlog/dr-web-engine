@@ -1,0 +1,26 @@
+{
+  "@url": "https://www.reddit.com/r/MachineLearning",
+  "@steps": [
+    {
+      // Anthropic Claude format with system prompts
+      "@format": "anthropic-messages",
+      "@output": "ml_posts_anthropic.jsonl", 
+      "@system-prompt": "You are an ML research assistant. Summarize and categorize machine learning posts, highlighting key techniques, datasets, and breakthroughs mentioned.",
+      "@user-template": "Post Title: {title}\nContent: {content}\nUpvotes: {upvotes}\nComments: {comments}\n\nSummarize this ML post and identify the main technique or contribution.",
+      "@compression": "compact",
+      "@max-tokens": 3000,
+      "@streaming": true,
+      "@batch-size": 25,
+      "@step": {
+        "@xpath": "//div[contains(@class, 'Post')]",
+        "@fields": {
+          "title": ".//h3/a/text()",
+          "content": ".//div[@data-testid='post-content']//text()",
+          "upvotes": ".//button[contains(@aria-label, 'upvote')]//text()",
+          "comments": ".//a[contains(@href, 'comments')]//text()",
+          "author": ".//a[contains(@href, '/user/')]//text()"
+        }
+      }
+    }
+  ]
+}

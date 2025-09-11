@@ -1,0 +1,23 @@
+{
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      // Smart retry wrapper around extraction
+      "@max-attempts": 3,
+      "@backoff": "exponential",  // exponential, linear, or fixed
+      "@base-delay": 1000,  // milliseconds
+      "@max-delay": 10000,
+      "@retry-on": ["timeout", "network", "5xx"],
+      "@jitter": true,
+      "@step": {
+        // The actual extraction step to retry
+        "@xpath": "//div[@class='quote']",
+        "@fields": {
+          "text": ".//span[@class='text']/text()",
+          "author": ".//small[@class='author']/text()",
+          "tags": ".//a[@class='tag']/text()"
+        }
+      }
+    }
+  ]
+}

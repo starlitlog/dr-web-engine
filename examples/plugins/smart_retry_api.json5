@@ -1,0 +1,40 @@
+{
+  "@url": "https://jsonplaceholder.typicode.com",
+  "@steps": [
+    {
+      // Retry API extraction with health-based strategy
+      "@max-attempts": 5,
+      "@backoff": "exponential",
+      "@base-delay": 500,
+      "@max-delay": 30000,
+      "@retry-on": ["timeout", "network", "5xx", "server-error"],
+      "@jitter": true,
+      "@step": {
+        // API extraction that might fail
+        "@endpoint": "/posts",
+        "@method": "GET",
+        "@response-type": "json",
+        "@fields": ["id", "title", "body"],
+        "@name": "posts",
+        "@timeout": 5000,
+        "@follow-pagination": true,
+        "@max-pages": 3
+      }
+    },
+    {
+      // Another retry with different strategy
+      "@max-attempts": 2,
+      "@backoff": "linear",
+      "@base-delay": 2000,
+      "@retry-on": ["timeout"],
+      "@step": {
+        // Extract user data  
+        "@endpoint": "/users",
+        "@method": "GET",
+        "@response-type": "json",
+        "@fields": ["id", "name", "email", "company"],
+        "@name": "users"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      // This should trigger the OutputFormatStep
+      "@format": "openai-chat",
+      "@output": "quotes_openai.jsonl",
+      "@system-prompt": "You are a wisdom analyzer. Analyze these quotes for insights.",
+      "@user-template": "Quote: {text} by {author}. What wisdom can we extract from this?",
+      "@compression": "minimal",
+      "@include-metadata": true,
+      "@step": {
+        "@xpath": "//div[@class='quote'][1]",
+        "@fields": {
+          "text": ".//span[@class='text']/text()",
+          "author": ".//small[@class='author']/text()"
+        }
+      }
+    }
+  ]
+}

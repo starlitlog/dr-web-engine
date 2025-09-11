@@ -1,0 +1,16 @@
+{
+  "@url": "https://pubmed.ncbi.nlm.nih.gov/?term=diabetes+treatment",
+  "@steps": [
+    {
+      // Extract medical research for LLM training
+      "@xpath": "//article[@class='full-docsum' or @class='short-docsum']",
+      "@fields": {
+        "title": ".//a[@class='docsum-title']/text()",
+        "authors": ".//span[@class='docsum-authors full-authors']/text()",
+        "journal": ".//span[@class='docsum-journal-citation full-journal-citation']/text()",
+        "pmid": ".//span[@class='docsum-pmid']/text()",
+        "snippet": ".//div[@class='docsum-snippet']/text()"
+      }
+    }
+  ]
+}

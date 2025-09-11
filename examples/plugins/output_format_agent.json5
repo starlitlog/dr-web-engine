@@ -1,0 +1,30 @@
+{
+  "@url": "https://techcrunch.com",
+  "@steps": [
+    {
+      // Agent-structured output for agentic workflows
+      "@format": "agent-structured", 
+      "@output": "tech_articles_agent.jsonl",
+      "@agent-role": "content_analyzer",
+      "@task": "Analyze tech articles for startup funding trends and market insights",
+      "@context-window": 8000,
+      "@field-mapping": {
+        "headline": "title",
+        "summary": "description", 
+        "publication_date": "date"
+      },
+      "@exclude": ["metadata", "ads"],
+      "@compression": "minimal",
+      "@step": {
+        "@xpath": "//article",
+        "@fields": {
+          "headline": ".//h2/a/text()",
+          "summary": ".//p[@class='summary']/text()",
+          "author": ".//span[@class='author']/text()",
+          "publication_date": ".//time/@datetime",
+          "category": ".//span[@class='category']/text()"
+        }
+      }
+    }
+  ]
+}

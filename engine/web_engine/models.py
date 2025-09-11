@@ -134,8 +134,21 @@ class AiSelectStep(BaseModel):
     max_results: Optional[int] = Field(default=10, alias="@max-results")  # Maximum number of results
 
 
+class OutputFormatStep(BaseModel):
+    """Output format configuration step"""
+    format: str = Field(alias="@format", default="jsonl")
+    output_file: Optional[str] = Field(alias="@output", default=None)
+    streaming: bool = Field(alias="@streaming", default=False)
+    batch_size: int = Field(alias="@batch-size", default=100, ge=1, le=10000)
+    compression: str = Field(alias="@compression", default="none")
+    system_prompt: Optional[str] = Field(alias="@system-prompt", default=None)
+    user_template: Optional[str] = Field(alias="@user-template", default=None)
+    include_metadata: bool = Field(alias="@include-metadata", default=True)
+    target_step: Dict[str, Any] = Field(alias="@step")
+
+
 # Forward reference for recursive step definitions
-Step = Union[ExtractStep, ConditionalStep, JavaScriptStep, JsonLdStep, ApiStep, AiSelectStep]
+Step = Union[ExtractStep, ConditionalStep, JavaScriptStep, JsonLdStep, ApiStep, AiSelectStep, OutputFormatStep]
 
 
 class ExtractionQuery(BaseModel):
@@ -152,3 +165,31 @@ class ExtractionQuery(BaseModel):
 ExtractStep.model_rebuild()
 FollowStep.model_rebuild()
 ConditionalStep.model_rebuild()  # New conditional model
+
+
+def parse_step(step_dict: Dict[str, Any]) -> Step:
+    """Parse a step dictionary into the appropriate Step model."""
+    # Try to determine step type from the dictionary keys
+    if "@xpath" in step_dict and "@fields" in step_dict:
+        return ExtractStep(**step_dict)
+    elif "@if" in step_dict:
+        return ConditionalStep(**step_dict)
+    elif "@javascript" in step_dict:
+        return JavaScriptStep(**step_dict)
+    elif "@schema" in step_dict or "@all-schemas" in step_dict:
+        return JsonLdStep(**step_dict)
+    elif "@endpoint" in step_dict:
+        return ApiStep(**step_dict)
+    elif "@ai-select" in step_dict:
+        return AiSelectStep(**step_dict)
+    elif "@format" in step_dict:
+        return OutputFormatStep(**step_dict)
+    else:
+        # Try each step type and return the first one that works
+        step_types = [ExtractStep, ConditionalStep, JavaScriptStep, JsonLdStep, ApiStep, AiSelectStep, OutputFormatStep]
+        for step_type in step_types:
+            try:
+                return step_type(**step_dict)
+            except Exception:
+                continue
+        raise ValueError(f"Could not parse step dictionary: {step_dict}")

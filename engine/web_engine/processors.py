@@ -146,3 +146,15 @@ class StepProcessorRegistry:
                     "class": processor.__class__.__name__
                 }
         return None
+
+
+# Global default registry instance
+_default_registry = None
+
+
+def get_default_registry() -> StepProcessorRegistry:
+    """Get the default global registry instance."""
+    global _default_registry
+    if _default_registry is None:
+        _default_registry = StepProcessorRegistry()
+    return _default_registry

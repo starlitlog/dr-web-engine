@@ -460,10 +460,19 @@ drweb plugin update database-export
 drweb plugin remove old-plugin
 ```
 
-**Essential First Plugins**
+**Essential First Plugins (AI-Powered Extraction Workflow)**
+- ✅ `smart-retry` - Intelligent retry logic with exponential backoff (v1.0.0)
+- ✅ `proxy-rotation` - Enterprise proxy management with health monitoring (v1.0.0)
 - ✅ `jsonld-extractor` - Extract structured data from JSON-LD scripts (v1.0.0)
-- `api-extractor` - Integrate with REST APIs and AJAX endpoints  
-- `ai-selector` - AI-powered element detection and selection
+- ✅ `api-extractor` - Integrate with REST APIs and AJAX endpoints (v1.0.0)
+- ✅ `ai-selector` - AI-powered element detection and selection (v1.0.0)
+- 🔄 `output-format-plugin` - JSONL/LLM-optimized structured outputs (v1.0.0)
+- `intelligent-extraction` - LLM-powered page understanding and data extraction
+- `pipeline-orchestration` - Enhanced data flow between extraction stages
+- `auto-tagging` - AI-powered content classification and tagging
+- `ai-validation` - LLM-based data quality and completeness validation
+- `realtime-streaming` - Stream results between pipeline stages
+- `drweb-ql-generator` - Natural language to DRWEB-QL conversion
 
 ### 6.2 Community Registry (v1.1.0)
 GitHub-based plugin registry with community features:
@@ -566,13 +575,23 @@ Advanced plugin ecosystem with commercial support:
 
 ### Next Major Milestones
 
-**v1.0.0 - Plugin Foundation** 🚧 IN PROGRESS
+**v1.0.0 - Plugin Foundation** 🚧 IN PROGRESS  
 - ✅ Plugin interface standards (StepProcessor, OutputProcessor, ActionHandler)
 - ✅ JSON-LD Extractor plugin (structured data extraction)
-- ✅ API Extractor plugin (AJAX/REST integration)
-- 🔄 AI-Selector plugin (intelligent element detection)
+- ✅ API Extractor plugin (AJAX/REST integration)  
+- ✅ AI-Selector plugin (intelligent element detection)
+- ✅ Smart Retry plugin (intelligent retry with backoff)
+- ✅ Proxy Rotation plugin (enterprise proxy management)
+- 🔄 Output Format plugin (JSONL/LLM-optimized outputs) - **CURRENT PRIORITY**
 - CLI plugin management
 - Plugin development documentation
+
+**AI-Powered Extraction Workflow Journey:**
+```
+Natural Language → DRWEB-QL Generator → Intelligent Extraction → 
+JSONL Output → Pipeline Orchestration → AI Validation → Auto-Tagging → 
+Real-time Streaming
+```
 
 **v1.1.0 - Community Registry** (Q3 2025)  
 - GitHub-based plugin registry

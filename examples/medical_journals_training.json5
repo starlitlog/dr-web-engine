@@ -1,0 +1,63 @@
+{
+  "@url": "https://pubmed.ncbi.nlm.nih.gov/",
+  "@actions": [
+    {
+      "@type": "fill",
+      "@selector": "input[name='term']",
+      "@value": "machine learning healthcare OR artificial intelligence medicine OR deep learning medical diagnosis"
+    },
+    {
+      "@type": "click", 
+      "@selector": "button[type='submit']"
+    },
+    {
+      "@type": "wait",
+      "@until": "element",
+      "@selector": ".search-results"
+    }
+  ],
+  "@steps": [
+    {
+      // Extract medical research papers for LLM training
+      "@format": "openai-chat",
+      "@output": "medical_research_training.jsonl",
+      "@streaming": true,
+      "@batch-size": 50,
+      "@system-prompt": "You are a medical research AI. This data contains peer-reviewed medical research abstracts and findings that will help you understand medical literature and evidence-based medicine.",
+      "@user-template": "Research Paper: {title}\nAuthors: {authors}\nJournal: {journal}\nAbstract: {abstract}\nKeywords: {keywords}\nDOI: {doi}",
+      "@compression": "compact",
+      "@max-tokens": 4000,
+      "@step": {
+        "@xpath": "//article[@class='full-docsum'] | //div[@class='docsum-content']",
+        "@fields": {
+          "title": ".//h1[@class='docsum-title']/text() | .//a[@class='docsum-title']/text()",
+          "authors": ".//span[@class='docsum-authors']/text() | .//div[@class='authors']//text()",
+          "journal": ".//span[@class='docsum-journal-citation']/text() | .//cite/text()",
+          "abstract": ".//div[@class='abstract-content']//text() | .//p[@class='abstract']//text()",
+          "publication_date": ".//span[@class='docsum-journal-citation']//text() | .//span[@class='cit']//text()",
+          "pmid": ".//span[@class='docsum-pmid']/text() | .//@data-pmid",
+          "doi": ".//span[@class='doi']/text() | .//a[contains(@href, 'doi.org')]/@href",
+          "keywords": ".//div[@class='keywords']//text() | .//span[@class='kwd']/text()",
+          "mesh_terms": ".//div[@class='mesh-terms']//text() | .//span[@class='mesh']/text()"
+        },
+        "@follow": {
+          "@xpath": ".//a[contains(@href, '/pubmed/') and contains(@class, 'docsum-title')]",
+          "@max-depth": 1,
+          "@steps": [
+            {
+              // Extract full paper details if available
+              "@xpath": "//main | //div[@class='abstract-content']",
+              "@fields": {
+                "full_abstract": ".//div[@class='abstract']//text() | .//abstracttext//text()",
+                "study_type": ".//div[@class='study-type']//text() | .//span[contains(@class, 'study')]//text()",
+                "clinical_trial_info": ".//div[@class='clinical-trial']//text() | .//span[contains(@class, 'trial')]//text()",
+                "conflict_of_interest": ".//div[contains(@class, 'conflict')]//text() | .//section[.//h3[contains(text(), 'Conflict')]]//text()",
+                "funding_source": ".//div[contains(@class, 'funding')]//text() | .//section[.//h3[contains(text(), 'Funding')]]//text()"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

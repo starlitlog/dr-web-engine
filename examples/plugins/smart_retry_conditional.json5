@@ -1,0 +1,48 @@
+{
+  "@url": "https://news.ycombinator.com",
+  "@steps": [
+    {
+      // Retry only network errors with fixed delay
+      "@max-attempts": 3,
+      "@backoff": "fixed",
+      "@base-delay": 3000,
+      "@retry-on": ["network", "timeout"],  // Only retry network issues
+      "@jitter": false,  // No jitter for predictable behavior
+      "@step": {
+        "@xpath": "//tr[@class='athing']",
+        "@fields": {
+          "title": ".//a[@class='storylink' or @class='titlelink']/text()",
+          "url": ".//a[@class='storylink' or @class='titlelink']/@href",
+          "score": "following-sibling::tr//span[@class='score']/text()"
+        },
+        "@name": "stories"
+      }
+    },
+    {
+      // Different retry strategy for authentication errors
+      "@max-attempts": 2,
+      "@backoff": "exponential",
+      "@base-delay": 5000,
+      "@retry-on": ["auth", "403", "401"],  // Only retry auth errors
+      "@step": {
+        "@if": {
+          "@exists": "//a[contains(@href, 'login')]"
+        },
+        "@then": [
+          {
+            "@javascript": "document.querySelector('a[href*=login]').click()",
+            "@timeout": 2000
+          }
+        ],
+        "@else": [
+          {
+            "@xpath": "//a[@class='hnuser']",
+            "@fields": {
+              "username": "./text()"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

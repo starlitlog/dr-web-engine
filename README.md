@@ -30,13 +30,16 @@
 - **🚀 JavaScript Execution (NEW in v0.9+)**: Execute custom JavaScript for complex scenarios and data extraction
 - **📊 JSON-LD Extraction (NEW in v1.0+)**: Extract structured data from JSON-LD script tags
 - **🌐 API Extractor (NEW in v1.0+)**: Intercept and extract data from AJAX/REST API calls
-- **🔌 Plugin System (NEW in v0.10.0+)**: Extensible architecture with internal and community plugins
-- **🤖 AI-Powered Selection (NEW in v0.10.0+)**: Natural language element selection using AI
+- **🔌 Complete Plugin Ecosystem (v1.0.0)**: 6 built-in plugins + extensible architecture for community plugins
+- **🤖 AI-Powered Selection**: Natural language element selection using OpenAI-compatible APIs
+- **🔄 Smart Retry Logic**: Intelligent retry with exponential backoff and error classification
+- **🌐 Proxy Rotation**: Enterprise proxy management with health monitoring and anti-detection
+- **📊 LLM-Optimized Outputs**: JSONL, OpenAI Chat, and Anthropic formats for AI training
 - **⚡ Playwright-Powered**: Reliable automation with modern browser engine
 - **🌍 Universal**: Extract from any website - static or JavaScript-heavy SPAs
 - **📊 Structured Output**: Get clean JSON data ready for analysis
 - **🔧 CLI & Docker**: Run from command line or containerized environments
-- **🧪 Thoroughly Tested**: 103 tests covering all functionality
+- **🧪 Thoroughly Tested**: 200+ tests covering all functionality including plugins
 
 ## 📋 Table of Contents
 

@@ -1,0 +1,82 @@
+{
+  "@url": "https://www.mayoclinic.org/diseases-conditions",
+  "@steps": [
+    {
+      // Extract medical conditions and symptoms for LLM training
+      "@format": "jsonl",
+      "@output": "healthcare_training_data.jsonl",
+      "@streaming": true,
+      "@batch-size": 25,
+      "@compression": "minimal",
+      "@field-mapping": {
+        "condition_name": "condition",
+        "medical_description": "description",
+        "symptom_list": "symptoms",
+        "treatment_options": "treatments",
+        "risk_factors": "risks"
+      },
+      "@system-prompt": "You are a medical AI assistant. This data will train you to understand medical conditions, symptoms, and treatments.",
+      "@user-template": "Medical Condition: {condition}\nSymptoms: {symptoms}\nTreatments: {treatments}\nRisk Factors: {risks}\n\nDescription: {description}",
+      "@include-metadata": true,
+      "@source-url": true,
+      "@step": {
+        "@xpath": "//div[contains(@class, 'content')]//article | //div[@class='condition-card']",
+        "@fields": {
+          "condition_name": ".//h1/text() | .//h2/text() | .//a[@class='condition-title']/text()",
+          "medical_description": ".//div[@class='description']//text() | .//p[contains(@class, 'overview')]//text()",
+          "symptom_list": ".//div[contains(@class, 'symptoms')]//li/text() | .//ul[preceding-sibling::h3[contains(text(), 'Symptoms')]]//li/text()",
+          "treatment_options": ".//div[contains(@class, 'treatment')]//li/text() | .//ul[preceding-sibling::h3[contains(text(), 'Treatment')]]//li/text()",
+          "risk_factors": ".//div[contains(@class, 'risk')]//li/text() | .//ul[preceding-sibling::h3[contains(text(), 'Risk')]]//li/text()",
+          "medical_specialty": ".//span[@class='specialty']/text() | .//div[@class='department']/text()",
+          "severity_level": ".//span[@class='severity']/text() | .//div[contains(@class, 'urgency')]/text()"
+        },
+        "@follow": {
+          "@xpath": ".//a[contains(@href, '/diseases-conditions/')]",
+          "@max-depth": 2,
+          "@steps": [
+            {
+              // Extract detailed condition information
+              "@xpath": "//main//article | //div[@class='main-content']",
+              "@fields": {
+                "detailed_overview": ".//div[@class='overview']//text()",
+                "causes": ".//div[contains(@class, 'causes')]//text() | .//section[.//h2[contains(text(), 'Causes')]]//text()",
+                "complications": ".//div[contains(@class, 'complications')]//text() | .//section[.//h2[contains(text(), 'Complications')]]//text()",
+                "prevention": ".//div[contains(@class, 'prevention')]//text() | .//section[.//h2[contains(text(), 'Prevention')]]//text()",
+                "diagnosis_methods": ".//div[contains(@class, 'diagnosis')]//text() | .//section[.//h2[contains(text(), 'Diagnosis')]]//text()",
+                "prognosis": ".//div[contains(@class, 'prognosis')]//text() | .//section[.//h2[contains(text(), 'Prognosis')]]//text()"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      // Extract drug and medication information
+      "@format": "jsonl", 
+      "@output": "medication_training_data.jsonl",
+      "@streaming": true,
+      "@compression": "minimal",
+      "@field-mapping": {
+        "drug_name": "medication",
+        "generic_name": "generic",
+        "drug_class": "class",
+        "indications": "uses",
+        "side_effects": "adverse_effects",
+        "dosage_info": "dosage"
+      },
+      "@step": {
+        "@xpath": "//div[contains(@class, 'drug-info') or contains(@class, 'medication')]",
+        "@fields": {
+          "drug_name": ".//h1/text() | .//h2[@class='drug-name']/text()",
+          "generic_name": ".//span[@class='generic']/text() | .//div[@class='generic-name']/text()",
+          "drug_class": ".//span[@class='drug-class']/text() | .//div[@class='classification']/text()",
+          "indications": ".//div[@class='indications']//text() | .//section[.//h3[contains(text(), 'Uses')]]//text()",
+          "side_effects": ".//div[@class='side-effects']//li/text() | .//ul[preceding-sibling::h3[contains(text(), 'Side effects')]]//li/text()",
+          "dosage_info": ".//div[@class='dosage']//text() | .//section[.//h3[contains(text(), 'Dosage')]]//text()",
+          "contraindications": ".//div[@class='contraindications']//text() | .//section[.//h3[contains(text(), 'Contraindications')]]//text()",
+          "interactions": ".//div[@class='interactions']//text() | .//section[.//h3[contains(text(), 'Interactions')]]//text()"
+        }
+      }
+    }
+  ]
+}
