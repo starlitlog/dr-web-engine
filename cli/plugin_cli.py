@@ -63,7 +63,9 @@ def list_plugins(
         table = Table(title="DR Web Engine Plugins")
         table.add_column("Name", style="cyan", no_wrap=True)
         table.add_column("Version", style="magenta")
+        table.add_column("Type", style="yellow")
         table.add_column("Status", style="green")
+        table.add_column("Enabled", style="blue")
         table.add_column("Processors", justify="right", style="blue")
         table.add_column("Description", style="white")
         
@@ -74,12 +76,27 @@ def list_plugins(
                 "disabled": "red"
             }.get(info["status"], "white")
             
+            # Determine enabled status
+            enabled = info.get("enabled", True)  # Default to True for backward compatibility
+            enabled_text = "✓" if enabled else "✗"
+            enabled_color = "green" if enabled else "red"
+            
+            # Plugin type styling
+            plugin_type = info.get("type", "community")
+            type_color = {
+                "internal": "blue",
+                "marketplace": "green",
+                "community": "yellow"
+            }.get(plugin_type, "white")
+            
             table.add_row(
                 name,
                 info["version"],
+                f"[{type_color}]{plugin_type}[/{type_color}]",
                 f"[{status_color}]{info['status']}[/{status_color}]",
+                f"[{enabled_color}]{enabled_text}[/{enabled_color}]",
                 str(info["processors"]),
-                info["description"][:60] + "..." if len(info["description"]) > 60 else info["description"]
+                info["description"][:50] + "..." if len(info["description"]) > 50 else info["description"]
             )
         
         console.print(table)
@@ -131,10 +148,17 @@ def plugin_info(
         
         content.append(f"[cyan]Min DR Web Version:[/cyan] {info.get('min_drweb_version', 'unknown')}")
         
-        if info.get('processors'):
-            content.append(f"[cyan]Processors:[/cyan] {len(info['processors'])}")
-            for i, proc in enumerate(info['processors'], 1):
-                content.append(f"  {i}. {proc['name']} (priority: {proc['priority']})")
+        processors = info.get('processors')
+        if processors:
+            if isinstance(processors, (list, tuple)):
+                content.append(f"[cyan]Processors:[/cyan] {len(processors)}")
+                for i, proc in enumerate(processors, 1):
+                    if isinstance(proc, dict):
+                        content.append(f"  {i}. {proc.get('name', 'Unknown')} (priority: {proc.get('priority', 'Unknown')})")
+                    else:
+                        content.append(f"  {i}. {proc}")
+            else:
+                content.append(f"[cyan]Processors:[/cyan] {processors}")
         
         panel = Panel("\n".join(content), title=f"Plugin: {plugin_name}", border_style="blue")
         console.print(panel)
@@ -255,6 +279,16 @@ def disable_plugin(
     try:
         registry = StepProcessorRegistry()
         manager = PluginManager(registry)
+        
+        # Check if plugin is internal before trying to disable
+        manager.discover_and_load_plugins(auto_load=False)  # Ensure plugins are discovered
+        plugins = manager.list_plugins()
+        plugin_info = plugins.get(plugin_name)
+        
+        if plugin_info and plugin_info.get("type") == "internal":
+            console.print(f"[red]Cannot disable internal plugin: {plugin_name}[/red]")
+            console.print("[yellow]Internal plugins are required for DR Web Engine core functionality[/yellow]")
+            sys.exit(1)
         
         if manager.disable_plugin(plugin_name):
             console.print(f"[yellow]Disabled plugin: {plugin_name}[/yellow]")

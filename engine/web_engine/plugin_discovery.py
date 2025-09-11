@@ -31,6 +31,7 @@ class PluginDiscovery:
         """
         self.plugin_dirs = plugin_dirs or []
         self.discovered_plugins: Dict[str, DrWebPlugin] = {}
+        self.plugin_sources: Dict[str, Dict[str, Any]] = {}  # Track plugin sources
     
     def discover_all_plugins(self) -> List[DrWebPlugin]:
         """Discover plugins from all sources.

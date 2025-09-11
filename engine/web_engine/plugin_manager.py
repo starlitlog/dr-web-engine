@@ -226,6 +226,12 @@ class PluginManager:
         Returns:
             bool: True if disabled successfully
         """
+        # Check if plugin is internal - internal plugins cannot be disabled
+        plugin_type = self._get_plugin_type(plugin_name)
+        if plugin_type == 'internal':
+            logger.warning(f"Cannot disable internal plugin: {plugin_name}")
+            return False
+        
         # Add to disabled set
         self.disabled_plugins.add(plugin_name)
         
@@ -236,6 +242,43 @@ class PluginManager:
         logger.info(f"Plugin {plugin_name} disabled")
         return True
     
+    def _get_plugin_type(self, plugin_name: str) -> str:
+        """Determine plugin type based on its source.
+        
+        Args:
+            plugin_name: Name of the plugin
+            
+        Returns:
+            str: Plugin type (internal/community/marketplace)
+        """
+        # Simple heuristic: check if we have internal plugins in the known path
+        import os
+        import engine
+        
+        # Get the DR Web Engine installation path
+        engine_path = os.path.dirname(os.path.dirname(engine.__file__))
+        internal_plugins_path = os.path.join(engine_path, "internal-plugins")
+        
+        # Check if plugin exists in internal-plugins directory
+        if os.path.exists(internal_plugins_path):
+            # Try both hyphen and underscore versions
+            plugin_internal_path1 = os.path.join(internal_plugins_path, plugin_name.replace('-', '_'))
+            plugin_internal_path2 = os.path.join(internal_plugins_path, plugin_name.replace('_', '-'))
+            if os.path.exists(plugin_internal_path1) or os.path.exists(plugin_internal_path2):
+                return 'internal'
+        
+        # Check if it's installed via pip (marketplace/community)
+        try:
+            import pkg_resources
+            for entry_point in pkg_resources.iter_entry_points('drweb.plugins'):
+                if entry_point.name == plugin_name:
+                    return 'marketplace'
+        except:
+            pass
+        
+        # Default to community for local plugins
+        return 'community'
+
     def list_plugins(self) -> Dict[str, Dict[str, Any]]:
         """List all plugins with their status.
         
@@ -247,6 +290,7 @@ class PluginManager:
         # Include loaded plugins
         for name, plugin in self.loaded_plugins.items():
             metadata = plugin.metadata
+            plugin_type = self._get_plugin_type(name)
             result[name] = {
                 "name": metadata.name,
                 "version": metadata.version,
@@ -255,6 +299,7 @@ class PluginManager:
                 "homepage": metadata.homepage,
                 "status": "loaded",
                 "enabled": True,
+                "type": plugin_type,
                 "processors": len(plugin.get_processors()),
                 "supported_step_types": metadata.supported_step_types
             }
@@ -263,7 +308,9 @@ class PluginManager:
         for name, plugin in self.discovery.discovered_plugins.items():
             if name not in result:
                 metadata = plugin.metadata
-                status = "disabled" if name in self.disabled_plugins else "available"
+                plugin_type = self._get_plugin_type(name)
+                is_disabled = name in self.disabled_plugins
+                status = "disabled" if is_disabled else "available"
                 result[name] = {
                     "name": metadata.name,
                     "version": metadata.version,
@@ -271,7 +318,8 @@ class PluginManager:
                     "author": metadata.author,
                     "homepage": metadata.homepage,
                     "status": status,
-                    "enabled": name not in self.disabled_plugins,
+                    "enabled": not is_disabled,
+                    "type": plugin_type,
                     "processors": len(plugin.get_processors()),
                     "supported_step_types": metadata.supported_step_types
                 }
