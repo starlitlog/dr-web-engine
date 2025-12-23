@@ -58,9 +58,21 @@ def main(
     xvfb: bool = typer.Option(False, "--xvfb", help="Launch browser in headless mode using Xvfb")
 ):
     """DR Web Engine - Data Retrieval Engine"""
-    # If no subcommand was invoked and we have query/output, run the extraction
-    if not ctx.invoked_subcommand and query and output:
-        run_extraction(query, output, query_format, log_level, log_file, xvfb)
+    # If no subcommand was invoked, handle backward compatibility
+    if not ctx.invoked_subcommand:
+        if query and output:
+            # Both query and output provided - run extraction
+            run_extraction(query, output, query_format, log_level, log_file, xvfb)
+        elif query and not output:
+            # Query provided but no output - show helpful error
+            typer.secho("❌ Error: Output file is required when using -q/--query", fg=typer.colors.RED, err=True)
+            typer.secho("💡 Usage: drweb -q query.json5 -o output.json", fg=typer.colors.YELLOW)
+            raise typer.Exit(1)
+        elif output and not query:
+            # Output provided but no query - show helpful error  
+            typer.secho("❌ Error: Query file is required when using -o/--output", fg=typer.colors.RED, err=True)
+            typer.secho("💡 Usage: drweb -q query.json5 -o output.json", fg=typer.colors.YELLOW)
+            raise typer.Exit(1)
 
 
 def run_extraction(query, output, query_format, log_level, log_file, xvfb):
