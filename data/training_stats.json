@@ -1,0 +1,126 @@
+{
+  "dataset_name": "WebQL CodeLlama Training Dataset",
+  "version": "1.0.0",
+  "created_date": "2025-09-15",
+  "total_examples": 321,
+  "categories": {
+    "basic_queries": {
+      "file": "webql_basic_queries.jsonl",
+      "examples": 9,
+      "description": "Basic WebQL query patterns and CLI commands"
+    },
+    "advanced_features": {
+      "file": "webql_advanced_features.jsonl", 
+      "examples": 9,
+      "description": "Advanced features: actions, conditionals, JavaScript, LLM formats"
+    },
+    "cli_commands": {
+      "file": "webql_cli_commands.jsonl",
+      "examples": 19,
+      "description": "Command-line interface usage and options"
+    },
+    "xpath_patterns": {
+      "file": "webql_xpath_patterns.jsonl",
+      "examples": 30,
+      "description": "XPath selector patterns and techniques"
+    },
+    "use_cases": {
+      "file": "webql_use_cases.jsonl",
+      "examples": 9,
+      "description": "Real-world use cases and industry applications"
+    },
+    "error_handling": {
+      "file": "webql_error_handling.jsonl",
+      "examples": 14,
+      "description": "Error handling, debugging, and troubleshooting"
+    },
+    "plugin_system": {
+      "file": "webql_plugin_system.jsonl",
+      "examples": 17,
+      "description": "Plugin usage, configuration, and management"
+    },
+    "optimization": {
+      "file": "webql_optimization.jsonl",
+      "examples": 14,
+      "description": "Performance optimization and best practices"
+    },
+    "syntax_disambiguation": {
+      "file": "webql_syntax_disambiguation.jsonl",
+      "examples": 10,
+      "description": "Clear distinction between WebQL and SQL/GraphQL syntax"
+    },
+    "core_concepts": {
+      "file": "webql_core_concepts.jsonl", 
+      "examples": 10,
+      "description": "Fundamental WebQL concepts and terminology"
+    },
+    "real_world_examples": {
+      "file": "webql_real_world_examples.jsonl",
+      "examples": 10,
+      "description": "Practical WebQL queries for common websites and use cases"
+    },
+    "examples_basic": {
+      "file": "webql_examples_basic.jsonl",
+      "examples": 5,
+      "description": "Real working examples from the examples/ folder - basic patterns"
+    },
+    "examples_advanced": {
+      "file": "webql_examples_advanced.jsonl", 
+      "examples": 5,
+      "description": "Real working examples from the examples/ folder - advanced features"
+    },
+    "documentation_examples": {
+      "file": "webql_documentation_examples.jsonl",
+      "examples": 10,
+      "description": "Training examples derived from README and documentation"
+    },
+    "negative_examples": {
+      "file": "webql_negative_examples.jsonl",
+      "examples": 10,
+      "description": "Examples showing what WebQL is NOT (SQL, GraphQL, etc.)"
+    },
+    "error_correction": {
+      "file": "webql_error_correction.jsonl",
+      "examples": 10,
+      "description": "Fix broken WebQL syntax and common errors"
+    },
+    "vs_others_comparison": {
+      "file": "webql_vs_others_comparison.jsonl",
+      "examples": 10,
+      "description": "Convert other query languages to WebQL format"
+    },
+    "validation_testing": {
+      "file": "webql_validation_testing.jsonl",
+      "examples": 9,
+      "description": "Testing, debugging, and validation techniques"
+    }
+  },
+  "format": "instruction_tuning",
+  "fields": ["instruction", "input", "output"],
+  "target_models": ["CodeLlama", "Alpaca", "Vicuna", "Llama-2"],
+  "data_quality": {
+    "syntax_validation": "All JSON5 queries validated",
+    "real_world_examples": "Based on actual use cases",
+    "best_practices": "Follows WebQL optimization guidelines",
+    "comprehensive_coverage": "Covers all major WebQL features"
+  },
+  "training_recommendations": {
+    "learning_rate": "2e-5 to 5e-5",
+    "batch_size": "4-8",
+    "epochs": "3-5",
+    "max_length": 2048,
+    "evaluation_metrics": [
+      "syntax_validity",
+      "execution_success", 
+      "semantic_accuracy",
+      "best_practice_adherence"
+    ]
+  },
+  "compatible_frameworks": [
+    "Hugging Face Transformers",
+    "FastChat",
+    "Alpaca-LoRA",
+    "QLoRA",
+    "DeepSpeed"
+  ]
+}

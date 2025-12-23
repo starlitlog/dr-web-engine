@@ -1,0 +1,628 @@
+[
+  {
+    "link": "/"
+  },
+  {
+    "condition": "Patient-Centered Care",
+    "link": "/patient-centered-care"
+  },
+  {
+    "condition": "About Mayo Clinic",
+    "link": "/about-mayo-clinic"
+  },
+  {
+    "condition": "Request Appointment",
+    "link": "/appointments"
+  },
+  {
+    "condition": "Find a Doctor",
+    "link": "https://www.mayoclinic.org/appointments/find-a-doctor"
+  },
+  {
+    "condition": "Locations",
+    "link": "/locations"
+  },
+  {
+    "condition": "Clinical Trials",
+    "link": "https://www.mayo.edu/research/clinical-trials"
+  },
+  {
+    "condition": "Connect to Support Groups",
+    "link": "https://connect.mayoclinic.org"
+  },
+  {
+    "condition": "Patient & Visitor Guide",
+    "link": "/patient-visitor-guide"
+  },
+  {
+    "condition": "Billing & Insurance",
+    "link": "/billing-insurance"
+  },
+  {
+    "condition": "Departments & Centers",
+    "link": "https://www.mayoclinic.org/departments-centers"
+  },
+  {
+    "condition": "International Services",
+    "link": "/departments-centers/international"
+  },
+  {
+    "condition": "Contact Us",
+    "link": "/about-mayo-clinic/contact"
+  },
+  {
+    "condition": "Patient & Visitor Guide",
+    "link": "/patient-visitor-guide"
+  },
+  {
+    "condition": "Diseases & Conditions",
+    "link": "/diseases-conditions"
+  },
+  {
+    "condition": "Symptoms",
+    "link": "https://www.mayoclinic.org/symptoms"
+  },
+  {
+    "condition": "Tests & Procedures",
+    "link": "https://www.mayoclinic.org/tests-procedures"
+  },
+  {
+    "condition": "Drugs & Supplements",
+    "link": "/drugs-supplements"
+  },
+  {
+    "condition": "Healthy Lifestyle",
+    "link": "https://www.mayoclinic.org/healthy-lifestyle"
+  },
+  {
+    "condition": "Mayo Clinic Health Letter & Books",
+    "link": "https://mcpress.mayoclinic.org/product/healthletter/?utm_source=MC-DotOrg-PC-Top&utm_medium=PromoCard&utm_campaign=HealthLetter&utm_content=HL_1"
+  },
+  {
+    "condition": "Mayo Clinic Health Letter & Books",
+    "link": "https://mcpress.mayoclinic.org/product/healthletter/?utm_source=MC-DotOrg-PC-Top&utm_medium=PromoCard&utm_campaign=HealthLetter&utm_content=HL_1"
+  },
+  {
+    "condition": "Medical Professional Resources",
+    "link": "https://www.mayoclinic.org/medical-professionals"
+  },
+  {
+    "condition": "Refer a Patient",
+    "link": "https://www.mayoclinic.org/medical-professionals/provider-relations/refer-patient"
+  },
+  {
+    "condition": "Continuing Medical Education",
+    "link": "https://ce.mayo.edu"
+  },
+  {
+    "condition": "AskMayoExpert",
+    "link": "https://askmayoexpert.mayoclinic.org"
+  },
+  {
+    "condition": "Mayo Clinic Laboratories",
+    "link": "https://www.mayocliniclabs.com"
+  },
+  {
+    "condition": "Video Center",
+    "link": "https://medprofvideos.mayoclinic.org"
+  },
+  {
+    "condition": "Journals & Publications",
+    "link": "https://www.mayoclinic.org/medical-professionals/publications"
+  },
+  {
+    "condition": "Mayo Clinic Alumni Association",
+    "link": "https://alumniassociation.mayo.edu/"
+  },
+  {
+    "condition": "Continuing Medical Education",
+    "link": "https://ce.mayo.edu"
+  },
+  {
+    "condition": "Research at Mayo Clinic",
+    "link": "https://www.mayo.edu/research"
+  },
+  {
+    "condition": "Research Faculty",
+    "link": "https://www.mayo.edu/research/faculty"
+  },
+  {
+    "condition": "Laboratories",
+    "link": "https://www.mayo.edu/research/labs"
+  },
+  {
+    "condition": "Core Facilities",
+    "link": "https://www.mayo.edu/research/core-facilities/overview"
+  },
+  {
+    "condition": "Centers & Programs",
+    "link": "https://www.mayo.edu/research/centers-programs"
+  },
+  {
+    "condition": "Departments & Divisions",
+    "link": "https://www.mayo.edu/research/departments-divisions"
+  },
+  {
+    "condition": "Clinical Trials",
+    "link": "https://www.mayo.edu/research/clinical-trials"
+  },
+  {
+    "condition": "Institutional Review Board",
+    "link": "https://www.mayo.edu/research/institutional-review-board/overview"
+  },
+  {
+    "condition": "Postdoctoral Fellowships",
+    "link": "https://jobs.mayoclinic.org/search-jobs/postdoctoral%20fellowships/33647/1"
+  },
+  {
+    "condition": "Training Grant Programs",
+    "link": "https://www.mayo.edu/research/training-grant-programs"
+  },
+  {
+    "condition": "Mayo Clinic College of Medicine and Science",
+    "link": "https://college.mayo.edu"
+  },
+  {
+    "condition": "Mayo Clinic Graduate School of Biomedical Sciences",
+    "link": "https://college.mayo.edu/academics/biomedical-research-training/"
+  },
+  {
+    "condition": "Mayo Clinic Alix School of Medicine",
+    "link": "https://college.mayo.edu/academics/mayo-clinic-alix-school-of-medicine/"
+  },
+  {
+    "condition": "Mayo Clinic School of Graduate Medical Education",
+    "link": "https://college.mayo.edu/academics/residencies-and-fellowships/"
+  },
+  {
+    "condition": "Mayo Clinic School of Health Sciences",
+    "link": "https://college.mayo.edu/academics/health-sciences-education/"
+  },
+  {
+    "condition": "Mayo Clinic School of Continuous Professional Development",
+    "link": "https://ce.mayo.edu"
+  },
+  {
+    "condition": "Mayo Clinic College of Medicine and Science",
+    "link": "https://college.mayo.edu"
+  },
+  {
+    "condition": "Give Now",
+    "link": "https://give.mayoclinic.org/give/609586/#!/donation/checkout"
+  },
+  {
+    "condition": "Giving to Mayo Clinic",
+    "link": "/giving-to-mayo-clinic"
+  },
+  {
+    "condition": "Frequently Asked Questions",
+    "link": "/giving-to-mayo-clinic/contact-us/frequently-asked-questions"
+  },
+  {
+    "condition": "Contact Us to Give",
+    "link": "/giving-to-mayo-clinic/contact-us"
+  },
+  {
+    "condition": "Make a Donation",
+    "link": "https://give.mayoclinic.org/give/609586/#!/donation/checkout"
+  },
+  {
+    "link": "/"
+  },
+  {
+    "condition": "Request appointment",
+    "link": "/appointments"
+  },
+  {
+    "condition": "Log in",
+    "link": "https://onlineservices.mayoclinic.org/content/staticpatient/showpage/patientonline"
+  },
+  {
+    "link": "/"
+  },
+  {
+    "link": "/"
+  },
+  {
+    "condition": "A",
+    "link": "/diseases-conditions/index?letter=A"
+  },
+  {
+    "condition": "B",
+    "link": "/diseases-conditions/index?letter=B"
+  },
+  {
+    "condition": "C",
+    "link": "/diseases-conditions/index?letter=C"
+  },
+  {
+    "condition": "D",
+    "link": "/diseases-conditions/index?letter=D"
+  },
+  {
+    "condition": "E",
+    "link": "/diseases-conditions/index?letter=E"
+  },
+  {
+    "condition": "F",
+    "link": "/diseases-conditions/index?letter=F"
+  },
+  {
+    "condition": "G",
+    "link": "/diseases-conditions/index?letter=G"
+  },
+  {
+    "condition": "H",
+    "link": "/diseases-conditions/index?letter=H"
+  },
+  {
+    "condition": "I",
+    "link": "/diseases-conditions/index?letter=I"
+  },
+  {
+    "condition": "J",
+    "link": "/diseases-conditions/index?letter=J"
+  },
+  {
+    "condition": "K",
+    "link": "/diseases-conditions/index?letter=K"
+  },
+  {
+    "condition": "L",
+    "link": "/diseases-conditions/index?letter=L"
+  },
+  {
+    "condition": "M",
+    "link": "/diseases-conditions/index?letter=M"
+  },
+  {
+    "condition": "N",
+    "link": "/diseases-conditions/index?letter=N"
+  },
+  {
+    "condition": "O",
+    "link": "/diseases-conditions/index?letter=O"
+  },
+  {
+    "condition": "P",
+    "link": "/diseases-conditions/index?letter=P"
+  },
+  {
+    "condition": "R",
+    "link": "/diseases-conditions/index?letter=R"
+  },
+  {
+    "condition": "S",
+    "link": "/diseases-conditions/index?letter=S"
+  },
+  {
+    "condition": "T",
+    "link": "/diseases-conditions/index?letter=T"
+  },
+  {
+    "condition": "U",
+    "link": "/diseases-conditions/index?letter=U"
+  },
+  {
+    "condition": "V",
+    "link": "/diseases-conditions/index?letter=V"
+  },
+  {
+    "condition": "W",
+    "link": "/diseases-conditions/index?letter=W"
+  },
+  {
+    "condition": "X",
+    "link": "/diseases-conditions/index?letter=X"
+  },
+  {
+    "condition": "Y",
+    "link": "/diseases-conditions/index?letter=Y"
+  },
+  {
+    "condition": "Z",
+    "link": "/diseases-conditions/index?letter=Z"
+  },
+  {
+    "condition": "#",
+    "link": "/diseases-conditions/index?letter=%23"
+  },
+  {
+    "condition": "Check symptoms",
+    "link": "https://www.mayoclinic.org/symptom-checker/select-symptom/itt-20009075"
+  },
+  {
+    "condition": "Search clinical trials",
+    "link": "https://www.mayo.edu/research/clinical-trials?_ga=2.120207757.463338827.1675104615-2058734019.1655132639"
+  },
+  {
+    "condition": "Find a support group",
+    "link": "https://connect.mayoclinic.org/"
+  },
+  {
+    "condition": "Learn about Mayo Clinic",
+    "link": "/patient-centered-care"
+  },
+  {
+    "condition": "5X My Gift!",
+    "link": "https://give.mayoclinic.org/give/703150?utm_source=devorgtilead&utm_medium=devweb&utm_campaign=dev5xchallenge/#!/donation/checkout?preset1=50&preset2=100&preset3=250&preset4=1000&currency=USD&amount=100&c_src=25R091WI5MWV90Z24B"
+  },
+  {
+    "condition": "5X My Gift!",
+    "link": "https://give.mayoclinic.org/give/703150?utm_source=devorgtilead&utm_medium=devweb&utm_campaign=dev5xchallenge/#!/donation/checkout?preset1=50&preset2=100&preset3=250&preset4=1000&currency=USD&amount=100&c_src=25R091WI5MWV90Z24B"
+  },
+  {
+    "condition": "Find a doctor",
+    "link": "https://www.mayoclinic.org/appointments/find-a-doctor"
+  },
+  {
+    "condition": "Explore careers",
+    "link": "https://jobs.mayoclinic.org"
+  },
+  {
+    "condition": "Sign up for free e-newsletters",
+    "link": "https://links.e.response.mayoclinic.org/preferencecenter"
+  },
+  {
+    "condition": "About Mayo Clinic",
+    "link": "/about-mayo-clinic"
+  },
+  {
+    "condition": "About this Site",
+    "link": "/about-this-site"
+  },
+  {
+    "condition": "Contact Us",
+    "link": "/about-mayo-clinic/contact"
+  },
+  {
+    "condition": "Locations",
+    "link": "/locations"
+  },
+  {
+    "condition": "Health Information Policy",
+    "link": "/about-this-site/health-information-policy"
+  },
+  {
+    "condition": "Medicare Accountable Care Organization (ACO)",
+    "link": "/about-mayo-clinic/aco"
+  },
+  {
+    "condition": "Media Requests",
+    "link": "https://newsnetwork.mayoclinic.org/newsroom/"
+  },
+  {
+    "condition": "News Network",
+    "link": "https://newsnetwork.mayoclinic.org/"
+  },
+  {
+    "condition": "Price Transparency",
+    "link": "/billing-insurance/price-estimates/chargemaster"
+  },
+  {
+    "condition": "Medical Professionals",
+    "link": "https://www.mayoclinic.org/medical-professionals"
+  },
+  {
+    "condition": "AskMayoExpert",
+    "link": "https://askmayoexpert.mayoclinic.org/"
+  },
+  {
+    "condition": "Clinical Trials",
+    "link": "https://www.mayo.edu/research/clinical-trials"
+  },
+  {
+    "condition": "Mayo Clinic Alumni Association",
+    "link": "https://alumniassociation.mayo.edu"
+  },
+  {
+    "condition": "Refer a Patient",
+    "link": "https://www.mayoclinic.org/medical-professionals/provider-relations/refer-patient"
+  },
+  {
+    "condition": "Businesses",
+    "link": "https://businessdevelopment.mayoclinic.org"
+  },
+  {
+    "condition": "Executive Health Program",
+    "link": "https://www.mayoclinic.org/departments-centers/mayo-clinic-executive-health-program/sections/overview/ovc-20253196"
+  },
+  {
+    "condition": "International Business Collaborations",
+    "link": "/about-mayo-clinic/international-business-collaborations"
+  },
+  {
+    "condition": "Facilities & Real Estate",
+    "link": "/about-mayo-clinic/facilities-and-real-estate"
+  },
+  {
+    "condition": "Supplier Information",
+    "link": "/about-mayo-clinic/supplier-information"
+  },
+  {
+    "condition": "Students",
+    "link": "https://college.mayo.edu"
+  },
+  {
+    "condition": "Admissions Requirements",
+    "link": "https://college.mayo.edu/admissions-and-tuition/"
+  },
+  {
+    "condition": "Degree Programs",
+    "link": "https://college.mayo.edu/academics/"
+  },
+  {
+    "condition": "Student & Faculty Portal",
+    "link": "https://edlinkplus.mayo.edu/"
+  },
+  {
+    "condition": "Researchers",
+    "link": "https://www.mayo.edu/research"
+  },
+  {
+    "condition": "Research Faculty",
+    "link": "https://www.mayo.edu/research/faculty"
+  },
+  {
+    "condition": "Laboratories",
+    "link": "https://www.mayo.edu/research/labs"
+  },
+  {
+    "condition": "International Patients",
+    "link": "/departments-centers/international"
+  },
+  {
+    "condition": "Appointments",
+    "link": "/departments-centers/international/appointments"
+  },
+  {
+    "condition": "Financial Services",
+    "link": "/departments-centers/international/financial-services"
+  },
+  {
+    "condition": "International Locations & Offices",
+    "link": "/departments-centers/international/locations"
+  },
+  {
+    "condition": "Charitable Care & Financial Assistance",
+    "link": "/billing-insurance/financial-assistance"
+  },
+  {
+    "condition": "Community Health Needs Assessment",
+    "link": "https://www.communityengagement.mayoclinic.org/community-health-needs-assessment"
+  },
+  {
+    "condition": "Financial Assistance Documents \u2013 Arizona",
+    "link": "/billing-insurance/financial-assistance/arizona-documents"
+  },
+  {
+    "condition": "Financial Assistance Documents \u2013 Florida",
+    "link": "/billing-insurance/financial-assistance/florida-documents"
+  },
+  {
+    "condition": "Financial Assistance Documents \u2013 Minnesota",
+    "link": "/billing-insurance/financial-assistance/minnesota-documents"
+  },
+  {
+    "condition": "X",
+    "link": "https://x.com/mayoclinic"
+  },
+  {
+    "condition": "YouTube",
+    "link": "https://www.youtube.com/user/mayoclinic"
+  },
+  {
+    "condition": "Facebook",
+    "link": "https://www.facebook.com/MayoClinic"
+  },
+  {
+    "condition": "LinkedIn",
+    "link": "https://www.linkedin.com/company/mayo-clinic"
+  },
+  {
+    "condition": "Instagram",
+    "link": "https://www.instagram.com/mayoclinic/"
+  },
+  {
+    "link": "https://play.google.com/store/apps/details?id=com.mayoclinic.patient&hl=en%27"
+  },
+  {
+    "link": "https://apps.apple.com/us/app/mayo-clinic/id523220194"
+  },
+  {
+    "condition": "Terms & Conditions",
+    "link": "/about-this-site/terms-conditions-use-policy"
+  },
+  {
+    "condition": "Privacy Policy",
+    "link": "/about-this-site/privacy-policy"
+  },
+  {
+    "condition": "Notice of Privacy Practices",
+    "link": "https://mcforms.mayo.edu/mc5200-mc5299/mc5256-01.pdf"
+  },
+  {
+    "condition": "Notice of Nondiscrimination",
+    "link": "https://mcforms.mayo.edu/mc2500-mc2599/mc2570-61.pdf"
+  },
+  {
+    "condition": "Digital Accessibility Statement",
+    "link": "/about-this-site/accessibility-statement"
+  },
+  {
+    "condition": "Advertising & Sponsorship Policy",
+    "link": "/about-this-site/advertising-sponsorship-policy"
+  },
+  {
+    "condition": "Site Map",
+    "link": "/site-help/site-map"
+  },
+  {
+    "condition": "Manage Cookies",
+    "link": "javascript:void(0);"
+  },
+  {
+    "condition": "Terms and Conditions",
+    "link": "/about-this-site/terms-conditions-use-policy"
+  },
+  {
+    "condition": "Privacy Policy",
+    "link": "/about-this-site/privacy-policy"
+  },
+  {
+    "condition": "Notice of Privacy Practices",
+    "link": "https://mcforms.mayo.edu/mc5200-mc5299/mc5256-01.pdf"
+  },
+  {
+    "condition": "Notice of Nondiscrimination",
+    "link": "https://mcforms.mayo.edu/mc2500-mc2599/mc2570-61.pdf"
+  },
+  {
+    "condition": "Digital Accessibility Statement",
+    "link": "/about-this-site/accessibility-statement"
+  },
+  {
+    "condition": "Advertising and Sponsorship Policy",
+    "link": "/about-this-site/advertising-sponsorship-policy"
+  },
+  {
+    "condition": "Site Map",
+    "link": "https://www.mayoclinic.org/site-help/site-map"
+  },
+  {
+    "condition": "Manage Cookies",
+    "link": "javascript:void(0);"
+  },
+  {
+    "condition": "English",
+    "link": "/diseases-conditions"
+  },
+  {
+    "condition": "Espa\u00f1ol",
+    "link": "/es/diseases-conditions"
+  },
+  {
+    "condition": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+    "link": "/ar/diseases-conditions"
+  },
+  {
+    "condition": "\u7b80\u4f53\u4e2d\u6587",
+    "link": "/zh-hans/diseases-conditions"
+  },
+  {
+    "condition": "English",
+    "link": "/diseases-conditions"
+  },
+  {
+    "condition": "Espa\u00f1ol",
+    "link": "/es/diseases-conditions"
+  },
+  {
+    "condition": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629",
+    "link": "/ar/diseases-conditions"
+  },
+  {
+    "condition": "\u7b80\u4f53\u4e2d\u6587",
+    "link": "/zh-hans/diseases-conditions"
+  }
+]

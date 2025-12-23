@@ -1,0 +1,57 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivation}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Design Principles}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Comparison with Existing Approaches}{4}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Getting Started}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Installation}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Your First Query}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Understanding the Structure}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Language Syntax}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Basic Structure}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Core Directives}{6}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Basic Extraction}{6}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Output Format Directives}{6}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}LLM Training Format}{6}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Navigation and Following Links}{6}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Nested Step Definitions}{7}{subsubsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.3}XPath Selectors}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Advanced Features}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Output Formatting for LLM Training}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Multi-Page Navigation}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Multi-modal Extraction}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}AI-Powered Extraction}{8}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Plugin System}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Built-in Plugins}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Using Plugins in Queries}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Creating Custom Plugins}{9}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Query Patterns}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}E-commerce Product Extraction}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}News Article Extraction}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Form Interaction and Search}{11}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Error Handling and Debugging}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Error Handling Strategies}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Debugging Queries}{12}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Common Issues and Solutions}{12}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Performance Optimization}{12}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Parallel Extraction}{12}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Caching}{12}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Selective Extraction}{13}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Integration}{13}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Python Integration}{13}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}REST API}{13}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Scheduling and Automation}{13}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Best Practices}{14}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Query Design}{14}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Reliability}{14}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Ethics and Compliance}{14}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Case Studies}{14}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Academic Research: Citation Network Analysis}{14}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Real Estate Market Analysis}{15}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Conclusion}{16}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Future Directions}{16}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Community and Resources}{16}{subsection.12.2}%
+\contentsline {section}{\numberline {A}Appendix A: Complete Language Reference}{16}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Query Structure}{16}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Step Types Reference}{16}{subsection.A.2}%
+\contentsline {section}{\numberline {B}Appendix B: Selector Reference}{16}{appendix.B}%
+\contentsline {section}{\numberline {C}Appendix C: Plugin API}{17}{appendix.C}%

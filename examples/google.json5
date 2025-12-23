@@ -1,0 +1,15 @@
+  {
+    "@url": "https://www.google.com/search?q=Hello+World",
+    "@steps": [
+      {
+        "@xpath": "//div[@id='search']//a[@href]",
+        "@fields": {
+          "title": ".//h3/text()",
+          "url": "./@href",
+          "snippet": "./ancestor::div[contains(@class,'g')]//span[contains(@class,'st') or contains(@class,'aCOpRe')]/text()",
+          "display_url": "./ancestor::div[contains(@class,'g')]//cite/text()"
+        }
+      }
+    ]
+  }
+

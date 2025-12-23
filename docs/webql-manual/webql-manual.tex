@@ -1,0 +1,919 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{float}
+
+% Code listing style for JSON5/WebQL
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{numb}{RGB}{106,109,32}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinelanguage{json5}{
+    basicstyle=\footnotesize\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!5},
+    literate=
+     *{:}{{{\color{delim}{:}}}}{1}
+      {,}{{{\color{delim}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+    string=[s]{"}{"},
+    stringstyle=\color{string},
+    comment=[l]{//},
+    commentstyle=\color{gray}\ttfamily
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Introduction to WebQL},
+    pdfauthor={Ylli Prifti},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{WebQL Manual}
+\lhead{Introduction to WebQL}
+\rfoot{Page \thepage}
+
+\title{\vspace{-2cm}\textbf{Introduction to WebQL}\\
+\large A Modern Web Data Extraction Language\\[0.5cm]
+\normalsize Version 1.0}
+\author{Ylli Prifti\\
+\texttt{ylli@prifti.us}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+WebQL (Web Query Language) is a declarative language for web data extraction that combines the simplicity of JSON5 syntax with powerful extraction capabilities. Building upon the foundations of OXPath and modern web technologies, WebQL provides a unified approach to extracting structured data from web pages, handling dynamic content, multi-modal data, and integrating AI-powered selectors. This manual provides a comprehensive introduction to WebQL, its syntax, semantics, and practical applications in modern web data extraction scenarios.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+%==============================================================================
+\section{Introduction}
+%==============================================================================
+
+The web has become the largest repository of information in human history, yet extracting structured data from web pages remains a challenging task. Traditional approaches using imperative programming with libraries like BeautifulSoup or Puppeteer require significant coding effort and domain expertise. WebQL addresses this challenge by providing a declarative language specifically designed for web data extraction.
+
+\subsection{Motivation}
+
+Modern web applications present unique challenges for data extraction:
+
+\begin{itemize}
+    \item \textbf{Dynamic Content}: Single-page applications (SPAs) load content dynamically
+    \item \textbf{Multi-modal Data}: Web pages contain text, images, videos, and embedded documents
+    \item \textbf{Complex Interactions}: Data often requires user interactions (clicks, scrolls, form submissions)
+    \item \textbf{Anti-bot Measures}: Websites implement CAPTCHAs and rate limiting
+    \item \textbf{Maintenance Burden}: Selectors break when websites update their structure
+\end{itemize}
+
+WebQL addresses these challenges through:
+\begin{itemize}
+    \item Declarative syntax that focuses on \textit{what} to extract, not \textit{how}
+    \item Built-in support for browser automation and interactions
+    \item AI-powered selectors that adapt to structural changes
+    \item Plugin architecture for extending functionality
+    \item Native handling of multi-modal content
+\end{itemize}
+
+\subsection{Design Principles}
+
+WebQL is designed around four core principles:
+
+\begin{enumerate}
+    \item \textbf{Simplicity}: Use familiar JSON5 syntax that's readable and writable by humans
+    \item \textbf{Composability}: Build complex extractions from simple, reusable components
+    \item \textbf{Extensibility}: Support custom processors through a plugin architecture
+    \item \textbf{Robustness}: Handle failures gracefully with built-in retry and error handling
+\end{enumerate}
+
+\subsection{Comparison with Existing Approaches}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Feature} & \textbf{WebQL} & \textbf{OXPath} & \textbf{Scrapy} & \textbf{Puppeteer} \\
+\hline
+Declarative & \checkmark & \checkmark & Partial & $\times$ \\
+Browser Automation & \checkmark & \checkmark & $\times$ & \checkmark \\
+AI Integration & \checkmark & $\times$ & $\times$ & $\times$ \\
+Multi-modal & \checkmark & $\times$ & Partial & Partial \\
+Plugin System & \checkmark & $\times$ & \checkmark & $\times$ \\
+JSON Output & Native & Extension & \checkmark & Manual \\
+\hline
+\end{tabular}
+\caption{Comparison of WebQL with existing web extraction tools}
+\end{table}
+
+%==============================================================================
+\section{Getting Started}
+%==============================================================================
+
+\subsection{Installation}
+
+WebQL is implemented through the DR Web Engine, which can be installed via pip:
+
+\begin{lstlisting}[language=bash]
+pip install dr-web-engine
+playwright install chromium
+\end{lstlisting}
+
+\subsection{Your First Query}
+
+Let's start with a simple example that extracts quotes from a website:
+
+\begin{lstlisting}[language=json5]
+{
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      "@xpath": "//div[@class='quote'][1]",
+      "@fields": {
+        "text": ".//span[@class='text']/text()",
+        "author": ".//small[@class='author']/text()"
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+To execute this query:
+
+\begin{lstlisting}[language=bash]
+drweb -q quotes.json5 -o results.json
+\end{lstlisting}
+
+\subsection{Understanding the Structure}
+
+Every WebQL query consists of:
+\begin{itemize}
+    \item \texttt{@url}: The target URL for extraction
+    \item \texttt{@steps}: An array of extraction steps, each containing:
+    \begin{itemize}
+        \item \texttt{@xpath}: XPath selector to find elements
+        \item \texttt{@fields}: Field mappings using relative XPath
+        \item Optional format directives like \texttt{@format}, \texttt{@output}
+    \end{itemize}
+\end{itemize}
+
+%==============================================================================
+\section{Language Syntax}
+%==============================================================================
+
+\subsection{Basic Structure}
+
+A WebQL query follows this structure:
+
+\begin{lstlisting}[language=json5]
+{
+  "@url": "https://example.com",  // Required: Target URL
+  "@steps": [                     // Required: Extraction steps
+    {
+      "@xpath": "//div[@class='item']",  // XPath selector
+      "@fields": {                       // Field mappings
+        "title": ".//h2/text()",
+        "description": ".//p/text()"
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Core Directives}
+
+WebQL uses directives prefixed with \texttt{@} to define extraction behavior:
+
+\subsubsection{Basic Extraction}
+
+The fundamental extraction step uses \texttt{@xpath} and \texttt{@fields}:
+
+\begin{lstlisting}[language=json5]
+{
+  "@xpath": "//div[@class='quote']",
+  "@fields": {
+    "text": ".//span[@class='text']/text()",
+    "author": ".//small[@class='author']/text()"
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Output Format Directives}
+
+Control output format and structure:
+
+\begin{lstlisting}[language=json5]
+{
+  "@format": "jsonl",                    // Output format
+  "@output": "results.jsonl",            // Output filename
+  "@compression": "minimal",             // Compression level
+  "@include-metadata": true,             // Include extraction metadata
+  "@streaming": true                     // Stream results
+}
+\end{lstlisting}
+
+\subsubsection{LLM Training Format}
+
+Format data for AI model training:
+
+\begin{lstlisting}[language=json5]
+{
+  "@format": "openai-chat",
+  "@system-prompt": "You are a helpful assistant.",
+  "@user-template": "Quote: {text} by {author}",
+  "@field-mapping": {
+    "quote_text": "text",
+    "quote_author": "author"
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Navigation and Following Links}
+
+Follow links to extract data from multiple pages:
+
+\begin{lstlisting}[language=json5]
+{
+  "@follow": {
+    "@xpath": ".//a[contains(@href, '/details/')]",
+    "@max-depth": 2,
+    "@steps": [
+      {
+        "@xpath": "//div[@class='detail-content']",
+        "@fields": {
+          "detailed_info": ".//p/text()",
+          "specs": ".//ul[@class='specs']//li/text()"
+        }
+      }
+    ]
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Nested Step Definitions}
+
+Use \texttt{@step} to define nested extraction logic:
+
+\begin{lstlisting}[language=json5]
+{
+  "@format": "jsonl",
+  "@step": {
+    "@xpath": "//article[@class='news-item']",
+    "@fields": {
+      "headline": ".//h2/text()",
+      "summary": ".//p[@class='summary']/text()",
+      "date": ".//time/@datetime"
+    }
+  }
+}
+\end{lstlisting}
+
+\subsection{XPath Selectors}
+
+WebQL primarily uses XPath for element selection:
+
+\begin{itemize}
+    \item \textbf{Element Selection}: \texttt{"//div[@class='content']"}
+    \item \textbf{Text Extraction}: \texttt{".//span/text()"}
+    \item \textbf{Attribute Values}: \texttt{".//a/@href"}
+    \item \textbf{Relative Paths}: Use \texttt{".//"}  for relative to current context
+    \item \textbf{Multiple Matches}: XPath naturally handles multiple matching elements
+\end{itemize}
+
+%==============================================================================
+\section{Advanced Features}
+%==============================================================================
+
+\subsection{Output Formatting for LLM Training}
+
+WebQL supports various output formats optimized for machine learning:
+
+\begin{lstlisting}[language=json5]
+{
+  "@url": "https://quotes.toscrape.com",
+  "@steps": [
+    {
+      "@format": "openai-chat",
+      "@output": "quotes_training.jsonl",
+      "@system-prompt": "You are a wisdom analyzer.",
+      "@user-template": "Quote: {text} by {author}",
+      "@compression": "minimal",
+      "@include-metadata": true,
+      "@step": {
+        "@xpath": "//div[@class='quote'][1]",
+        "@fields": {
+          "text": ".//span[@class='text']/text()",
+          "author": ".//small[@class='author']/text()"
+        }
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Multi-Page Navigation}
+
+Follow links to extract data from multiple pages:
+
+\begin{lstlisting}[language=json5]
+{
+  "@url": "https://example.com/articles",
+  "@steps": [
+    {
+      "@xpath": "//article[@class='summary']",
+      "@fields": {
+        "title": ".//h2/text()",
+        "summary": ".//p/text()"
+      },
+      "@follow": {
+        "@xpath": ".//a[@class='read-more']",
+        "@max-depth": 2,
+        "@steps": [
+          {
+            "@xpath": "//article[@class='full-content']",
+            "@fields": {
+              "full_content": ".//div[@class='content']//text()",
+              "tags": ".//span[@class='tag']/text()"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Multi-modal Extraction}
+
+Extract different types of content:
+
+\begin{lstlisting}[language=json5]
+{
+  "@extract": {
+    text_content: ".article-body",
+    images: [{
+      "@base": "img",
+      url: "@attr:src",
+      alt: "@attr:alt",
+      ocr_text: "@ocr"  // Extract text from image
+    }],
+    pdf_link: {
+      selector: "a[href$='.pdf']",
+      url: "@attr:href",
+      content: "@pdf_text"  // Extract text from PDF
+    }
+  }
+}
+\end{lstlisting}
+
+\subsection{AI-Powered Extraction}
+
+Use natural language to describe what to extract:
+
+\begin{lstlisting}[language=json5]
+{
+  "@ai_extract": {
+    prompt: "Extract product specifications as key-value pairs",
+    selector: ".specifications-section"
+  }
+}
+
+{
+  "@ai_select": {
+    description: "Find the 'Add to Cart' button",
+    action: "click"
+  }
+}
+\end{lstlisting}
+
+%==============================================================================
+\section{Plugin System}
+%==============================================================================
+
+\subsection{Built-in Plugins}
+
+WebQL includes several built-in plugins:
+
+\begin{itemize}
+    \item \textbf{smart-retry}: Intelligent retry with exponential backoff
+    \item \textbf{proxy-rotation}: Automatic proxy rotation
+    \item \textbf{ai-selector}: Natural language selectors
+    \item \textbf{api-extractor}: API response extraction
+    \item \textbf{jsonld-extractor}: JSON-LD structured data extraction
+\end{itemize}
+
+\subsection{Using Plugins in Queries}
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://example.com",
+  plugins: {
+    "smart-retry": {
+      max_attempts: 3,
+      backoff: "exponential"
+    }
+  },
+  steps: [
+    {
+      "@with-retry": {
+        "@extract": {
+          data: ".fragile-selector"
+        }
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Creating Custom Plugins}
+
+Extend WebQL with custom functionality:
+
+\begin{lstlisting}[language=python]
+from engine.web_engine.plugin_interface import DrWebPlugin
+
+class CustomPlugin(DrWebPlugin):
+    @property
+    def metadata(self):
+        return PluginMetadata(
+            name="custom-extractor",
+            version="1.0.0",
+            description="Custom extraction logic"
+        )
+    
+    def get_processors(self):
+        return [CustomProcessor()]
+\end{lstlisting}
+
+%==============================================================================
+\section{Query Patterns}
+%==============================================================================
+
+\subsection{E-commerce Product Extraction}
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://shop.example.com/products",
+  steps: [
+    {
+      "@loop": {
+        while: "exists(.product-card)",
+        steps: [
+          {
+            "@extract": {
+              products: [{
+                "@base": ".product-card",
+                name: ".product-title",
+                price: ".price-now",
+                original_price: ".price-was",
+                rating: ".rating-value",
+                reviews: ".review-count",
+                image: "img@attr:src",
+                link: "a@attr:href"
+              }]
+            }
+          },
+          {
+            "@click": ".load-more-products",
+            "@wait": 2000
+          }
+        ]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{News Article Extraction}
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://news.example.com",
+  steps: [
+    {
+      "@extract": {
+        articles: [{
+          "@base": "article",
+          headline: "h1",
+          author: ".author-name",
+          date: "time@attr:datetime",
+          content: ".article-body",
+          tags: [".tag"],
+          related: [{
+            "@base": ".related-article",
+            title: ".title",
+            url: "a@attr:href"
+          }]
+        }]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Form Interaction and Search}
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://example.com/search",
+  steps: [
+    {
+      "@type": {
+        selector: "input[name='query']",
+        text: "machine learning"
+      }
+    },
+    {
+      "@select": {
+        selector: "select[name='category']",
+        value: "research"
+      }
+    },
+    {
+      "@click": "button[type='submit']"
+    },
+    {
+      "@wait": "selector:.search-results"
+    },
+    {
+      "@extract": {
+        results: [{
+          "@base": ".result-item",
+          title: ".result-title",
+          url: "a@attr:href",
+          snippet: ".result-snippet"
+        }]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+%==============================================================================
+\section{Error Handling and Debugging}
+%==============================================================================
+
+\subsection{Error Handling Strategies}
+
+WebQL provides multiple error handling mechanisms:
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://example.com",
+  on_error: "continue",  // continue, stop, retry
+  steps: [
+    {
+      "@try": {
+        steps: [
+          {"@extract": {data: ".may-not-exist"}}
+        ],
+        catch: [
+          {"@log": "Extraction failed, using fallback"},
+          {"@extract": {data: ".fallback-selector"}}
+        ]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Debugging Queries}
+
+Enable debug mode for detailed execution logs:
+
+\begin{lstlisting}[language=bash]
+drweb -q query.json5 -o output.json --log-level debug
+\end{lstlisting}
+
+\subsection{Common Issues and Solutions}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{5cm}|p{8cm}|}
+\hline
+\textbf{Issue} & \textbf{Solution} \\
+\hline
+Selector returns empty & Use browser DevTools to verify selector; try AI selector as fallback \\
+\hline
+Dynamic content not loaded & Add \texttt{@wait} step or use \texttt{wait\_until: "networkidle"} \\
+\hline
+Rate limiting & Enable proxy-rotation plugin or add delays between requests \\
+\hline
+CAPTCHA blocking & Use residential proxies or implement CAPTCHA solving service \\
+\hline
+\end{tabular}
+\caption{Common issues and their solutions}
+\end{table}
+
+%==============================================================================
+\section{Performance Optimization}
+%==============================================================================
+
+\subsection{Parallel Extraction}
+
+Execute multiple extractions concurrently:
+
+\begin{lstlisting}[language=json5]
+{
+  urls: [
+    "https://example.com/page1",
+    "https://example.com/page2",
+    "https://example.com/page3"
+  ],
+  parallel: 3,  // Process 3 URLs concurrently
+  steps: [
+    {"@extract": {/* ... */}}
+  ]
+}
+\end{lstlisting}
+
+\subsection{Caching}
+
+Enable caching to avoid redundant requests:
+
+\begin{lstlisting}[language=json5]
+{
+  config: {
+    cache: {
+      enabled: true,
+      ttl: 3600,  // Cache for 1 hour
+      storage: "redis://localhost:6379"
+    }
+  }
+}
+\end{lstlisting}
+
+\subsection{Selective Extraction}
+
+Optimize by extracting only required fields:
+
+\begin{lstlisting}[language=json5]
+{
+  "@extract": {
+    // Only extract if condition is met
+    "@if": "exists(.premium-content)",
+    premium_data: ".premium-content"
+  }
+}
+\end{lstlisting}
+
+%==============================================================================
+\section{Integration}
+%==============================================================================
+
+\subsection{Python Integration}
+
+\begin{lstlisting}[language=python]
+from dr_web_engine import WebQL
+
+# Initialize engine
+engine = WebQL()
+
+# Define query
+query = {
+    "url": "https://example.com",
+    "steps": [
+        {"@extract": {"title": "h1"}}
+    ]
+}
+
+# Execute
+results = engine.execute(query)
+print(results)
+\end{lstlisting}
+
+\subsection{REST API}
+
+WebQL can be exposed as a REST API:
+
+\begin{lstlisting}[language=bash]
+# Start API server
+drweb-server --port 8080
+
+# Submit query
+curl -X POST http://localhost:8080/extract \
+  -H "Content-Type: application/json" \
+  -d @query.json5
+\end{lstlisting}
+
+\subsection{Scheduling and Automation}
+
+Integrate with schedulers for automated extraction:
+
+\begin{lstlisting}
+# cron-job.yaml
+schedule: "0 */6 * * *"  # Every 6 hours
+query: 
+  url: "https://example.com/prices"
+  steps:
+    - "@extract":
+        prices: [".price"]
+output:
+  type: "webhook"
+  url: "https://api.example.com/prices"
+\end{lstlisting}
+
+%==============================================================================
+\section{Best Practices}
+%==============================================================================
+
+\subsection{Query Design}
+
+\begin{enumerate}
+    \item \textbf{Start Simple}: Begin with basic selectors, add complexity gradually
+    \item \textbf{Use Specific Selectors}: Prefer IDs and unique classes over generic tags
+    \item \textbf{Test Incrementally}: Verify each step before adding the next
+    \item \textbf{Handle Edge Cases}: Account for missing elements and pagination limits
+    \item \textbf{Document Queries}: Add comments to explain complex logic
+\end{enumerate}
+
+\subsection{Reliability}
+
+\begin{enumerate}
+    \item \textbf{Implement Retries}: Use smart-retry plugin for transient failures
+    \item \textbf{Fallback Selectors}: Provide alternative selectors for critical data
+    \item \textbf{Monitor Changes}: Set up alerts for extraction failures
+    \item \textbf{Version Control}: Track query changes in Git
+    \item \textbf{Test Suite}: Maintain test queries for regression testing
+\end{enumerate}
+
+\subsection{Ethics and Compliance}
+
+\begin{enumerate}
+    \item \textbf{Respect robots.txt}: Check and comply with site policies
+    \item \textbf{Rate Limiting}: Implement delays to avoid overwhelming servers
+    \item \textbf{User-Agent}: Identify your bot appropriately
+    \item \textbf{Terms of Service}: Review and comply with website ToS
+    \item \textbf{Data Privacy}: Handle extracted data according to regulations
+\end{enumerate}
+
+%==============================================================================
+\section{Case Studies}
+%==============================================================================
+
+\subsection{Academic Research: Citation Network Analysis}
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://scholar.google.com/scholar?q=machine+learning",
+  steps: [
+    {
+      "@follow": {
+        selector: ".gs_r",
+        max_items: 100,
+        extract_each: {
+          title: "h3 a",
+          authors: ".gs_a",
+          year: ".gs_a:regex(\\d{4})",
+          citations: "a:contains('Cited by')",
+          pdf_link: "a[href$='.pdf']@attr:href"
+        },
+        follow_next: "button[aria-label='Next']"
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\subsection{Real Estate Market Analysis}
+
+\begin{lstlisting}[language=json5]
+{
+  url: "https://realestate.example.com/listings",
+  config: {
+    viewport: {width: 1920, height: 1080}
+  },
+  steps: [
+    {
+      "@interact": {
+        filters: {
+          "@type": {
+            selector: "#price-min",
+            text: "500000"
+          },
+          "@type": {
+            selector: "#price-max", 
+            text: "1000000"
+          },
+          "@select": {
+            selector: "#property-type",
+            value: "house"
+          },
+          "@click": "button.apply-filters"
+        }
+      }
+    },
+    {
+      "@wait": 3000
+    },
+    {
+      "@extract": {
+        listings: [{
+          "@base": ".listing-card",
+          address: ".address",
+          price: ".price",
+          bedrooms: ".beds",
+          bathrooms: ".baths",
+          sqft: ".square-feet",
+          image: "img@attr:src",
+          description: ".description",
+          agent: ".agent-name",
+          listed_date: ".list-date"
+        }]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+%==============================================================================
+\section{Conclusion}
+%==============================================================================
+
+WebQL represents a significant advancement in web data extraction technology, combining declarative simplicity with powerful extraction capabilities. By abstracting away the complexities of web scraping while providing fine-grained control when needed, WebQL enables both technical and non-technical users to extract structured data from the modern web efficiently.
+
+\subsection{Future Directions}
+
+The WebQL language continues to evolve with planned enhancements including:
+
+\begin{itemize}
+    \item \textbf{Visual Query Builder}: GUI for creating queries without writing code
+    \item \textbf{ML-based Selector Generation}: Automatic selector learning from examples
+    \item \textbf{Distributed Execution}: Built-in support for distributed scraping
+    \item \textbf{Schema Validation}: Type system for extracted data validation
+    \item \textbf{Query Optimization}: Automatic query optimization for performance
+\end{itemize}
+
+\subsection{Community and Resources}
+
+\begin{itemize}
+    \item \textbf{Website}: \url{https://webql.dev}
+    \item \textbf{GitHub}: \url{https://github.com/starlitlog/dr-web-engine}
+    \item \textbf{Documentation}: \url{https://docs.webql.dev}
+    \item \textbf{Community Forum}: \url{https://discuss.webql.dev}
+\end{itemize}
+
+%==============================================================================
+\appendix
+\section{Appendix A: Complete Language Reference}
+%==============================================================================
+
+\subsection{Query Structure}
+\begin{lstlisting}[language=json5]
+{
+  // Required fields
+  url: String | Array<String>,
+  steps: Array<Step>,
+  
+  // Optional fields
+  config: Config,
+  plugins: PluginConfig,
+  on_error: "stop" | "continue" | "retry",
+  parallel: Number,
+  cache: CacheConfig
+}
+\end{lstlisting}
+
+\subsection{Step Types Reference}
+
+[Complete reference of all step types with parameters...]
+
+%==============================================================================
+\section{Appendix B: Selector Reference}
+%==============================================================================
+
+[Complete list of selector types and syntax...]
+
+%==============================================================================
+\section{Appendix C: Plugin API}
+%==============================================================================
+
+[Plugin development guide and API reference...]
+
+\end{document}

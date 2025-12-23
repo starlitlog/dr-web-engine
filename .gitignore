@@ -176,3 +176,11 @@ cython_debug/
 
 # Claude Code
 .claude
+
+# Development/temporary files
+auto-complete.py                  # Development script
+fix_jsonl.py                     # Development utility
+simple_fix_jsonl.py              # Development utility  
+fix_venv_setup.sh                # Development script
+improved_chat.py                 # Development script
+test.json                        # Test output
