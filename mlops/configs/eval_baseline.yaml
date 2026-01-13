@@ -1,0 +1,14 @@
+# Baseline evaluation - compares against the original (non-fine-tuned) model
+model_path: meta-llama/Meta-Llama-3-8B
+model_subfolder:
+dataset_path: ./data/eval
+dataset_pattern: "*.jsonl"
+data_format: prompt_completion
+metrics_dir: artifacts/metrics/baseline
+max_samples: 200
+max_new_tokens: 256
+temperature: 0.0
+top_p: 0.9
+do_sample: false
+cuda_visible_devices: "0"
+use_gguf: false

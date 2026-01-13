@@ -1,0 +1,77 @@
+# WebQL Incremental Training Configuration  
+# Smart approach: Start small, validate, then scale up
+
+model_name: meta-llama/Llama-3.2-1B-Instruct  # Small but modern and flexible
+dataset_path: ./data
+
+# Progressive data loading (start with basics, add complexity)  
+dataset_pattern: "converted_webql_*.jsonl"  # Use all converted files for now
+# TODO: Implement proper file selection in data loader for specific subsets
+# Current: All converted files (~345 examples) - should converge better
+# Previous: "converted_webql_basic_queries.jsonl" - too small (~10 examples)
+
+tokenized_path: data/tokenized
+use_tokenized: false
+data_format: prompt_completion
+
+# Data source configuration
+data_source:
+  type: local
+
+cuda_visible_devices: "0"
+output_dir: outputs/runs
+
+# Optimized training hyperparameters for 48GB VRAM (45-60 minutes)
+epochs: 12  # More epochs for better learning
+batch_size: 16  # Increased from 4 to utilize more memory  
+lr: 1e-4  # More stable learning rate
+gradient_accumulation_steps: 2  # Effective batch size = 32
+max_length: 512  # Increased context for longer WebQL queries
+
+# Learning rate schedule  
+warmup_ratio: 0.03
+weight_decay: 0.01
+lr_scheduler_type: cosine
+
+# Precision settings
+bf16: true
+fp16: false
+
+# Optimized LoRA configuration for better capacity
+lora_r: 64  # Increased from 16 for more model capacity
+lora_alpha: 128  # Doubled to match rank increase
+lora_dropout: 0.05
+lora_target_modules:  # Expanded to include MLP layers
+  - q_proj
+  - k_proj  # Added key projection
+  - v_proj
+  - o_proj
+  - gate_proj  # Added MLP layers for better learning
+  - up_proj
+  - down_proj
+
+# Regular monitoring
+save_steps: 25
+logging_steps: 5
+logging_strategy: "steps"
+evaluation_strategy: "steps"
+eval_steps: 50
+
+# Memory optimization - can disable with 48GB VRAM
+gradient_checkpointing: false  # Disabled for speed since we have plenty of memory
+
+# Optimized data loading for faster training
+dataloader_num_workers: 8  # Increased for faster data loading
+dataloader_prefetch_factor: 4  # More prefetching
+dataloader_pin_memory: true  # Pin memory for faster GPU transfers
+
+# Progressive training approach
+task_type: "incremental_learning"
+domain: "web_scraping"  
+output_format: "json5_yaml"
+
+# Notes for progression:
+# 1. Train on basic_queries.jsonl (10 examples) - validate syntax
+# 2. Add examples_basic.jsonl (5 examples) - validate simple patterns  
+# 3. Add core_concepts.jsonl (10 examples) - validate DSL understanding
+# 4. Scale to full dataset if previous steps successful

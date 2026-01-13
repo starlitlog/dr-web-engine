@@ -1,0 +1,65 @@
+# Llama 8B Training Configuration
+# Optimized for RTX 8000 48GB VRAM
+
+model_name: meta-llama/Llama-3.1-8B
+dataset_path: ./data
+dataset_pattern: "*.jsonl"
+tokenized_path: data/tokenized  # Pre-tokenized dataset (created by make tokenize)
+use_tokenized: true  # Set to false to tokenize on-the-fly
+data_format: prompt_completion  # Universal format for all models
+
+# Data source configuration
+data_source:
+  type: local  # local or lakefs
+  lakefs:
+    endpoint: http://localhost:8000
+    repo: anysecret-data
+    branch: main
+    path: data
+    access_key: null
+    secret_key: null
+
+cuda_visible_devices: "0"
+output_dir: outputs/runs
+
+# Training hyperparameters (Optimized for 8B model on 48GB GPU)
+epochs: 5
+batch_size: 4  # Reduced for 8B model (larger than 3B)
+lr: 2e-4  # Slightly lower learning rate for larger model
+gradient_accumulation_steps: 2  # Effective batch size = 8
+max_length: 512
+
+# Learning rate schedule
+warmup_ratio: 0.03
+weight_decay: 0
+lr_scheduler_type: cosine
+
+# Precision (RTX 8000 doesn't support BF16 - use FP16 instead)
+bf16: false
+fp16: true
+
+# LoRA configuration (High-Capacity for DSL Learning)
+lora_r: 64
+lora_alpha: 128
+lora_dropout: 0.05
+lora_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+# Logging
+save_steps: 100
+logging_steps: 20
+logging_strategy: "steps"
+evaluation_strategy: "steps"
+
+# Memory optimization
+gradient_checkpointing: false  # Disabled - we have sufficient VRAM with batch_size=4
+
+# DataLoader optimization (speeds up data loading)
+dataloader_num_workers: 8
+dataloader_prefetch_factor: 4

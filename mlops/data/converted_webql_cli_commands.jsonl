@@ -1,0 +1,20 @@
+{"prompt": "Run a basic WebQL extraction command\n\nInput: Execute a query file and save results\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json"}
+{"prompt": "Run WebQL with debug logging\n\nInput: Execute query with detailed logging for troubleshooting\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json -l debug"}
+{"prompt": "Run WebQL in headless mode\n\nInput: Execute extraction on a server without display\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json --xvfb"}
+{"prompt": "Run WebQL with log file\n\nInput: Save debug logs to a specific file\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json -l debug --log-file scraping.log"}
+{"prompt": "Run WebQL with YAML query format\n\nInput: Execute a YAML query file\n\nGenerate a WebQL query:", "completion": "drweb -q query.yaml -o results.json -f yaml"}
+{"prompt": "Run WebQL with timestamped output\n\nInput: Save results with timestamp in filename\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o \"results_$(date +%Y%m%d_%H%M%S).json\""}
+{"prompt": "List available plugins\n\nInput: Show all installed WebQL plugins\n\nGenerate a WebQL query:", "completion": "drweb plugin list"}
+{"prompt": "Get plugin information\n\nInput: Show details about a specific plugin\n\nGenerate a WebQL query:", "completion": "drweb plugin info ai-selector"}
+{"prompt": "Enable a plugin\n\nInput: Activate a disabled plugin\n\nGenerate a WebQL query:", "completion": "drweb plugin enable ai-selector"}
+{"prompt": "Disable a plugin\n\nInput: Deactivate a running plugin\n\nGenerate a WebQL query:", "completion": "drweb plugin disable api-extractor"}
+{"prompt": "Install external plugin\n\nInput: Install a plugin from PyPI\n\nGenerate a WebQL query:", "completion": "drweb plugin install drweb-plugin-awesome"}
+{"prompt": "Run WebQL with different formats\n\nInput: Execute query and specify input format\n\nGenerate a WebQL query:", "completion": "drweb -q query.yaml -f yaml -o results.json"}
+{"prompt": "Create cron job for WebQL\n\nInput: Schedule daily extraction at 2 AM\n\nGenerate a WebQL query:", "completion": "0 2 * * * cd /path/to/queries && drweb -q daily.json5 -o \"data/results_$(date +\\%Y\\%m\\%d).json\" --xvfb"}
+{"prompt": "Process multiple queries in batch\n\nInput: Run all queries in a directory\n\nGenerate a WebQL query:", "completion": "for query in queries/*.json5; do\n  output=\"results/$(basename \"$query\" .json5)_$(date +%Y%m%d).json\"\n  drweb -q \"$query\" -o \"$output\" --xvfb -l info\ndone"}
+{"prompt": "Run WebQL with timeout settings\n\nInput: Execute query with custom timeout\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json --timeout 30000"}
+{"prompt": "Run WebQL with error handling\n\nInput: Execute with proper error handling and logging\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json -l debug || echo \"Extraction failed\" | tee -a error.log"}
+{"prompt": "Check WebQL version\n\nInput: Display version information\n\nGenerate a WebQL query:", "completion": "drweb version"}
+{"prompt": "Get help for WebQL commands\n\nInput: Show available command options\n\nGenerate a WebQL query:", "completion": "drweb --help"}
+{"prompt": "Run WebQL in Docker\n\nInput: Execute extraction in Docker container\n\nGenerate a WebQL query:", "completion": "docker run -v $(pwd)/data:/app/data drweb/dr-web-engine -q /app/data/query.json5 -o /app/data/output.json"}
+{"prompt": "Run WebQL with custom viewport\n\nInput: Execute with specific browser viewport size\n\nGenerate a WebQL query:", "completion": "drweb -q query.json5 -o results.json --viewport-width 1920 --viewport-height 1080"}

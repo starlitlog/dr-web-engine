@@ -1,0 +1,20 @@
+{"instruction": "Run a basic WebQL extraction command", "input": "Execute a query file and save results", "output": "drweb -q query.json5 -o results.json"}
+{"instruction": "Run WebQL with debug logging", "input": "Execute query with detailed logging for troubleshooting", "output": "drweb -q query.json5 -o results.json -l debug"}
+{"instruction": "Run WebQL in headless mode", "input": "Execute extraction on a server without display", "output": "drweb -q query.json5 -o results.json --xvfb"}
+{"instruction": "Run WebQL with log file", "input": "Save debug logs to a specific file", "output": "drweb -q query.json5 -o results.json -l debug --log-file scraping.log"}
+{"instruction": "Run WebQL with YAML query format", "input": "Execute a YAML query file", "output": "drweb -q query.yaml -o results.json -f yaml"}
+{"instruction": "Run WebQL with timestamped output", "input": "Save results with timestamp in filename", "output": "drweb -q query.json5 -o \"results_$(date +%Y%m%d_%H%M%S).json\""}
+{"instruction": "List available plugins", "input": "Show all installed WebQL plugins", "output": "drweb plugin list"}
+{"instruction": "Get plugin information", "input": "Show details about a specific plugin", "output": "drweb plugin info ai-selector"}
+{"instruction": "Enable a plugin", "input": "Activate a disabled plugin", "output": "drweb plugin enable ai-selector"}
+{"instruction": "Disable a plugin", "input": "Deactivate a running plugin", "output": "drweb plugin disable api-extractor"}
+{"instruction": "Install external plugin", "input": "Install a plugin from PyPI", "output": "drweb plugin install drweb-plugin-awesome"}
+{"instruction": "Run WebQL with different formats", "input": "Execute query and specify input format", "output": "drweb -q query.yaml -f yaml -o results.json"}
+{"instruction": "Create cron job for WebQL", "input": "Schedule daily extraction at 2 AM", "output": "0 2 * * * cd /path/to/queries && drweb -q daily.json5 -o \"data/results_$(date +\\%Y\\%m\\%d).json\" --xvfb"}
+{"instruction": "Process multiple queries in batch", "input": "Run all queries in a directory", "output": "for query in queries/*.json5; do\n  output=\"results/$(basename \"$query\" .json5)_$(date +%Y%m%d).json\"\n  drweb -q \"$query\" -o \"$output\" --xvfb -l info\ndone"}
+{"instruction": "Run WebQL with timeout settings", "input": "Execute query with custom timeout", "output": "drweb -q query.json5 -o results.json --timeout 30000"}
+{"instruction": "Run WebQL with error handling", "input": "Execute with proper error handling and logging", "output": "drweb -q query.json5 -o results.json -l debug || echo \"Extraction failed\" | tee -a error.log"}
+{"instruction": "Check WebQL version", "input": "Display version information", "output": "drweb version"}
+{"instruction": "Get help for WebQL commands", "input": "Show available command options", "output": "drweb --help"}
+{"instruction": "Run WebQL in Docker", "input": "Execute extraction in Docker container", "output": "docker run -v $(pwd)/data:/app/data drweb/dr-web-engine -q /app/data/query.json5 -o /app/data/output.json"}
+{"instruction": "Run WebQL with custom viewport", "input": "Execute with specific browser viewport size", "output": "drweb -q query.json5 -o results.json --viewport-width 1920 --viewport-height 1080"}

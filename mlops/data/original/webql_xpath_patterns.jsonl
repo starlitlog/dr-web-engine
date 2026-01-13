@@ -1,0 +1,31 @@
+{"instruction": "Write XPath to extract text content", "input": "Get the text from a paragraph element", "output": ".//p/text()"}
+{"instruction": "Write XPath to extract attribute values", "input": "Get the href attribute from a link", "output": ".//a/@href"}
+{"instruction": "Write XPath to extract img src attributes", "input": "Get image source URLs", "output": ".//img/@src"}
+{"instruction": "Write XPath with class attribute selector", "input": "Select elements with specific class", "output": "//div[@class='product-card']"}
+{"instruction": "Write XPath with multiple class conditions", "input": "Select elements with multiple classes", "output": "//div[contains(@class, 'product') and contains(@class, 'featured')]"}
+{"instruction": "Write XPath with text content matching", "input": "Select elements containing specific text", "output": "//button[contains(text(), 'Add to Cart')]"}
+{"instruction": "Write XPath with position selectors", "input": "Get the first element of a type", "output": "//div[@class='item'][1]"}
+{"instruction": "Write XPath with descendant selector", "input": "Find nested elements within a container", "output": "//div[@class='container']//span[@class='price']"}
+{"instruction": "Write XPath with following sibling", "input": "Get the next sibling element", "output": ".//h3/following-sibling::p[1]"}
+{"instruction": "Write XPath with preceding sibling", "input": "Get the previous sibling element", "output": ".//span[@class='price']/preceding-sibling::h3"}
+{"instruction": "Write XPath with OR condition", "input": "Select elements matching either condition", "output": ".//span[@class='sale-price'] | .//span[@class='regular-price']"}
+{"instruction": "Write XPath with normalized text", "input": "Get cleaned text content without extra whitespace", "output": "normalize-space(.//p)"}
+{"instruction": "Write XPath with contains function", "input": "Select elements containing partial text", "output": "//a[contains(@href, '/product/')]"}
+{"instruction": "Write XPath with starts-with function", "input": "Select elements starting with specific text", "output": "//a[starts-with(@href, 'https://')]"}
+{"instruction": "Write XPath with not condition", "input": "Select elements that don't match condition", "output": "//div[not(@class='hidden')]"}
+{"instruction": "Write XPath for table data extraction", "input": "Extract data from table cells", "output": "//table//tr/td[1]/text()"}
+{"instruction": "Write XPath with parent selector", "input": "Select parent element", "output": ".//span[@class='price']/parent::div"}
+{"instruction": "Write XPath with count function", "input": "Count number of matching elements", "output": "count(.//div[@class='comment'])"}
+{"instruction": "Write XPath with position conditions", "input": "Select last element", "output": "//div[@class='item'][last()]"}
+{"instruction": "Write XPath with attribute existence check", "input": "Select elements that have specific attribute", "output": "//img[@alt]"}
+{"instruction": "Write XPath for list item extraction", "input": "Extract text from list items", "output": ".//ul[@class='features']//li/text()"}
+{"instruction": "Write XPath with multiple attribute conditions", "input": "Select elements with multiple attribute constraints", "output": "//input[@type='text' and @name='email']"}
+{"instruction": "Write XPath for form field values", "input": "Extract input field values", "output": ".//input[@name='username']/@value"}
+{"instruction": "Write XPath with axis navigation", "input": "Navigate through element relationships", "output": ".//h2/following::p[1]"}
+{"instruction": "Write XPath for nested attribute extraction", "input": "Extract data attributes from nested elements", "output": ".//div[@class='rating']/@data-rating"}
+{"instruction": "Write relative XPath for field extraction", "input": "Extract relative to current context node", "output": ".//span[@class='text']/text()"}
+{"instruction": "Write XPath with text normalization", "input": "Clean extracted text content", "output": "normalize-space(.//div[@class='description'])"}
+{"instruction": "Write XPath for conditional attribute extraction", "input": "Extract attribute if element exists", "output": ".//a[@class='download-link']/@href"}
+{"instruction": "Write XPath for multiple text nodes", "input": "Extract all text content from element and children", "output": ".//div[@class='content']//text()"}
+{"instruction": "Write XPath with case-insensitive matching", "input": "Match text regardless of case", "output": "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'submit')]"}
+{"instruction": "Write XPath for data extraction with fallback", "input": "Try multiple selectors with OR", "output": ".//span[@class='new-price']/text() | .//span[@class='price']/text()"}

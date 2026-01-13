@@ -1,0 +1,17 @@
+model_path: outputs/runs/latest/merged
+model_subfolder:
+dataset_path: ./data/eval
+dataset_pattern: "*.jsonl"
+metrics_dir: artifacts/metrics
+max_samples: 200
+max_new_tokens: 256
+temperature: 0.0
+top_p: 0.9
+do_sample: false
+cuda_visible_devices: "0"
+use_gguf: false
+gguf_model_path:
+llama_cpp_binary: ../llama.cpp/build/bin/llama-simple
+llama_cpp_threads: 16
+llama_cpp_ctx: 4096
+llama_cpp_gpu_layers: 0

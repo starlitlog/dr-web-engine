@@ -1,0 +1,31 @@
+{"prompt": "Write XPath to extract text content\n\nInput: Get the text from a paragraph element\n\nGenerate a WebQL query:", "completion": ".//p/text()"}
+{"prompt": "Write XPath to extract attribute values\n\nInput: Get the href attribute from a link\n\nGenerate a WebQL query:", "completion": ".//a/@href"}
+{"prompt": "Write XPath to extract img src attributes\n\nInput: Get image source URLs\n\nGenerate a WebQL query:", "completion": ".//img/@src"}
+{"prompt": "Write XPath with class attribute selector\n\nInput: Select elements with specific class\n\nGenerate a WebQL query:", "completion": "//div[@class='product-card']"}
+{"prompt": "Write XPath with multiple class conditions\n\nInput: Select elements with multiple classes\n\nGenerate a WebQL query:", "completion": "//div[contains(@class, 'product') and contains(@class, 'featured')]"}
+{"prompt": "Write XPath with text content matching\n\nInput: Select elements containing specific text\n\nGenerate a WebQL query:", "completion": "//button[contains(text(), 'Add to Cart')]"}
+{"prompt": "Write XPath with position selectors\n\nInput: Get the first element of a type\n\nGenerate a WebQL query:", "completion": "//div[@class='item'][1]"}
+{"prompt": "Write XPath with descendant selector\n\nInput: Find nested elements within a container\n\nGenerate a WebQL query:", "completion": "//div[@class='container']//span[@class='price']"}
+{"prompt": "Write XPath with following sibling\n\nInput: Get the next sibling element\n\nGenerate a WebQL query:", "completion": ".//h3/following-sibling::p[1]"}
+{"prompt": "Write XPath with preceding sibling\n\nInput: Get the previous sibling element\n\nGenerate a WebQL query:", "completion": ".//span[@class='price']/preceding-sibling::h3"}
+{"prompt": "Write XPath with OR condition\n\nInput: Select elements matching either condition\n\nGenerate a WebQL query:", "completion": ".//span[@class='sale-price'] | .//span[@class='regular-price']"}
+{"prompt": "Write XPath with normalized text\n\nInput: Get cleaned text content without extra whitespace\n\nGenerate a WebQL query:", "completion": "normalize-space(.//p)"}
+{"prompt": "Write XPath with contains function\n\nInput: Select elements containing partial text\n\nGenerate a WebQL query:", "completion": "//a[contains(@href, '/product/')]"}
+{"prompt": "Write XPath with starts-with function\n\nInput: Select elements starting with specific text\n\nGenerate a WebQL query:", "completion": "//a[starts-with(@href, 'https://')]"}
+{"prompt": "Write XPath with not condition\n\nInput: Select elements that don't match condition\n\nGenerate a WebQL query:", "completion": "//div[not(@class='hidden')]"}
+{"prompt": "Write XPath for table data extraction\n\nInput: Extract data from table cells\n\nGenerate a WebQL query:", "completion": "//table//tr/td[1]/text()"}
+{"prompt": "Write XPath with parent selector\n\nInput: Select parent element\n\nGenerate a WebQL query:", "completion": ".//span[@class='price']/parent::div"}
+{"prompt": "Write XPath with count function\n\nInput: Count number of matching elements\n\nGenerate a WebQL query:", "completion": "count(.//div[@class='comment'])"}
+{"prompt": "Write XPath with position conditions\n\nInput: Select last element\n\nGenerate a WebQL query:", "completion": "//div[@class='item'][last()]"}
+{"prompt": "Write XPath with attribute existence check\n\nInput: Select elements that have specific attribute\n\nGenerate a WebQL query:", "completion": "//img[@alt]"}
+{"prompt": "Write XPath for list item extraction\n\nInput: Extract text from list items\n\nGenerate a WebQL query:", "completion": ".//ul[@class='features']//li/text()"}
+{"prompt": "Write XPath with multiple attribute conditions\n\nInput: Select elements with multiple attribute constraints\n\nGenerate a WebQL query:", "completion": "//input[@type='text' and @name='email']"}
+{"prompt": "Write XPath for form field values\n\nInput: Extract input field values\n\nGenerate a WebQL query:", "completion": ".//input[@name='username']/@value"}
+{"prompt": "Write XPath with axis navigation\n\nInput: Navigate through element relationships\n\nGenerate a WebQL query:", "completion": ".//h2/following::p[1]"}
+{"prompt": "Write XPath for nested attribute extraction\n\nInput: Extract data attributes from nested elements\n\nGenerate a WebQL query:", "completion": ".//div[@class='rating']/@data-rating"}
+{"prompt": "Write relative XPath for field extraction\n\nInput: Extract relative to current context node\n\nGenerate a WebQL query:", "completion": ".//span[@class='text']/text()"}
+{"prompt": "Write XPath with text normalization\n\nInput: Clean extracted text content\n\nGenerate a WebQL query:", "completion": "normalize-space(.//div[@class='description'])"}
+{"prompt": "Write XPath for conditional attribute extraction\n\nInput: Extract attribute if element exists\n\nGenerate a WebQL query:", "completion": ".//a[@class='download-link']/@href"}
+{"prompt": "Write XPath for multiple text nodes\n\nInput: Extract all text content from element and children\n\nGenerate a WebQL query:", "completion": ".//div[@class='content']//text()"}
+{"prompt": "Write XPath with case-insensitive matching\n\nInput: Match text regardless of case\n\nGenerate a WebQL query:", "completion": "//button[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'submit')]"}
+{"prompt": "Write XPath for data extraction with fallback\n\nInput: Try multiple selectors with OR\n\nGenerate a WebQL query:", "completion": ".//span[@class='new-price']/text() | .//span[@class='price']/text()"}

@@ -1,0 +1,61 @@
+# WebQL Training with Llama-3.2-3B (Flexible & Manageable)
+# Better balance of capability and training time
+
+model_name: meta-llama/Llama-3.2-3B-Instruct  # More flexible than CodeLlama, smaller than 7B
+dataset_path: ./data
+dataset_pattern: "converted_webql_*.jsonl"  # Full dataset but manageable model
+tokenized_path: data/tokenized
+use_tokenized: false
+data_format: prompt_completion
+
+# Data source configuration
+data_source:
+  type: local
+
+cuda_visible_devices: "0"
+output_dir: outputs/runs
+
+# Manageable training hyperparameters (1-2 hour runs)
+epochs: 4  # Reasonable epochs
+batch_size: 8  # Good batch size for 3B model
+lr: 2e-4  # Conservative learning rate
+gradient_accumulation_steps: 2  # Effective batch size = 16
+max_length: 512  # Good for WebQL complexity
+
+# Learning rate schedule
+warmup_ratio: 0.05  # Moderate warmup
+weight_decay: 0.01  # Small regularization
+lr_scheduler_type: cosine
+
+# Precision settings
+bf16: true  # Use bfloat16 for stability
+fp16: false
+
+# Moderate LoRA configuration (good learning capacity)
+lora_r: 32  # Balanced capacity
+lora_alpha: 64  # 2x rank
+lora_dropout: 0.05
+lora_target_modules:  # Focused on attention
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+
+# Reasonable logging
+save_steps: 50
+logging_steps: 10
+logging_strategy: "steps"
+evaluation_strategy: "steps"
+eval_steps: 100
+
+# Memory optimization
+gradient_checkpointing: true  # Good for 3B model
+
+# Optimized data loading
+dataloader_num_workers: 4
+dataloader_prefetch_factor: 2
+
+# Training settings
+task_type: "instruction_following"
+domain: "web_scraping"
+output_format: "json5_yaml"

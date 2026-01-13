@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+  - train
+
+# Override for LakeFS production use
+data_source:
+  type: lakefs
+  lakefs:
+    endpoint: ${LAKEFS_ENDPOINT:http://localhost:8000}
+    repo: anysecret-data
+    branch: main
+    path: data
+    access_key: ${LAKEFS_ACCESS_KEY}
+    secret_key: ${LAKEFS_SECRET_KEY}

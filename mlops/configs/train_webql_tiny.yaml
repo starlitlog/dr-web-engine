@@ -1,0 +1,57 @@
+# WebQL Tiny Test Configuration
+# Ultra-fast training for pipeline testing and quick validation
+
+model_name: TinyLlama/TinyLlama-1.1B-Chat-v1.0  # Small but uses Llama architecture
+dataset_path: ./data
+dataset_pattern: "converted_webql_basic_queries.jsonl"  # Just 10 examples
+tokenized_path: data/tokenized
+use_tokenized: false
+data_format: prompt_completion
+
+# Data source configuration
+data_source:
+  type: local
+
+cuda_visible_devices: "0"
+output_dir: outputs/runs
+
+# Ultra-fast hyperparameters (2-3 minute runs)
+epochs: 1  # Single epoch
+batch_size: 1  # Minimal batch
+lr: 1e-3  # High learning rate
+gradient_accumulation_steps: 1
+max_length: 128  # Very short sequences
+
+# Learning rate schedule
+warmup_ratio: 0.1
+weight_decay: 0
+lr_scheduler_type: linear
+
+# Precision settings
+bf16: true
+fp16: false
+
+# Minimal LoRA (fastest possible)
+lora_r: 4  # Tiny rank
+lora_alpha: 8
+lora_dropout: 0.1
+lora_target_modules:  # TinyLlama uses standard Llama architecture
+  - q_proj
+
+# Frequent logging for debugging
+save_steps: 1
+logging_steps: 1
+logging_strategy: "steps"
+evaluation_strategy: "no"
+
+# No memory optimization (prioritize speed)
+gradient_checkpointing: false
+
+# Fast data loading
+dataloader_num_workers: 1
+dataloader_prefetch_factor: 1
+
+# Test settings
+task_type: "pipeline_test"
+domain: "web_scraping"
+output_format: "json5_yaml"

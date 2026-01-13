@@ -1,0 +1,48 @@
+# WebQL Baseline Model Evaluation Configuration
+# Evaluates the base CodeLlama model without fine-tuning
+
+# Base model to evaluate
+model_name: meta-llama/Llama-3.2-1B-Instruct  # Same as incremental training base model
+eval_dataset_path: ./data
+eval_dataset_pattern: "converted_webql_*.jsonl"
+
+# Evaluation settings
+max_eval_samples: null  # Evaluate on full dataset
+eval_batch_size: 8
+max_length: 1024
+
+# Output settings
+output_dir: artifacts/metrics/baseline
+save_predictions: true
+save_detailed_metrics: true
+
+# WebQL-specific evaluation metrics (same as fine-tuned eval)
+metrics:
+  - exact_match          # Perfect query match
+  - syntax_validity      # Valid JSON5/YAML syntax
+  - semantic_accuracy    # Functional equivalence
+  - xpath_validity       # Valid XPath expressions
+  - rouge1              # Token overlap
+  - rouge2              # Bigram overlap
+  - rougeL              # Longest common subsequence
+  - bleu                # Precision-based metric
+
+# WebQL syntax validation
+syntax_checks:
+  - json5_parse         # Can parse as JSON5
+  - yaml_parse          # Can parse as YAML
+  - required_fields     # Has @url, @steps, @xpath, @fields
+  - xpath_syntax        # Valid XPath expressions
+
+# Generation settings (same as fine-tuned model for fair comparison)
+generation_config:
+  max_new_tokens: 512
+  do_sample: true
+  temperature: 0.1      # Low temperature for consistent code generation
+  top_p: 0.9
+  repetition_penalty: 1.1
+  pad_token_id: 0
+
+# Baseline comparison settings
+baseline: true
+comparison_reference: "base_model_performance"

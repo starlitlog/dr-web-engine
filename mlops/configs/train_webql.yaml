@@ -1,0 +1,71 @@
+# WebQL DSL Training Configuration
+# Specialized for web scraping query generation
+
+model_name: codellama/CodeLlama-7b-Instruct-hf  # Code generation optimized
+dataset_path: ./data  # Use converted training data
+dataset_pattern: "converted_webql_*.jsonl"
+tokenized_path: data/tokenized  # Pre-tokenized dataset (created by make tokenize)
+use_tokenized: false  # Tokenize on-the-fly initially, can enable after make tokenize
+data_format: prompt_completion  # Universal format for all models
+
+# Data source configuration
+data_source:
+  type: local  # local or lakefs
+  lakefs:
+    endpoint: http://localhost:8000
+    repo: webql-training-data
+    branch: main
+    path: data
+    access_key: null
+    secret_key: null
+
+cuda_visible_devices: "0"
+output_dir: outputs/runs
+
+# Training hyperparameters (Optimized for code generation)
+epochs: 8  # More epochs for DSL learning
+batch_size: 6  # Moderate batch size for 7B model
+lr: 3e-4  # Higher learning rate for code generation
+gradient_accumulation_steps: 2  # Effective batch size = 12
+max_length: 1024  # Longer sequences for complex WebQL queries
+
+# Learning rate schedule
+warmup_ratio: 0.05  # More warmup for stable training
+weight_decay: 0.01  # Small regularization for generalization
+lr_scheduler_type: cosine
+
+# Precision settings
+bf16: true  # Use bfloat16 if available
+fp16: false
+
+# LoRA configuration (High-Capacity for DSL Learning)
+lora_r: 64
+lora_alpha: 128
+lora_dropout: 0.05
+lora_target_modules:  # Full coverage for maximum learning capacity
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+
+# Logging
+save_steps: 50  # More frequent saves for code generation
+logging_steps: 10  # More frequent logging
+logging_strategy: "steps"
+evaluation_strategy: "steps"
+eval_steps: 100
+
+# Memory optimization
+gradient_checkpointing: true  # Enable for 7B model efficiency
+
+# DataLoader optimization (speeds up data loading)
+dataloader_num_workers: 4  # Conservative for stability
+dataloader_prefetch_factor: 2
+
+# WebQL-specific training settings
+task_type: "code_generation"
+domain: "web_scraping"
+output_format: "json5_yaml"

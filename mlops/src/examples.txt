@@ -1,0 +1,5 @@
+Explain the difference between FLOWROLL and a moving average.
+Can DIMMATCH align two lists if one of them is missing half the items?
+What happens if I give FLOWROLL a PeriodCount that is larger than the available time range?
+Does DIMMATCH work when the source values are scalars and the target list has 12 items?
+Why can’t FLOWROLL be used to compare or merge dimensions?

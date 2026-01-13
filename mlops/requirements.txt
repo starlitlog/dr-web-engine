@@ -1,0 +1,31 @@
+# === Core utilities ===
+typer[all]==0.20.0
+click>=8.3.0
+hydra-core==1.3.2
+omegaconf==2.3.0
+
+# === ML stack ===
+torch>=2.1.0
+transformers>=4.44.0
+datasets>=3.0.0
+accelerate>=0.31.0
+peft>=0.11.0
+evaluate>=0.4.0
+scikit-learn>=1.5.0
+tensorboard>=2.16.2
+
+# === Optional logging / experiment tracking ===
+rich>=13.7.0
+tqdm>=4.66.0
+wandb>=0.17.0     # optional: comment out if not using
+
+# === Evaluation ===
+evaluate>=0.4.0
+scikit-learn>=1.5.0
+nltk>=3.8.0
+rouge-score>=0.1.2
+
+# === Linting & formatting ===
+black>=24.3.0
+pylint>=3.1.0
+sentencepiece

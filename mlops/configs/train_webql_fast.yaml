@@ -1,0 +1,58 @@
+# WebQL Fast Iteration Configuration
+# Optimized for quick experimentation and rapid feedback
+
+model_name: TinyLlama/TinyLlama-1.1B-Chat-v1.0  # Small, fast, compatible model
+dataset_path: ./data
+dataset_pattern: "converted_webql_basic_queries.jsonl"  # Start with just basic queries (10 examples)
+tokenized_path: data/tokenized
+use_tokenized: false
+data_format: prompt_completion
+
+# Data source configuration
+data_source:
+  type: local
+
+cuda_visible_devices: "0"
+output_dir: outputs/runs
+
+# Fast training hyperparameters (5-10 minute runs)
+epochs: 2  # Minimal epochs for testing
+batch_size: 2  # Small batches
+lr: 5e-4  # Higher LR for faster convergence
+gradient_accumulation_steps: 1  # No accumulation for speed
+max_length: 256  # Shorter sequences for speed
+
+# Learning rate schedule
+warmup_ratio: 0.1  # Quick warmup
+weight_decay: 0
+lr_scheduler_type: linear
+
+# Precision settings
+bf16: true
+fp16: false
+
+# Minimal LoRA configuration (fast training)
+lora_r: 8  # Very small rank
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules:  # TinyLlama attention layers
+  - q_proj
+  - v_proj
+
+# Logging (frequent for debugging)
+save_steps: 5
+logging_steps: 1
+logging_strategy: "steps"
+evaluation_strategy: "no"  # Skip evaluation for speed
+
+# Memory optimization
+gradient_checkpointing: false  # Speed over memory
+
+# Fast data loading
+dataloader_num_workers: 2
+dataloader_prefetch_factor: 1
+
+# Fast training settings
+task_type: "quick_test"
+domain: "web_scraping"
+output_format: "json5_yaml"
